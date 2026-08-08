@@ -1,0 +1,65 @@
+{
+  "description": "Formulas, pivot tables, and dashboard-building fundamentals for Excel-based interview rounds.",
+  "questions": [
+    {
+      "id": "excel-001",
+      "subtopic": "Lookup Formulas",
+      "difficulty": "easy",
+      "question": "What's the difference between VLOOKUP and XLOOKUP?",
+      "answer": "VLOOKUP searches only left-to-right and requires the lookup column to be the leftmost column in the range — it also breaks if columns are inserted since it references column numbers. XLOOKUP searches in any direction, returns a cleaner #N/A handling with a built-in `if_not_found` argument, and references full columns instead of numeric offsets, so it's more resilient to layout changes. If available in your Excel version, XLOOKUP is generally the better default."
+    },
+    {
+      "id": "excel-002",
+      "subtopic": "Lookup Formulas",
+      "difficulty": "medium",
+      "question": "How do you look up a value based on two conditions (e.g. match on both Region AND Product)?",
+      "answer": "Two common approaches:\n\n1) INDEX/MATCH with a concatenated helper column, or an array formula:\n```\n=INDEX(SalesRange, MATCH(1, (Region_Range=\"West\")*(Product_Range=\"Widget\"), 0))\n```\n(entered as an array formula, or naturally in newer Excel with dynamic arrays)\n\n2) SUMIFS/COUNTIFS style multi-criteria lookup, if you're returning a number:\n```\n=SUMIFS(SalesRange, Region_Range, \"West\", Product_Range, \"Widget\")\n```\nXLOOKUP can also do this by concatenating the lookup arrays: `=XLOOKUP(\"West\"&\"Widget\", Region_Range&Product_Range, SalesRange)`."
+    },
+    {
+      "id": "excel-003",
+      "subtopic": "Pivot Tables",
+      "difficulty": "easy",
+      "question": "Walk through how you'd build a pivot table to show total sales by region and month.",
+      "answer": "Select the data range → Insert → PivotTable. Drag Region into Rows, Month into Columns (or also Rows if you want a stacked view), and Sales Amount into Values (make sure it's set to Sum, not Count). Use the Filters area for anything you want to slice without cluttering rows/columns — like Product Category. Right-click a date field and use 'Group' to roll daily dates up into months automatically."
+    },
+    {
+      "id": "excel-004",
+      "subtopic": "Pivot Tables",
+      "difficulty": "medium",
+      "question": "How do you show pivot table values as a percentage of the row/column total instead of raw numbers?",
+      "answer": "In the Values area, click the dropdown on your value field → Value Field Settings → Show Values As → choose '% of Row Total', '% of Column Total', or '% of Grand Total' depending on what comparison you need. This is useful for things like 'what % of a region's sales came from each product' without writing a separate formula."
+    },
+    {
+      "id": "excel-005",
+      "subtopic": "Formulas",
+      "difficulty": "medium",
+      "question": "What's the difference between absolute and relative cell references, and when do you use $?",
+      "answer": "A relative reference (A1) shifts automatically when you copy the formula to other cells. An absolute reference ($A$1) stays fixed no matter where you copy it. A mixed reference ($A1 or A$1) locks only the column or only the row. Use absolute references for things like a fixed tax rate or a lookup table range that shouldn't shift when you drag a formula across many rows."
+    },
+    {
+      "id": "excel-006",
+      "subtopic": "Formulas",
+      "difficulty": "medium",
+      "question": "How would you flag duplicate entries in a column?",
+      "answer": "Formula approach: `=COUNTIF($A$2:$A$100, A2)>1` returns TRUE for any row whose value appears more than once — wrap this in Conditional Formatting for a visual flag. For quick one-off checks, Excel's built-in Conditional Formatting → Highlight Cell Rules → Duplicate Values does the same thing without a formula."
+    },
+    {
+      "id": "excel-007",
+      "subtopic": "Data Cleaning",
+      "difficulty": "easy",
+      "question": "How do you remove extra spaces or clean inconsistent text data in a column?",
+      "answer": "`=TRIM(A2)` removes leading/trailing spaces and collapses multiple internal spaces to one. Pair with `=CLEAN(A2)` to also strip non-printable characters (common with data pasted from other systems). For case consistency use `=PROPER()`, `=UPPER()`, or `=LOWER()`. Power Query's 'Trim' and 'Clean' transforms do this at scale for entire datasets during import."
+    },
+    {
+      "id": "excel-008",
+      "subtopic": "Data Cleaning",
+      "difficulty": "medium",
+      "question": "You're given a dataset with dates stored as text. How do you convert them to real Excel dates?",
+      "answer": "If the format is consistent, `=DATEVALUE(A2)` converts text to a serial date number (then format the cell as a date). For messier real-world data, Text to Columns (Data tab) with 'Date' selected as the column format during the wizard often handles it more robustly, and Power Query's 'Change Type → Date' is the most reliable option for bulk cleanup since it can handle multiple locale formats."
+    }
+  ],
+  "practice": [
+    { "question": "You have a list of 10,000 transactions. Describe step-by-step how you'd build a dashboard showing monthly revenue trend, top 5 products, and % contribution by region." },
+    { "question": "Write the formula you'd use to calculate a 3-month rolling average of sales in a column, without using a pivot table." }
+  ]
+}

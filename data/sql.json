@@ -1,0 +1,80 @@
+{
+  "description": "Joins, window functions, CTEs, and query optimization — the core of almost every DA/BI interview.",
+  "questions": [
+    {
+      "id": "sql-001",
+      "subtopic": "Joins",
+      "difficulty": "easy",
+      "question": "What's the difference between INNER JOIN and LEFT JOIN?",
+      "answer": "INNER JOIN returns only rows that have matching values in both tables. LEFT JOIN returns every row from the left table, and matching rows from the right table — if there's no match, the right side's columns come back as NULL.\n\nRule of thumb: use INNER JOIN when a row is meaningless without its match (e.g. an order without a customer). Use LEFT JOIN when you need to keep every record from the primary table regardless of whether a match exists (e.g. every customer, even ones with zero orders)."
+    },
+    {
+      "id": "sql-002",
+      "subtopic": "Joins",
+      "difficulty": "medium",
+      "question": "How would you find customers who have never placed an order?",
+      "answer": "LEFT JOIN customers to orders, then filter for rows where the order side is NULL:\n```\nSELECT c.customer_id, c.customer_name\nFROM customers c\nLEFT JOIN orders o ON c.customer_id = o.customer_id\nWHERE o.order_id IS NULL;\n```\nThis is a classic \"anti-join\" pattern — LEFT JOIN + WHERE right_table.key IS NULL. Alternative: `NOT EXISTS` with a correlated subquery, which is often more efficient on large tables since the optimizer can short-circuit as soon as a match is found."
+    },
+    {
+      "id": "sql-003",
+      "subtopic": "Window Functions",
+      "difficulty": "medium",
+      "question": "Explain RANK(), DENSE_RANK(), and ROW_NUMBER() — when would you use each?",
+      "answer": "All three assign a position within a partition, ordered by some column — but they handle ties differently.\n\n`ROW_NUMBER()` — always unique, 1,2,3,4... even if values tie, order among ties is arbitrary. Use when you need exactly one row per group (e.g. picking the latest transaction per customer).\n\n`RANK()` — ties share the same rank, but leaves gaps: 1,2,2,4. Use when ties should be visibly equal and skipping ranks makes sense (leaderboard-style).\n\n`DENSE_RANK()` — ties share the same rank, no gaps: 1,2,2,3. Use for things like \"top 3 distinct scores\" where you don't want to skip a rank."
+    },
+    {
+      "id": "sql-004",
+      "subtopic": "Window Functions",
+      "difficulty": "medium",
+      "question": "Write a query to get the top 2 highest-paid employees per department.",
+      "answer": "```\nSELECT *\nFROM (\n  SELECT employee_id, department, salary,\n         RANK() OVER (PARTITION BY department ORDER BY salary DESC) AS rnk\n  FROM employees\n) t\nWHERE rnk <= 2;\n```\nPARTITION BY resets the ranking for each department, so it's essentially \"do this ranking independently within each group.\" Wrapping it in a subquery (or CTE) is required because you can't filter on a window function directly in the same-level WHERE clause."
+    },
+    {
+      "id": "sql-005",
+      "subtopic": "CTEs",
+      "difficulty": "easy",
+      "question": "What's a CTE and why use one instead of a subquery?",
+      "answer": "A Common Table Expression (`WITH name AS (...)`) is a named, temporary result set scoped to a single query. Functionally it's similar to a subquery, but it's more readable — especially when you reference the same logic multiple times, or chain several transformation steps. CTEs can also be recursive, which plain subqueries can't do (useful for hierarchical data like org charts or category trees)."
+    },
+    {
+      "id": "sql-006",
+      "subtopic": "CTEs",
+      "difficulty": "hard",
+      "question": "How would you write a recursive CTE to flatten an employee-manager hierarchy?",
+      "answer": "```\nWITH RECURSIVE org_chart AS (\n  SELECT employee_id, manager_id, name, 1 AS level\n  FROM employees\n  WHERE manager_id IS NULL          -- anchor: top of hierarchy\n\n  UNION ALL\n\n  SELECT e.employee_id, e.manager_id, e.name, oc.level + 1\n  FROM employees e\n  JOIN org_chart oc ON e.manager_id = oc.employee_id   -- recursive step\n)\nSELECT * FROM org_chart ORDER BY level;\n```\nThe anchor member picks the root(s); the recursive member repeatedly joins back to the growing result set until no new rows are produced."
+    },
+    {
+      "id": "sql-007",
+      "subtopic": "Query Optimization",
+      "difficulty": "medium",
+      "question": "A query is running slowly on a large table. What's your troubleshooting process?",
+      "answer": "1) Run EXPLAIN / EXPLAIN ANALYZE to see the execution plan — look for full table scans where an index scan should be happening.\n2) Check if WHERE/JOIN columns are indexed; add indexes on high-selectivity filter and join columns.\n3) Avoid `SELECT *` — pull only needed columns to reduce I/O.\n4) Check for functions applied to indexed columns in WHERE clauses (e.g. `WHERE YEAR(date_col) = 2025`) — these prevent index usage; rewrite as a range filter instead.\n5) Look for unnecessary DISTINCT or ORDER BY that force expensive sorts.\n6) For very large tables, consider partitioning by date or another natural boundary."
+    },
+    {
+      "id": "sql-008",
+      "subtopic": "Query Optimization",
+      "difficulty": "medium",
+      "question": "What's the difference between WHERE and HAVING?",
+      "answer": "WHERE filters individual rows before aggregation happens. HAVING filters groups after GROUP BY/aggregation has been applied. You can't reference an aggregate function like SUM() or COUNT() in a WHERE clause — that's exactly what HAVING is for.\n```\nSELECT department, COUNT(*) AS headcount\nFROM employees\nWHERE status = 'active'      -- row-level filter first\nGROUP BY department\nHAVING COUNT(*) > 10;        -- group-level filter after aggregation\n```"
+    },
+    {
+      "id": "sql-009",
+      "subtopic": "Aggregation",
+      "difficulty": "easy",
+      "question": "What's the difference between COUNT(*), COUNT(column), and COUNT(DISTINCT column)?",
+      "answer": "`COUNT(*)` counts all rows, including ones with NULLs anywhere. `COUNT(column)` counts only rows where that specific column is NOT NULL. `COUNT(DISTINCT column)` counts the number of unique non-NULL values in that column. Mixing these up is a common source of subtly wrong report numbers."
+    },
+    {
+      "id": "sql-010",
+      "subtopic": "Aggregation",
+      "difficulty": "medium",
+      "question": "How do you calculate a running total / cumulative sum in SQL?",
+      "answer": "```\nSELECT order_date, daily_revenue,\n       SUM(daily_revenue) OVER (ORDER BY order_date) AS running_total\nFROM daily_sales;\n```\nBy default, `ORDER BY` inside the window frame makes it a cumulative window (RANGE/ROWS UNBOUNDED PRECEDING to CURRENT ROW). Add `PARTITION BY region` if you want the running total to restart per group."
+    }
+  ],
+  "practice": [
+    { "question": "Write a query to find the second-highest salary in an employees table without using LIMIT/OFFSET." },
+    { "question": "You have a `transactions` table with duplicate rows. Write a query to identify and remove the duplicates, keeping only one copy of each." },
+    { "question": "Write a query that returns month-over-month revenue growth percentage from a `sales(order_date, amount)` table." }
+  ]
+}

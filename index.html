@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>riya.prep — Data Analyst Revision Console</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="app">
+
+  <!-- Sidebar: schema explorer -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <span class="prompt">riya</span><span class="prompt-dim">@</span><span class="prompt">prep</span><span class="prompt-dim">:~$</span>
+      <button class="sidebar-close" id="sidebarClose" aria-label="Close menu">&times;</button>
+    </div>
+
+    <div class="db-label">
+      <span class="db-icon">▤</span> revision_db
+    </div>
+
+    <nav class="table-list" id="tableList">
+      <!-- populated by JS from TOPICS -->
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="progress-summary" id="progressSummary">
+        <div class="progress-summary-label">overall progress</div>
+        <div class="progress-bar-track"><div class="progress-bar-fill" id="overallProgressFill"></div></div>
+        <div class="progress-summary-text" id="overallProgressText">0 / 0 reviewed</div>
+      </div>
+    </div>
+  </aside>
+
+  <div class="sidebar-scrim" id="sidebarScrim"></div>
+
+  <!-- Main -->
+  <main class="main">
+    <header class="topbar">
+      <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
+      <div class="breadcrumb" id="breadcrumb">revision_db <span class="breadcrumb-sep">›</span> <span id="breadcrumbCurrent">home</span></div>
+      <div class="topbar-search">
+        <input type="text" id="searchInput" placeholder="grep -i 'topic or keyword'">
+      </div>
+    </header>
+
+    <div class="content" id="content">
+      <!-- home / topic content injected here -->
+    </div>
+  </main>
+
+</div>
+
+<script src="js/data-loader.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

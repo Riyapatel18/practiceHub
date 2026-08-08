@@ -1,0 +1,65 @@
+{
+  "description": "DAX, data modeling, and Power BI service concepts — the PL-300 core plus common interview curveballs.",
+  "questions": [
+    {
+      "id": "pbi-001",
+      "subtopic": "DAX Fundamentals",
+      "difficulty": "easy",
+      "question": "What's the difference between a calculated column and a measure?",
+      "answer": "A calculated column is computed row-by-row at data refresh time and stored in the model (takes up memory, visible as a regular column). A measure is computed on the fly at query time, based on whatever filter context is active in the visual — it's not stored, and always reflects live aggregation. Rule of thumb: use measures for aggregations (SUM, AVERAGE, ratios) since they respond dynamically to slicers and filters; use calculated columns only when you need a static, row-level value to slice or group by (like a custom category or flag)."
+    },
+    {
+      "id": "pbi-002",
+      "subtopic": "DAX Fundamentals",
+      "difficulty": "medium",
+      "question": "Explain CALCULATE() — why is it considered the most important DAX function?",
+      "answer": "CALCULATE() evaluates an expression in a modified filter context. It's the only DAX function that can change filter context directly, which makes it the backbone of almost every non-trivial measure — year-over-year comparisons, % of total, filtered aggregations, etc.\n```\nTotal Sales West = CALCULATE(SUM(Sales[Amount]), Sales[Region] = \"West\")\n```\nHere, CALCULATE overrides whatever region filter is coming from the visual/slicer and forces the calculation to only consider West, regardless of outside context."
+    },
+    {
+      "id": "pbi-003",
+      "subtopic": "DAX Fundamentals",
+      "difficulty": "medium",
+      "question": "What's the difference between filter context and row context?",
+      "answer": "Row context exists when a formula is evaluated row-by-row — like inside a calculated column, or inside iterator functions (SUMX, FILTER). It knows 'which row am I currently on.'\n\nFilter context is the set of filters applied to the data model at the point a measure is evaluated — from slicers, visual axes, and CALCULATE() overrides. It answers 'which subset of rows should be aggregated.'\n\nThe tricky part: row context does NOT automatically propagate to related tables unless you use functions like RELATED(), and CALCULATE() can convert row context into filter context (context transition) — this trips up a lot of intermediate DAX users."
+    },
+    {
+      "id": "pbi-004",
+      "subtopic": "DAX — Time Intelligence",
+      "difficulty": "medium",
+      "question": "How would you write a Year-over-Year growth % measure?",
+      "answer": "```\nYoY Sales Growth % =\nVAR CurrentSales = SUM(Sales[Amount])\nVAR PriorYearSales = CALCULATE(SUM(Sales[Amount]), SAMEPERIODLASTYEAR('Date'[Date]))\nRETURN\nDIVIDE(CurrentSales - PriorYearSales, PriorYearSales)\n```\nSAMEPERIODLASTYEAR requires a proper Date table marked as the model's date table, with a continuous date range. DIVIDE() is preferred over the `/` operator because it gracefully returns BLANK() (or a custom fallback) instead of erroring on divide-by-zero."
+    },
+    {
+      "id": "pbi-005",
+      "subtopic": "Data Modeling",
+      "difficulty": "medium",
+      "question": "Why is a star schema preferred over a single flat table in Power BI?",
+      "answer": "A star schema (central fact table + surrounding dimension tables) keeps dimensions like Date, Product, and Customer deduplicated and reusable across multiple fact tables. Benefits: smaller model size (dimension attributes aren't repeated on every fact row), faster DAX performance (the engine is optimized for star schemas), simpler and more intuitive relationships, and easier maintenance. A flat single table forces repeated dimension data on every row, bloats the model, and makes relationships/filtering messier as the model grows."
+    },
+    {
+      "id": "pbi-006",
+      "subtopic": "Data Modeling",
+      "difficulty": "hard",
+      "question": "What's the difference between a one-to-many and many-to-many relationship, and when do you actually need many-to-many?",
+      "answer": "One-to-many is the standard star-schema relationship — one row in a dimension table (e.g. Product) relates to many rows in a fact table (e.g. Sales). Many-to-many happens when neither side has unique keys relative to the other — e.g. a Customers table and an Accounts table where a customer can have multiple accounts and an account can have multiple customers (joint accounts). Power BI supports this directly via bidirectional or many-to-many relationship types, but it should be a last resort — it's slower and can produce ambiguous filtering. Where possible, resolve it with a bridge table instead."
+    },
+    {
+      "id": "pbi-007",
+      "subtopic": "Row-Level Security",
+      "difficulty": "medium",
+      "question": "How does Row-Level Security (RLS) work in Power BI?",
+      "answer": "RLS restricts which rows a user can see based on their identity, defined via DAX filter expressions applied to roles (Modeling → Manage Roles). Example: a role filter `[RegionManager] = USERPRINCIPALNAME()` only shows rows where the region manager's email matches the logged-in user. Roles are then assigned to users/groups in the Power BI Service. Static RLS hardcodes filter values per role; dynamic RLS uses a lookup table so a single role's logic scales to many users without creating a separate role for each person."
+    },
+    {
+      "id": "pbi-008",
+      "subtopic": "Power BI Service",
+      "difficulty": "easy",
+      "question": "What's the difference between a scheduled refresh and a DirectQuery connection?",
+      "answer": "With Import mode + scheduled refresh, Power BI pulls a snapshot of the data into its own compressed in-memory model on a schedule (e.g. daily) — fast visuals, but data is only as fresh as the last refresh. DirectQuery sends live queries to the source database every time a visual renders, so data is always current, but performance depends entirely on the source system and DAX functionality is more limited. Composite models let you mix both approaches within the same report."
+    }
+  ],
+  "practice": [
+    { "question": "Write a DAX measure that calculates each product's contribution % to total sales within its category (not the grand total)." },
+    { "question": "Explain how you'd design a data model for a dashboard tracking sales, returns, and inventory — how many fact tables, how many dimensions, and why?" }
+  ]
+}

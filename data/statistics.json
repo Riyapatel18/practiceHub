@@ -1,0 +1,58 @@
+{
+  "description": "The statistical foundations behind data analysis decisions — often used to separate DA candidates who can explain 'why', not just 'how'.",
+  "questions": [
+    {
+      "id": "stat-001",
+      "subtopic": "Descriptive Stats",
+      "difficulty": "easy",
+      "question": "When would you use the median instead of the mean?",
+      "answer": "Use the median when data is skewed or has outliers — like household income or house prices — because the mean gets dragged toward extreme values while the median stays representative of a 'typical' value. Use the mean when data is roughly symmetric/normal, since it uses all the data and has nicer mathematical properties for further analysis. A quick check: if mean and median are far apart, the distribution is skewed."
+    },
+    {
+      "id": "stat-002",
+      "subtopic": "Descriptive Stats",
+      "difficulty": "medium",
+      "question": "What's the difference between variance and standard deviation, and why do we usually report standard deviation?",
+      "answer": "Variance is the average squared deviation from the mean — squaring is necessary to prevent positive and negative deviations from canceling out, but it leaves the result in squared units (e.g. squared rupees), which isn't intuitive. Standard deviation is the square root of variance, bringing it back to the original unit, which is why it's the one typically reported and plotted alongside the mean."
+    },
+    {
+      "id": "stat-003",
+      "subtopic": "Probability Distributions",
+      "difficulty": "medium",
+      "question": "Explain the Central Limit Theorem in plain terms — why does it matter for data analysis?",
+      "answer": "The Central Limit Theorem says that if you repeatedly take sufficiently large random samples from any population (regardless of that population's original distribution shape) and calculate the mean of each sample, those sample means will form an approximately normal distribution. It matters because it's the reason so many statistical tests (t-tests, confidence intervals) can assume normality even when the underlying raw data isn't normal — as long as your sample size is reasonably large (commonly n ≥ 30 as a rule of thumb)."
+    },
+    {
+      "id": "stat-004",
+      "subtopic": "Hypothesis Testing",
+      "difficulty": "medium",
+      "question": "What's a p-value, and what's a common misinterpretation of it?",
+      "answer": "A p-value is the probability of observing data at least as extreme as what you got, assuming the null hypothesis is true. It does NOT mean 'the probability the null hypothesis is true,' and it's not 'the probability your result is due to chance' — those are the most common misinterpretations. A small p-value (typically < 0.05) suggests the observed effect would be unlikely under the null hypothesis, giving you grounds to reject it — but it says nothing about the size or business importance of the effect, only its statistical unlikeliness."
+    },
+    {
+      "id": "stat-005",
+      "subtopic": "Hypothesis Testing",
+      "difficulty": "medium",
+      "question": "What are Type I and Type II errors?",
+      "answer": "Type I error (false positive) — rejecting a true null hypothesis, i.e. concluding there's an effect when there actually isn't one. Controlled by your significance level (alpha), typically set at 0.05.\n\nType II error (false negative) — failing to reject a false null hypothesis, i.e. missing a real effect that's actually there. Related to statistical power (1 - beta) — the probability of correctly detecting an effect when it exists.\n\nThere's a trade-off: making alpha stricter (lower) to reduce Type I errors generally increases the risk of Type II errors, unless you also increase sample size."
+    },
+    {
+      "id": "stat-006",
+      "subtopic": "Correlation",
+      "difficulty": "easy",
+      "question": "Does correlation imply causation? Give a business example of why this matters.",
+      "answer": "No. Two variables can be correlated because one causes the other, because a third variable (a confounder) drives both, or purely by coincidence. Classic business example: ice cream sales and drowning incidents are correlated — but ice cream doesn't cause drowning; hot weather drives both. In a business setting, mistaking correlation for causation could mean, say, seeing that customers who use a loyalty app spend more and concluding the app caused the spend — when in reality, customers who were already highly engaged were simply more likely to both adopt the app and spend more."
+    },
+    {
+      "id": "stat-007",
+      "subtopic": "A/B Testing",
+      "difficulty": "medium",
+      "question": "How would you determine if a new website design (B) performs better than the old one (A) in terms of conversion rate?",
+      "answer": "Set up an A/B test: randomly split traffic between the two versions to control for confounders, define your success metric up front (conversion rate) and the minimum detectable effect you care about, then run a two-proportion hypothesis test (e.g. a chi-square test or z-test for proportions) comparing conversion rates between groups. Check statistical significance (p-value) AND practical significance (is the lift big enough to matter for the business), and make sure the test ran long enough to reach adequate sample size and account for day-of-week effects before declaring a winner."
+    }
+  ],
+  "practice": [
+    { "question": "A stakeholder says 'our new feature increased revenue by 5%, and the p-value is 0.03, so we should roll it out everywhere.' What follow-up questions would you ask before agreeing?" },
+    { "question": "Explain, without any formulas, what a 95% confidence interval actually means to someone who's never studied statistics." }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "description": "Open-ended 'what would you do' scenarios — these test judgment and communication, not just technical recall.",
+  "questions": [
+    {
+      "id": "scen-001",
+      "subtopic": "Stakeholder Management",
+      "difficulty": "medium",
+      "question": "A stakeholder asks for a report by end of day, but the data source hasn't refreshed and the numbers would be incomplete. What do you do?",
+      "answer": "Don't silently deliver incomplete numbers, and don't silently miss the deadline either — communicate early. Go to the stakeholder as soon as you know there's a problem (not at the deadline), explain specifically what's incomplete and why, and offer options: a partial report clearly labeled with what's missing and an ETA for the full version, or a short delay for a complete and accurate report. Most stakeholders would rather know now than get bad numbers they later have to walk back — protecting the reliability of your reporting matters more than hitting an arbitrary deadline with wrong data."
+    },
+    {
+      "id": "scen-002",
+      "subtopic": "Stakeholder Management",
+      "difficulty": "medium",
+      "question": "Two stakeholders want the same dashboard to show conflicting definitions of a metric (e.g. 'active customer'). How do you handle it?",
+      "answer": "This is a data governance problem disguised as a technical one. Don't just pick one definition yourself — surface the conflict explicitly, get both stakeholders (or their teams) in a conversation to agree on a single source-of-truth definition, and document it once agreed. If both definitions are genuinely needed for different purposes, build them as clearly and separately labeled measures (e.g. 'Active Customers (30-day)' vs 'Active Customers (90-day)') rather than letting one ambiguous 'Active Customers' metric mean different things to different people."
+    },
+    {
+      "id": "scen-003",
+      "subtopic": "Data Quality",
+      "difficulty": "medium",
+      "question": "You notice a sudden, unexplained 40% drop in a key metric on your dashboard this morning. What's your process?",
+      "answer": "First, rule out a data/pipeline issue before assuming it's a real business change: check if the ETL/refresh ran successfully, check row counts against a typical day, and check if a source system or upstream table changed. If the data looks technically sound, segment the drop — is it across the board or concentrated in one region/product/channel? That narrows down whether it's a real event (e.g. a promotion ending, a system outage on the business side) versus a data artifact. Only after ruling out a pipeline issue would you escalate it as a genuine business finding."
+    },
+    {
+      "id": "scen-004",
+      "subtopic": "Prioritization",
+      "difficulty": "medium",
+      "question": "You have three ad-hoc requests due today from three different senior stakeholders, and you can realistically only finish two. How do you decide?",
+      "answer": "Don't silently drop one — communicate the constraint immediately rather than at the deadline. Quickly assess: which requests are time-sensitive versus which have flexibility (e.g. feeding a board meeting today vs. a nice-to-have exploration), and how long each will actually take. Then proactively message all three stakeholders (or your manager if there's ambiguity about priority) with a clear plan: what you'll deliver by when, and ask if the priority order makes sense to them. This shows judgment and communication, not just technical throughput."
+    },
+    {
+      "id": "scen-005",
+      "subtopic": "Communicating Insights",
+      "difficulty": "medium",
+      "question": "How would you explain a complex statistical finding (like a p-value or confidence interval) to a non-technical stakeholder?",
+      "answer": "Translate the finding into business language, not statistical jargon. Instead of 'the p-value was 0.03, so the result is statistically significant,' say something like: 'Based on the data, we're fairly confident this increase in sales is a real effect from the campaign, not just random variation — and here's what that means for the decision in front of us.' Lead with the decision-relevant takeaway, keep the statistical mechanics available if they ask for more detail, and always translate confidence/uncertainty into practical terms (e.g. 'we're reasonably but not 100% certain' rather than raw percentages)."
+    },
+    {
+      "id": "scen-006",
+      "subtopic": "Handling Mistakes",
+      "difficulty": "medium",
+      "question": "You shipped a dashboard last week, and today you realize a formula error means one of the key numbers has been wrong the whole time. What do you do?",
+      "answer": "Own it immediately rather than waiting to be caught. Quantify the actual impact first (how wrong, which numbers, who's seen/used it), then proactively notify whoever relied on that number — including anyone who might have made a decision based on it — with a clear explanation of the error, the corrected number, and what you're doing to prevent it happening again (like adding a validation check). Speed and transparency here matter far more to trust than the fact that a mistake happened in the first place — everyone makes them."
+    }
+  ],
+  "practice": [
+    { "question": "Describe a real (or realistic) situation where data told a different story than what a stakeholder wanted to hear. How would you present that finding?" },
+    { "question": "Your manager asks you to build a dashboard 'to track everything about sales.' How do you turn that vague ask into a concrete, buildable spec?" }
+  ]
+}

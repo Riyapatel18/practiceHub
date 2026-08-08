@@ -1,0 +1,65 @@
+{
+  "description": "Pandas, NumPy, and EDA-focused Python — the practical toolkit interviewers actually probe for DA roles.",
+  "questions": [
+    {
+      "id": "py-001",
+      "subtopic": "Pandas Basics",
+      "difficulty": "easy",
+      "question": "What's the difference between .loc[] and .iloc[] in Pandas?",
+      "answer": "`.loc[]` selects by label — row/column names, or boolean conditions. `.iloc[]` selects by integer position, regardless of what the labels actually are. `df.loc[2:5]` is inclusive of both ends and uses index labels; `df.iloc[2:5]` behaves like normal Python slicing (exclusive of the end) and uses positions. Mixing these up is a very common source of off-by-one bugs when the index isn't a simple 0,1,2... range."
+    },
+    {
+      "id": "py-002",
+      "subtopic": "Pandas Basics",
+      "difficulty": "medium",
+      "question": "How do you handle missing values in a dataset with Pandas?",
+      "answer": "Start by quantifying: `df.isnull().sum()` to see how much is missing per column. Options from there:\n- `df.dropna()` — drop rows/columns with nulls, fine if missingness is small and random.\n- `df.fillna(value)` — fill with a constant, mean/median (`df['col'].fillna(df['col'].mean())`), or forward/backward fill for time series (`method='ffill'`).\n- For categorical columns, filling with the mode or an explicit 'Unknown' category often makes more sense than a numeric fill.\nThe right choice depends on why the data is missing — MCAR (missing completely at random) is safer to drop; anything systematic usually needs an informed fill or a missingness flag column."
+    },
+    {
+      "id": "py-003",
+      "subtopic": "Pandas — GroupBy",
+      "difficulty": "medium",
+      "question": "How would you calculate total sales per region and the top product per region in one workflow?",
+      "answer": "```python\n# Total sales per region\nregion_totals = df.groupby('region')['sales'].sum()\n\n# Top product per region\ntop_products = (\n    df.groupby(['region', 'product'])['sales']\n      .sum()\n      .reset_index()\n      .sort_values('sales', ascending=False)\n      .groupby('region')\n      .head(1)\n)\n```\nThe pattern of group → aggregate → sort → group again → head(1) is a very common way to get 'top N per group' in Pandas."
+    },
+    {
+      "id": "py-004",
+      "subtopic": "Pandas — Merging",
+      "difficulty": "medium",
+      "question": "What's the difference between pd.merge(), pd.concat(), and .join()?",
+      "answer": "`pd.merge()` combines DataFrames based on common columns/keys, like a SQL join (supports inner/left/right/outer). `pd.concat()` stacks DataFrames together — either vertically (adding rows, `axis=0`) or horizontally (adding columns, `axis=1`) — without matching on keys. `.join()` is a convenience method for merging on the index rather than a column, essentially a shortcut for a specific merge case."
+    },
+    {
+      "id": "py-005",
+      "subtopic": "EDA",
+      "difficulty": "easy",
+      "question": "Walk through your first few steps when you get a new, unfamiliar dataset.",
+      "answer": "1) `df.shape`, `df.info()`, `df.head()` — get a feel for size, dtypes, and a visual sample.\n2) `df.describe()` — check ranges, means, and spot obvious outliers (e.g. a max value 100x the mean).\n3) `df.isnull().sum()` — quantify missing data.\n4) `df.duplicated().sum()` — check for duplicate rows.\n5) Check dtypes are sensible (dates read as strings, numbers read as objects are common traps).\n6) Univariate distributions of key columns (histograms, value_counts() for categoricals) before jumping into relationships between variables."
+    },
+    {
+      "id": "py-006",
+      "subtopic": "EDA",
+      "difficulty": "medium",
+      "question": "How do you detect and handle outliers in a numeric column?",
+      "answer": "Common detection methods: IQR rule (flag values beyond Q1 - 1.5×IQR or Q3 + 1.5×IQR), or Z-score (flag |z| > 3 for roughly normal data). \n```python\nQ1, Q3 = df['amount'].quantile([0.25, 0.75])\nIQR = Q3 - Q1\noutliers = df[(df['amount'] < Q1 - 1.5*IQR) | (df['amount'] > Q3 + 1.5*IQR)]\n```\nHandling depends on context: cap/winsorize extreme values, remove them if they're clearly data-entry errors, or keep them but flag them if they're genuine (e.g. a legitimately huge enterprise order) — outliers aren't automatically 'wrong,' so understand the business context before dropping them."
+    },
+    {
+      "id": "py-007",
+      "subtopic": "NumPy",
+      "difficulty": "easy",
+      "question": "Why use NumPy arrays instead of plain Python lists for numeric data?",
+      "answer": "NumPy arrays are stored in contiguous memory as a fixed type, which enables vectorized operations implemented in C — meaning operations like element-wise addition run far faster than looping over a Python list. NumPy also supports broadcasting (applying operations across arrays of different shapes without manual loops) and a huge library of statistical/linear algebra functions that Pandas itself is built on top of."
+    },
+    {
+      "id": "py-008",
+      "subtopic": "Visualization",
+      "difficulty": "easy",
+      "question": "When would you choose Seaborn over Matplotlib for a quick EDA plot?",
+      "answer": "Matplotlib is the lower-level engine — full control, but more code for polished output. Seaborn is built on top of Matplotlib and is optimized for statistical plots directly from DataFrames — things like `sns.boxplot()`, `sns.heatmap()` for correlation matrices, or `sns.pairplot()` for quick multi-variable exploration come with sensible defaults and far less boilerplate. In practice: reach for Seaborn for fast exploratory plots, and drop down to Matplotlib when you need fine-grained customization for a final, presentation-ready chart."
+    }
+  ],
+  "practice": [
+    { "question": "Given a DataFrame `df` with columns ['customer_id', 'order_date', 'amount'], write Pandas code to find each customer's most recent order and their total lifetime spend." },
+    { "question": "Describe how you'd identify which numeric columns in a new dataset are most correlated with a target column called 'churned', and what you'd do next with that information." }
+  ]
+}

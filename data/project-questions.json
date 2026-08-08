@@ -1,0 +1,44 @@
+{
+  "description": "Questions interviewers ask about the projects on your resume — Healthcare Dashboard, Credit Risk Analytics, Retail Sales Performance, and your work at Jio Platforms.",
+  "questions": [
+    {
+      "id": "proj-001",
+      "subtopic": "Explaining Your Projects",
+      "difficulty": "easy",
+      "question": "Walk me through your Healthcare Analytics Dashboard project, start to finish.",
+      "answer": "Structure your answer as: Problem → Data → Process → Outcome.\n\nProblem: Hospital operations lacked visibility into census, department-level performance, and wait times.\nData: 2,506 patient records across 9 departments.\nProcess: Built an ETL pipeline in Power Query, cleaned and preprocessed in Excel, then modeled a 6-page Power BI report.\nOutcome: Surfaced a 67% inpatient admission rate and OPD wait time variance of 33–96 minutes — findings that directly informed resource reallocation across departments.\n\nKeep it under 90 seconds unless they ask you to go deeper on a specific part — interviewers often follow up on your DAX/data modeling choices next."
+    },
+    {
+      "id": "proj-002",
+      "subtopic": "Explaining Your Projects",
+      "difficulty": "medium",
+      "question": "In your Credit Risk Analytics project, how exactly did you 'reduce credit losses by 15%'? Interviewers often probe metrics like this.",
+      "answer": "Be ready to explain the mechanism behind any metric on your resume, not just the number. Example structure: 'I engineered credit risk features including credit utilization scoring using SQL and Python — these features fed into a risk-monitoring Power BI dashboard that isolated high-risk segments worth 15% of the portfolio. By giving underwriters visibility into those specific segments for targeted review, risky accounts got extra scrutiny before approval — which is what drove the reduction in losses.' Never claim you personally built a predictive model unless you did — be precise about whether your contribution was the feature engineering, the dashboard, or the analysis that informed a decision."
+    },
+    {
+      "id": "proj-003",
+      "subtopic": "Explaining Your Projects",
+      "difficulty": "medium",
+      "question": "Tell me about a time you found something wrong in the data mid-project. What did you do?",
+      "answer": "Use a real, specific example if you have one (even a small one) — interviewers can tell generic answers apart from real ones. Structure with STAR: Situation (what you were building), Task (what you needed data for), Action (how you noticed the issue — e.g. a RCA on production incidents, or numbers not reconciling against a source system), Result (what you did about it and what changed). If you genuinely don't have a strong example yet, prepare one from your Jio RCA work — you led root cause analysis on 150+ production incidents, which is rich material for this kind of behavioral question."
+    },
+    {
+      "id": "proj-004",
+      "subtopic": "Technical Depth",
+      "difficulty": "hard",
+      "question": "Your Retail Sales project mentions a 'star schema' — why did you model it that way instead of one flat table?",
+      "answer": "Good answer structure: name the fact and dimension tables specifically (e.g. a Sales fact table with Product, Date, Store dimensions), then explain the tradeoff in your own words — smaller model size since dimension attributes aren't repeated on every transaction row, faster aggregation performance, and cleaner filtering/slicing in Power BI. If you modeled 150K+ transactions, mention that the star schema is exactly what made drill-through dashboards and SKU-level analysis performant at that scale — a flat table would have made the model bloated and slower to query."
+    },
+    {
+      "id": "proj-005",
+      "subtopic": "Technical Depth",
+      "difficulty": "medium",
+      "question": "How did you validate that your dashboard's numbers were actually correct before sharing them with stakeholders?",
+      "answer": "Talk through your actual QA process: cross-checking aggregated totals in Power BI against a source-of-truth query run directly in SQL, spot-checking a handful of individual records end-to-end, checking edge cases (nulls, duplicates, date boundary issues), and having a second pair of eyes review before wide distribution. If you have a concrete example — like reconciling MIS reports against source systems in your freelance or Jio work — use it. This question is really testing whether you take ownership of data quality, not just visualization polish."
+    }
+  ],
+  "practice": [
+    { "question": "Pick one project from your resume and write a 60-second verbal answer (as text) to 'Tell me about a project you're proud of.' Keep it structured: Problem → Approach → Impact." },
+    { "question": "An interviewer says 'this dashboard looks nice, but how do you know it actually influenced any real business decision?' Write your answer using a specific example from your resume." }
+  ]
+}
