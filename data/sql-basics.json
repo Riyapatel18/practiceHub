@@ -1,0 +1,2327 @@
+{
+  "description": "Joins, window functions, CTEs, and query optimization — the core of almost every DA/BI interview.",
+  "questions": [
+  {
+    "id": "sql-001",
+    "subtopic": "SELECT",
+    "difficulty": "easy",
+    "question": "What is the purpose of the SELECT statement?",
+    "answer": "The SELECT statement retrieves data from one or more tables. You can return specific columns, computed values, or all columns using *. It is the most fundamental SQL command."
+  },
+  {
+    "id": "sql-002",
+    "subtopic": "SELECT *",
+    "difficulty": "easy",
+    "question": "Why is using SELECT * generally discouraged in production?",
+    "answer": "SELECT * retrieves every column, increasing network traffic, memory usage, and query execution time. It also makes applications vulnerable to schema changes. It's better to select only the columns you need."
+  },
+  {
+    "id": "sql-003",
+    "subtopic": "DISTINCT",
+    "difficulty": "easy",
+    "question": "What does the DISTINCT keyword do?",
+    "answer": "DISTINCT removes duplicate rows from the result set. It returns only unique combinations of the selected columns."
+  },
+  {
+    "id": "sql-004",
+    "subtopic": "Aliases",
+    "difficulty": "easy",
+    "question": "What are aliases in SQL?",
+    "answer": "Aliases provide temporary names for tables or columns using the AS keyword (optional in many databases). They improve query readability and simplify complex SQL statements."
+  },
+  {
+    "id": "sql-005",
+    "subtopic": "WHERE",
+    "difficulty": "easy",
+    "question": "What is the purpose of the WHERE clause?",
+    "answer": "WHERE filters rows before grouping or aggregation. Only rows that satisfy the specified condition are included in the result."
+  },
+  {
+    "id": "sql-006",
+    "subtopic": "ORDER BY",
+    "difficulty": "easy",
+    "question": "How does ORDER BY work?",
+    "answer": "ORDER BY sorts the result set in ascending (ASC) or descending (DESC) order. You can sort by one or multiple columns."
+  },
+  {
+    "id": "sql-007",
+    "subtopic": "LIMIT",
+    "difficulty": "easy",
+    "question": "What is the purpose of LIMIT?",
+    "answer": "LIMIT restricts the number of rows returned by a query. SQL Server uses TOP instead of LIMIT, while PostgreSQL and MySQL support LIMIT."
+  },
+  {
+    "id": "sql-008",
+    "subtopic": "TOP",
+    "difficulty": "easy",
+    "question": "What is TOP in SQL Server?",
+    "answer": "TOP limits the number of rows returned by a query. For example, TOP 10 returns only the first ten rows after applying ORDER BY."
+  },
+  {
+    "id": "sql-009",
+    "subtopic": "NULL",
+    "difficulty": "easy",
+    "question": "What is NULL in SQL?",
+    "answer": "NULL represents an unknown, missing, or unavailable value. It is not equal to zero, an empty string, or FALSE. NULL comparisons require IS NULL or IS NOT NULL."
+  },
+  {
+    "id": "sql-010",
+    "subtopic": "Data Types",
+    "difficulty": "easy",
+    "question": "Why are data types important in SQL?",
+    "answer": "Data types determine how data is stored, validated, indexed, and processed. Choosing appropriate data types improves storage efficiency and query performance."
+  },
+  {
+    "id": "sql-011",
+    "subtopic": "Comparison Operators",
+    "difficulty": "easy",
+    "question": "What comparison operators are commonly used in SQL?",
+    "answer": "Common comparison operators include =, !=, <>, >, <, >=, and <=. They are primarily used inside WHERE clauses to filter rows."
+  },
+  {
+    "id": "sql-012",
+    "subtopic": "Logical Operators",
+    "difficulty": "easy",
+    "question": "What are logical operators in SQL?",
+    "answer": "AND requires all conditions to be true, OR requires at least one condition to be true, and NOT negates a condition."
+  },
+  {
+    "id": "sql-013",
+    "subtopic": "BETWEEN",
+    "difficulty": "easy",
+    "question": "How does the BETWEEN operator work?",
+    "answer": "BETWEEN filters values within an inclusive range. For example, salary BETWEEN 50000 AND 100000 includes both 50000 and 100000."
+  },
+  {
+    "id": "sql-014",
+    "subtopic": "IN",
+    "difficulty": "easy",
+    "question": "What is the IN operator used for?",
+    "answer": "IN checks whether a value exists in a specified list of values. It simplifies multiple OR conditions."
+  },
+  {
+    "id": "sql-015",
+    "subtopic": "NOT IN",
+    "difficulty": "easy",
+    "question": "What does NOT IN do?",
+    "answer": "NOT IN returns rows whose values are not present in the specified list. Be cautious when the list contains NULL values, as results may become unexpected."
+  },
+  {
+    "id": "sql-016",
+    "subtopic": "LIKE",
+    "difficulty": "easy",
+    "question": "What is the LIKE operator used for?",
+    "answer": "LIKE performs pattern matching on text values using wildcards such as % (any number of characters) and _ (a single character)."
+  },
+  {
+    "id": "sql-017",
+    "subtopic": "Wildcards",
+    "difficulty": "easy",
+    "question": "What are SQL wildcards?",
+    "answer": "The % wildcard matches zero or more characters, while the _ wildcard matches exactly one character."
+  },
+  {
+    "id": "sql-018",
+    "subtopic": "IS NULL",
+    "difficulty": "easy",
+    "question": "Why can't we use = NULL?",
+    "answer": "NULL represents an unknown value, so comparisons using = or != always evaluate to UNKNOWN. SQL provides IS NULL and IS NOT NULL for checking NULL values."
+  },
+  {
+    "id": "sql-019",
+    "subtopic": "Comments",
+    "difficulty": "easy",
+    "question": "How do you write comments in SQL?",
+    "answer": "Use -- for single-line comments and /* ... */ for multi-line comments."
+  },
+  {
+    "id": "sql-020",
+    "subtopic": "Execution Order",
+    "difficulty": "medium",
+    "question": "What is the logical execution order of a SQL query?",
+    "answer": "The logical execution order is FROM → JOIN → WHERE → GROUP BY → HAVING → SELECT → DISTINCT → ORDER BY → LIMIT/TOP. This explains why aliases defined in SELECT cannot be referenced in WHERE."
+  },
+  {
+    "id": "sql-021",
+    "subtopic": "Aggregate Functions",
+    "difficulty": "easy",
+    "question": "What are aggregate functions?",
+    "answer": "Aggregate functions calculate a single value from multiple rows. Common examples include COUNT(), SUM(), AVG(), MIN(), and MAX()."
+  },
+  {
+    "id": "sql-022",
+    "subtopic": "COUNT",
+    "difficulty": "easy",
+    "question": "What is the difference between COUNT(*) and COUNT(column)?",
+    "answer": "COUNT(*) counts every row, including rows containing NULL values. COUNT(column) counts only rows where the specified column is not NULL."
+  },
+  {
+    "id": "sql-023",
+    "subtopic": "COUNT DISTINCT",
+    "difficulty": "easy",
+    "question": "What does COUNT(DISTINCT column) do?",
+    "answer": "It counts the number of unique non-NULL values in a column."
+  },
+  {
+    "id": "sql-024",
+    "subtopic": "SUM",
+    "difficulty": "easy",
+    "question": "What does SUM() do?",
+    "answer": "SUM() calculates the total of all numeric values in a column while ignoring NULL values."
+  },
+  {
+    "id": "sql-025",
+    "subtopic": "AVG",
+    "difficulty": "easy",
+    "question": "How does AVG() handle NULL values?",
+    "answer": "AVG() ignores NULL values and calculates the average using only non-NULL rows."
+  },
+  {
+    "id": "sql-026",
+    "subtopic": "MIN and MAX",
+    "difficulty": "easy",
+    "question": "What do MIN() and MAX() return?",
+    "answer": "MIN() returns the smallest value, while MAX() returns the largest value in the specified column."
+  },
+  {
+    "id": "sql-027",
+    "subtopic": "GROUP BY",
+    "difficulty": "easy",
+    "question": "Why do we use GROUP BY?",
+    "answer": "GROUP BY groups rows with the same values together so aggregate functions can be applied to each group separately."
+  },
+  {
+    "id": "sql-028",
+    "subtopic": "HAVING",
+    "difficulty": "medium",
+    "question": "What is the difference between WHERE and HAVING?",
+    "answer": "WHERE filters individual rows before grouping, whereas HAVING filters groups after aggregation. Aggregate functions cannot be used in WHERE but can be used in HAVING."
+  },
+  {
+    "id": "sql-029",
+    "subtopic": "CASE",
+    "difficulty": "easy",
+    "question": "What is the CASE expression used for?",
+    "answer": "CASE adds conditional logic to SQL queries. It works like an IF-ELSE statement and is commonly used for categorization, labels, and conditional calculations."
+  },
+  {
+    "id": "sql-030",
+    "subtopic": "INNER JOIN",
+    "difficulty": "easy",
+    "question": "What is an INNER JOIN?",
+    "answer": "INNER JOIN returns only rows that have matching values in both tables. Rows without a match are excluded."
+  },
+  {
+    "id": "sql-031",
+    "subtopic": "LEFT JOIN",
+    "difficulty": "easy",
+    "question": "What's the difference between INNER JOIN and LEFT JOIN?",
+    "answer": "INNER JOIN returns only matching rows from both tables. LEFT JOIN returns every row from the left table and matching rows from the right table. If no match exists, the right-side columns contain NULL."
+  },
+  {
+    "id": "sql-032",
+    "subtopic": "RIGHT JOIN",
+    "difficulty": "easy",
+    "question": "What is a RIGHT JOIN?",
+    "answer": "RIGHT JOIN returns all rows from the right table and matching rows from the left table. Non-matching left-side columns contain NULL."
+  },
+  {
+    "id": "sql-033",
+    "subtopic": "FULL OUTER JOIN",
+    "difficulty": "medium",
+    "question": "What is a FULL OUTER JOIN?",
+    "answer": "FULL OUTER JOIN returns every row from both tables. Matching rows are combined, while unmatched rows contain NULL values for missing columns."
+  },
+  {
+    "id": "sql-034",
+    "subtopic": "SELF JOIN",
+    "difficulty": "medium",
+    "question": "What is a SELF JOIN?",
+    "answer": "A SELF JOIN joins a table with itself. It is commonly used for hierarchical data such as employees and managers."
+  },
+  {
+    "id": "sql-035",
+    "subtopic": "CROSS JOIN",
+    "difficulty": "medium",
+    "question": "What is a CROSS JOIN?",
+    "answer": "A CROSS JOIN returns the Cartesian product of two tables, combining every row from the first table with every row from the second table."
+  },
+  {
+    "id": "sql-036",
+    "subtopic": "UNION",
+    "difficulty": "easy",
+    "question": "What is UNION?",
+    "answer": "UNION combines the results of two or more SELECT statements and automatically removes duplicate rows."
+  },
+  {
+    "id": "sql-037",
+    "subtopic": "UNION ALL",
+    "difficulty": "easy",
+    "question": "What's the difference between UNION and UNION ALL?",
+    "answer": "UNION removes duplicates, whereas UNION ALL retains all rows, including duplicates. UNION ALL is generally faster because it avoids duplicate elimination."
+  },
+  {
+    "id": "sql-038",
+    "subtopic": "Subquery",
+    "difficulty": "medium",
+    "question": "What is a subquery?",
+    "answer": "A subquery is a query nested inside another SQL query. It can appear in SELECT, FROM, WHERE, or HAVING clauses."
+  },
+  {
+    "id": "sql-039",
+    "subtopic": "Correlated Subquery",
+    "difficulty": "hard",
+    "question": "What is a correlated subquery?",
+    "answer": "A correlated subquery references columns from the outer query and executes once for each row processed by the outer query."
+  },
+  {
+    "id": "sql-040",
+    "subtopic": "CTE",
+    "difficulty": "medium",
+    "question": "What is a Common Table Expression (CTE)?",
+    "answer": "A CTE is a temporary named result set created using the WITH keyword. It improves readability and simplifies complex queries."
+  },
+  {
+    "id": "sql-041",
+    "subtopic": "ROW_NUMBER",
+    "difficulty": "medium",
+    "question": "What does ROW_NUMBER() do?",
+    "answer": "ROW_NUMBER() assigns a unique sequential number to each row within a partition based on the specified ordering."
+  },
+  {
+    "id": "sql-042",
+    "subtopic": "RANK",
+    "difficulty": "medium",
+    "question": "How does RANK() work?",
+    "answer": "RANK() assigns the same rank to tied rows but skips subsequent rank numbers. For example, if two rows are ranked 1, the next rank is 3."
+  },
+  {
+    "id": "sql-043",
+    "subtopic": "DENSE_RANK",
+    "difficulty": "medium",
+    "question": "How is DENSE_RANK() different from RANK()?",
+    "answer": "DENSE_RANK() assigns the same rank to tied rows without skipping the next rank number."
+  },
+  {
+    "id": "sql-044",
+    "subtopic": "PARTITION BY",
+    "difficulty": "medium",
+    "question": "What is PARTITION BY used for?",
+    "answer": "PARTITION BY divides the result set into logical groups for window functions without collapsing rows like GROUP BY."
+  },
+  {
+    "id": "sql-045",
+    "subtopic": "LEAD",
+    "difficulty": "medium",
+    "question": "What is the LEAD() function used for?",
+    "answer": "LEAD() returns data from the next row within the same partition. It is useful for trend analysis and comparing consecutive records."
+  },
+  {
+    "id": "sql-046",
+    "subtopic": "LAG",
+    "difficulty": "medium",
+    "question": "What is the LAG() function used for?",
+    "answer": "LAG() returns data from the previous row within the same partition. It is commonly used to compare current and previous values."
+  },
+  {
+    "id": "sql-047",
+    "subtopic": "Indexes",
+    "difficulty": "medium",
+    "question": "What is an index?",
+    "answer": "An index is a database object that speeds up data retrieval by allowing the database engine to locate rows efficiently. However, indexes consume storage and slightly slow INSERT, UPDATE, and DELETE operations."
+  },
+  {
+    "id": "sql-048",
+    "subtopic": "Primary Key",
+    "difficulty": "easy",
+    "question": "What is a primary key?",
+    "answer": "A primary key uniquely identifies each row in a table. It cannot contain NULL values and must be unique."
+  },
+  {
+    "id": "sql-049",
+    "subtopic": "Foreign Key",
+    "difficulty": "easy",
+    "question": "What is a foreign key?",
+    "answer": "A foreign key is a column or set of columns that references the primary key of another table. It enforces referential integrity between related tables."
+  },
+  {
+    "id": "sql-050",
+    "subtopic": "Normalization",
+    "difficulty": "medium",
+    "question": "What is normalization?",
+    "answer": "Normalization is the process of organizing database tables to reduce redundancy and improve data integrity. Common normal forms include 1NF, 2NF, and 3NF."
+  },
+   {
+    "id": "sql-051",
+    "subtopic": "CONCAT",
+    "difficulty": "easy",
+    "question": "What does the CONCAT() function do?",
+    "answer": "CONCAT() combines two or more strings into a single string. Unlike using the + operator in some databases, CONCAT() handles NULL values more consistently across SQL dialects."
+  },
+  {
+    "id": "sql-052",
+    "subtopic": "SUBSTRING",
+    "difficulty": "easy",
+    "question": "What is the purpose of the SUBSTRING() function?",
+    "answer": "SUBSTRING() extracts a specified portion of a string starting from a given position for a specified length."
+  },
+  {
+    "id": "sql-053",
+    "subtopic": "LENGTH",
+    "difficulty": "easy",
+    "question": "What is the difference between LENGTH() and CHAR_LENGTH()?",
+    "answer": "LENGTH() typically returns the number of bytes used to store a string, while CHAR_LENGTH() returns the number of characters. In multibyte character sets, these values may differ."
+  },
+  {
+    "id": "sql-054",
+    "subtopic": "UPPER and LOWER",
+    "difficulty": "easy",
+    "question": "What are UPPER() and LOWER() used for?",
+    "answer": "UPPER() converts all characters in a string to uppercase, while LOWER() converts them to lowercase. These functions are commonly used for case-insensitive comparisons."
+  },
+  {
+    "id": "sql-055",
+    "subtopic": "TRIM",
+    "difficulty": "easy",
+    "question": "Why is the TRIM() function useful?",
+    "answer": "TRIM() removes leading and trailing spaces from a string, helping clean imported or user-entered data before comparisons."
+  },
+  {
+    "id": "sql-056",
+    "subtopic": "REPLACE",
+    "difficulty": "easy",
+    "question": "What does the REPLACE() function do?",
+    "answer": "REPLACE() substitutes all occurrences of one substring with another. It is commonly used for data cleaning and formatting."
+  },
+  {
+    "id": "sql-057",
+    "subtopic": "LEFT and RIGHT",
+    "difficulty": "easy",
+    "question": "What are the LEFT() and RIGHT() functions?",
+    "answer": "LEFT() returns a specified number of characters from the beginning of a string, while RIGHT() returns characters from the end."
+  },
+  {
+    "id": "sql-058",
+    "subtopic": "CURRENT_DATE",
+    "difficulty": "easy",
+    "question": "What does CURRENT_DATE return?",
+    "answer": "CURRENT_DATE returns the current system date without the time component."
+  },
+  {
+    "id": "sql-059",
+    "subtopic": "CURRENT_TIMESTAMP",
+    "difficulty": "easy",
+    "question": "What does CURRENT_TIMESTAMP return?",
+    "answer": "CURRENT_TIMESTAMP returns the current system date and time. It is commonly used for audit columns such as CreatedDate and UpdatedDate."
+  },
+  {
+    "id": "sql-060",
+    "subtopic": "DATEDIFF",
+    "difficulty": "easy",
+    "question": "What is the purpose of DATEDIFF()?",
+    "answer": "DATEDIFF() calculates the difference between two dates in a specified unit such as days, months, or years, depending on the database."
+  },
+  {
+    "id": "sql-061",
+    "subtopic": "DATEADD",
+    "difficulty": "easy",
+    "question": "What does DATEADD() do?",
+    "answer": "DATEADD() adds or subtracts a specified time interval from a date. For example, adding 30 days to a given date."
+  },
+  {
+    "id": "sql-062",
+    "subtopic": "EXTRACT",
+    "difficulty": "easy",
+    "question": "What is the EXTRACT() function used for?",
+    "answer": "EXTRACT() retrieves a specific part of a date or timestamp, such as YEAR, MONTH, DAY, HOUR, or MINUTE."
+  },
+  {
+    "id": "sql-063",
+    "subtopic": "COALESCE",
+    "difficulty": "medium",
+    "question": "What is the COALESCE() function?",
+    "answer": "COALESCE() returns the first non-NULL value from a list of expressions. It is commonly used to replace NULL values with defaults."
+  },
+  {
+    "id": "sql-064",
+    "subtopic": "NULLIF",
+    "difficulty": "medium",
+    "question": "What does NULLIF() do?",
+    "answer": "NULLIF() compares two expressions and returns NULL if they are equal; otherwise, it returns the first expression. It is often used to prevent divide-by-zero errors."
+  },
+  {
+    "id": "sql-065",
+    "subtopic": "IFNULL / ISNULL",
+    "difficulty": "medium",
+    "question": "What is the purpose of IFNULL() or ISNULL()?",
+    "answer": "These functions replace NULL values with a specified alternative. IFNULL() is common in MySQL, while ISNULL() is used in SQL Server."
+  },
+  {
+    "id": "sql-066",
+    "subtopic": "Primary Key vs Unique Key",
+    "difficulty": "medium",
+    "question": "What is the difference between a Primary Key and a Unique Key?",
+    "answer": "A Primary Key uniquely identifies each row and cannot contain NULL values. A Unique Key also enforces uniqueness but usually allows one or more NULL values, depending on the database."
+  },
+  {
+    "id": "sql-067",
+    "subtopic": "Composite Key",
+    "difficulty": "medium",
+    "question": "What is a Composite Key?",
+    "answer": "A Composite Key consists of two or more columns that together uniquely identify a row when a single column is insufficient."
+  },
+  {
+    "id": "sql-068",
+    "subtopic": "Candidate Key",
+    "difficulty": "medium",
+    "question": "What is a Candidate Key?",
+    "answer": "A Candidate Key is any column or combination of columns that can uniquely identify a row. One candidate key is chosen as the Primary Key."
+  },
+  {
+    "id": "sql-069",
+    "subtopic": "Check Constraint",
+    "difficulty": "medium",
+    "question": "What is a CHECK constraint?",
+    "answer": "A CHECK constraint enforces a condition on column values. For example, ensuring salary is greater than zero or age is at least 18."
+  },
+  {
+    "id": "sql-070",
+    "subtopic": "Default Constraint",
+    "difficulty": "easy",
+    "question": "What is a DEFAULT constraint?",
+    "answer": "A DEFAULT constraint automatically assigns a predefined value to a column when no value is provided during insertion."
+  },
+  {
+    "id": "sql-071",
+    "subtopic": "Views",
+    "difficulty": "medium",
+    "question": "What is a View in SQL?",
+    "answer": "A View is a virtual table based on the result of a SQL query. It does not usually store data itself but simplifies complex queries and improves security by exposing only required columns."
+  },
+  {
+    "id": "sql-072",
+    "subtopic": "Materialized View",
+    "difficulty": "hard",
+    "question": "How is a Materialized View different from a View?",
+    "answer": "A Materialized View stores the query result physically on disk and must be refreshed periodically. A normal View stores only the query definition and executes it each time it is accessed."
+  },
+  {
+    "id": "sql-073",
+    "subtopic": "Transactions",
+    "difficulty": "medium",
+    "question": "What is a transaction in SQL?",
+    "answer": "A transaction is a sequence of one or more SQL operations treated as a single unit of work. Either all operations succeed (COMMIT) or all are undone (ROLLBACK)."
+  },
+  {
+    "id": "sql-074",
+    "subtopic": "COMMIT vs ROLLBACK",
+    "difficulty": "medium",
+    "question": "What is the difference between COMMIT and ROLLBACK?",
+    "answer": "COMMIT permanently saves all changes made during the current transaction, while ROLLBACK undoes all uncommitted changes and restores the database to its previous consistent state."
+  },
+  {
+    "id": "sql-075",
+    "subtopic": "ACID Properties",
+    "difficulty": "hard",
+    "question": "What are the ACID properties of a transaction?",
+    "answer": "ACID stands for Atomicity, Consistency, Isolation, and Durability. Atomicity ensures all operations succeed or fail together. Consistency keeps data valid before and after a transaction. Isolation prevents concurrent transactions from interfering with each other. Durability guarantees committed changes remain even after a system failure."
+  },
+   {
+    "id": "sql-076",
+    "subtopic": "EXISTS",
+    "difficulty": "medium",
+    "question": "What is the EXISTS operator used for?",
+    "answer": "EXISTS checks whether a subquery returns at least one row. It stops evaluating as soon as it finds the first matching row, making it efficient for existence checks."
+  },
+  {
+    "id": "sql-077",
+    "subtopic": "EXISTS vs IN",
+    "difficulty": "hard",
+    "question": "What's the difference between EXISTS and IN?",
+    "answer": "IN compares a value against a list returned by a subquery, while EXISTS checks whether any matching row exists. EXISTS often performs better for large datasets because it stops searching after the first match, whereas IN may evaluate the entire result set."
+  },
+  {
+    "id": "sql-078",
+    "subtopic": "NOT EXISTS",
+    "difficulty": "hard",
+    "question": "When should you use NOT EXISTS?",
+    "answer": "NOT EXISTS returns rows where no matching records exist in the subquery. It is commonly used to find customers without orders, employees without managers, or products that have never been sold."
+  },
+  {
+    "id": "sql-079",
+    "subtopic": "ANY",
+    "difficulty": "hard",
+    "question": "What does the ANY operator do?",
+    "answer": "ANY compares a value against a subquery and returns TRUE if the comparison is true for at least one value returned by the subquery."
+  },
+  {
+    "id": "sql-080",
+    "subtopic": "ALL",
+    "difficulty": "hard",
+    "question": "How does the ALL operator work?",
+    "answer": "ALL compares a value against every value returned by a subquery. The condition must be true for every value in the result set."
+  },
+  {
+    "id": "sql-081",
+    "subtopic": "Recursive CTE",
+    "difficulty": "hard",
+    "question": "What is a Recursive CTE?",
+    "answer": "A Recursive CTE repeatedly references itself until a termination condition is met. It is commonly used to traverse hierarchical structures such as organizational charts, folder structures, and bill-of-materials relationships."
+  },
+  {
+    "id": "sql-082",
+    "subtopic": "CTE vs Temporary Table",
+    "difficulty": "hard",
+    "question": "What is the difference between a CTE and a temporary table?",
+    "answer": "A CTE exists only for the duration of a single SQL statement and is mainly used for readability. A temporary table physically stores data for the current session or transaction and can be indexed or referenced multiple times."
+  },
+  {
+    "id": "sql-083",
+    "subtopic": "Window Functions",
+    "difficulty": "medium",
+    "question": "What are window functions in SQL?",
+    "answer": "Window functions perform calculations across a set of related rows while preserving every row in the result set. Unlike GROUP BY, they do not collapse rows into groups."
+  },
+  {
+    "id": "sql-084",
+    "subtopic": "OVER Clause",
+    "difficulty": "medium",
+    "question": "What is the purpose of the OVER clause?",
+    "answer": "The OVER clause defines the window on which a window function operates. It can include PARTITION BY, ORDER BY, and window frame specifications."
+  },
+  {
+    "id": "sql-085",
+    "subtopic": "GROUP BY vs PARTITION BY",
+    "difficulty": "hard",
+    "question": "What's the difference between GROUP BY and PARTITION BY?",
+    "answer": "GROUP BY combines rows into a single row per group, whereas PARTITION BY divides rows into logical groups while keeping every original row in the output."
+  },
+  {
+    "id": "sql-086",
+    "subtopic": "Running Total",
+    "difficulty": "medium",
+    "question": "How can you calculate a running total in SQL?",
+    "answer": "Running totals are typically calculated using the SUM() window function with OVER(ORDER BY ...). Each row contains the cumulative total up to that point."
+  },
+  {
+    "id": "sql-087",
+    "subtopic": "Moving Average",
+    "difficulty": "hard",
+    "question": "What is a moving average in SQL?",
+    "answer": "A moving average calculates the average over a sliding window of rows using a window function with ROWS BETWEEN or RANGE BETWEEN clauses."
+  },
+  {
+    "id": "sql-088",
+    "subtopic": "FIRST_VALUE",
+    "difficulty": "medium",
+    "question": "What does FIRST_VALUE() return?",
+    "answer": "FIRST_VALUE() returns the first value in the current window partition based on the specified ordering."
+  },
+  {
+    "id": "sql-089",
+    "subtopic": "LAST_VALUE",
+    "difficulty": "medium",
+    "question": "What does LAST_VALUE() return?",
+    "answer": "LAST_VALUE() returns the last value within the current window frame. Depending on the frame definition, you may need to explicitly extend the frame to include all rows."
+  },
+  {
+    "id": "sql-090",
+    "subtopic": "NTILE",
+    "difficulty": "hard",
+    "question": "What is the purpose of the NTILE() function?",
+    "answer": "NTILE() divides rows into a specified number of approximately equal groups. It is commonly used for quartiles, deciles, and percentile-based analysis."
+  },
+  {
+    "id": "sql-091",
+    "subtopic": "Clustered Index",
+    "difficulty": "hard",
+    "question": "What is a clustered index?",
+    "answer": "A clustered index determines the physical order in which rows are stored on disk. Since a table's data can only be stored in one physical order, a table can have only one clustered index."
+  },
+  {
+    "id": "sql-092",
+    "subtopic": "Non-Clustered Index",
+    "difficulty": "hard",
+    "question": "What is a non-clustered index?",
+    "answer": "A non-clustered index stores index keys separately from the table data and points to the corresponding rows. Multiple non-clustered indexes can exist on a table."
+  },
+  {
+    "id": "sql-093",
+    "subtopic": "Clustered vs Non-Clustered Index",
+    "difficulty": "hard",
+    "question": "What's the difference between clustered and non-clustered indexes?",
+    "answer": "A clustered index determines the physical storage order of table rows, while a non-clustered index is a separate structure containing key values and row pointers. A table can have one clustered index but multiple non-clustered indexes."
+  },
+  {
+    "id": "sql-094",
+    "subtopic": "Composite Index",
+    "difficulty": "hard",
+    "question": "What is a composite index?",
+    "answer": "A composite index is built on two or more columns. It improves performance for queries that filter or sort using the indexed columns in the defined order."
+  },
+  {
+    "id": "sql-095",
+    "subtopic": "Covering Index",
+    "difficulty": "hard",
+    "question": "What is a covering index?",
+    "answer": "A covering index contains all the columns required by a query, allowing the database to retrieve results directly from the index without accessing the base table."
+  },
+  {
+    "id": "sql-096",
+    "subtopic": "Full Table Scan",
+    "difficulty": "medium",
+    "question": "What is a full table scan?",
+    "answer": "A full table scan occurs when the database reads every row in a table to satisfy a query. It is usually slower than using an appropriate index, especially on large tables."
+  },
+  {
+    "id": "sql-097",
+    "subtopic": "Index Seek vs Index Scan",
+    "difficulty": "hard",
+    "question": "What's the difference between an Index Seek and an Index Scan?",
+    "answer": "An Index Seek navigates directly to matching rows using the index and is generally faster. An Index Scan reads most or all index entries, which is less efficient for highly selective queries."
+  },
+  {
+    "id": "sql-098",
+    "subtopic": "Execution Plan",
+    "difficulty": "hard",
+    "question": "What is an execution plan?",
+    "answer": "An execution plan describes how the database engine will execute a query, including operations such as scans, seeks, joins, sorting, and aggregation. It is the primary tool for SQL performance tuning."
+  },
+  {
+    "id": "sql-099",
+    "subtopic": "Query Optimization",
+    "difficulty": "hard",
+    "question": "What are some common SQL query optimization techniques?",
+    "answer": "Common techniques include selecting only required columns, filtering rows as early as possible, creating appropriate indexes, avoiding unnecessary DISTINCT operations, minimizing correlated subqueries, and reviewing execution plans."
+  },
+  {
+    "id": "sql-100",
+    "subtopic": "SARGable Queries",
+    "difficulty": "hard",
+    "question": "What is a SARGable query?",
+    "answer": "A SARGable (Search ARGument Able) query allows the database engine to efficiently use indexes. Applying functions directly to indexed columns, performing implicit data type conversions, or using leading wildcards (such as LIKE '%text') can make a query non-SARGable and reduce performance."
+  },
+   {
+    "id": "sql-101",
+    "subtopic": "Second Highest Salary",
+    "difficulty": "medium",
+    "question": "How would you find the second highest salary from an employee table?",
+    "answer": "A common approach is to use DENSE_RANK() or a subquery. DENSE_RANK() is especially useful when duplicate salaries exist because it treats equal salaries as the same rank. For example: SELECT salary FROM (SELECT salary, DENSE_RANK() OVER (ORDER BY salary DESC) AS rnk FROM employees) t WHERE rnk = 2;"
+  },
+  {
+    "id": "sql-102",
+    "subtopic": "N-th Highest Salary",
+    "difficulty": "medium",
+    "question": "How would you find the N-th highest salary?",
+    "answer": "Use DENSE_RANK() to rank distinct salary values in descending order and then filter for the required rank. This handles duplicate salaries correctly. For example, rank 3 represents the third highest distinct salary."
+  },
+  {
+    "id": "sql-103",
+    "subtopic": "Top N Per Group",
+    "difficulty": "hard",
+    "question": "How would you find the top 3 highest-paid employees in each department?",
+    "answer": "Use a window function such as DENSE_RANK() or ROW_NUMBER() with PARTITION BY department_id and ORDER BY salary DESC. Then filter the result for ranks less than or equal to 3. DENSE_RANK() is useful when ties should receive the same rank."
+  },
+  {
+    "id": "sql-104",
+    "subtopic": "Highest Salary Per Department",
+    "difficulty": "medium",
+    "question": "How would you find the employee with the highest salary in each department?",
+    "answer": "Use ROW_NUMBER() or DENSE_RANK() partitioned by department and ordered by salary descending. Filter for rank 1. If multiple employees with the same highest salary should be returned, use DENSE_RANK()."
+  },
+  {
+    "id": "sql-105",
+    "subtopic": "Duplicate Records",
+    "difficulty": "medium",
+    "question": "How can you find duplicate records in a table?",
+    "answer": "Group the records by the columns that should be unique and use COUNT(*) greater than 1. For example: SELECT email, COUNT(*) FROM customers GROUP BY email HAVING COUNT(*) > 1; This identifies email values appearing more than once."
+  },
+  {
+    "id": "sql-106",
+    "subtopic": "Removing Duplicates",
+    "difficulty": "hard",
+    "question": "How can you remove duplicate rows while keeping one record?",
+    "answer": "Use ROW_NUMBER() to assign a sequence number within each duplicate group, then delete rows where the row number is greater than 1. The exact DELETE syntax depends on the database, so the ranking step should first be tested with SELECT."
+  },
+  {
+    "id": "sql-107",
+    "subtopic": "Customers Without Orders",
+    "difficulty": "medium",
+    "question": "How would you find customers who have never placed an order?",
+    "answer": "Use a LEFT JOIN from customers to orders and filter where the order-side key is NULL. Another reliable approach is NOT EXISTS. NOT EXISTS is often preferred because it directly expresses the requirement that no matching order exists."
+  },
+  {
+    "id": "sql-108",
+    "subtopic": "Products Never Sold",
+    "difficulty": "medium",
+    "question": "How would you find products that have never been sold?",
+    "answer": "Start with the products table and LEFT JOIN it to the sales or order-details table. Filter for rows where the matching product ID from the sales table is NULL. NOT EXISTS can also solve this problem."
+  },
+  {
+    "id": "sql-109",
+    "subtopic": "Employees Without Managers",
+    "difficulty": "medium",
+    "question": "How would you find employees who do not have a manager?",
+    "answer": "If the employee table contains a manager_id column, filter for manager_id IS NULL. If manager information is stored separately, a LEFT JOIN can be used to identify employees without a matching manager."
+  },
+  {
+    "id": "sql-110",
+    "subtopic": "Latest Record",
+    "difficulty": "hard",
+    "question": "How would you retrieve the latest record for each customer?",
+    "answer": "Use ROW_NUMBER() with PARTITION BY customer_id and ORDER BY date_column DESC. Assign row number 1 to the latest record and filter for that row. This pattern is commonly used for retrieving the latest transaction, status, or customer activity."
+  },
+  {
+    "id": "sql-111",
+    "subtopic": "First Purchase",
+    "difficulty": "medium",
+    "question": "How would you find the first purchase made by each customer?",
+    "answer": "Use MIN(purchase_date) grouped by customer_id if only the date is required. If you need other columns from the first purchase, use ROW_NUMBER() partitioned by customer_id and ordered by purchase_date ascending, then select row number 1."
+  },
+  {
+    "id": "sql-112",
+    "subtopic": "Last Purchase",
+    "difficulty": "medium",
+    "question": "How would you find each customer's most recent purchase?",
+    "answer": "Use MAX(purchase_date) with GROUP BY customer_id when only the date is needed. If details such as product, amount, or order ID are also required, use ROW_NUMBER() ordered by purchase_date DESC and select the first row."
+  },
+  {
+    "id": "sql-113",
+    "subtopic": "Running Total",
+    "difficulty": "medium",
+    "question": "How would you calculate a running total of sales?",
+    "answer": "Use SUM(sales_amount) as a window function with ORDER BY transaction_date. For example: SUM(sales_amount) OVER (ORDER BY transaction_date) AS running_total. If the running total should restart for each customer, add PARTITION BY customer_id."
+  },
+  {
+    "id": "sql-114",
+    "subtopic": "Running Total By Group",
+    "difficulty": "hard",
+    "question": "How would you calculate a running sales total separately for each customer?",
+    "answer": "Use SUM(amount) OVER (PARTITION BY customer_id ORDER BY transaction_date). PARTITION BY resets the cumulative calculation for every customer while ORDER BY determines the sequence."
+  },
+  {
+    "id": "sql-115",
+    "subtopic": "Month-over-Month Growth",
+    "difficulty": "hard",
+    "question": "How would you calculate month-over-month sales growth?",
+    "answer": "First aggregate sales by month. Then use LAG() to retrieve the previous month's sales and calculate (current_sales - previous_sales) / previous_sales * 100. NULL or zero previous values should be handled to avoid invalid calculations."
+  },
+  {
+    "id": "sql-116",
+    "subtopic": "Year-over-Year Growth",
+    "difficulty": "hard",
+    "question": "How would you calculate year-over-year revenue growth?",
+    "answer": "Aggregate revenue by year, use LAG() to obtain the previous year's revenue, and calculate the percentage change as (current_revenue - previous_revenue) / previous_revenue * 100. The first year will normally have no comparison value."
+  },
+  {
+    "id": "sql-117",
+    "subtopic": "Rolling Average",
+    "difficulty": "hard",
+    "question": "How would you calculate a 7-day rolling average of sales?",
+    "answer": "Aggregate sales at the daily level and use AVG() as a window function with an appropriate seven-row or date-based window. The exact frame depends on whether every calendar date exists in the dataset. For calendar-based analysis, a date/calendar table can provide more reliable results."
+  },
+  {
+    "id": "sql-118",
+    "subtopic": "Customers With Multiple Orders",
+    "difficulty": "easy",
+    "question": "How would you find customers who placed more than one order?",
+    "answer": "Group orders by customer_id and use HAVING COUNT(*) > 1. This filters groups after counting their orders."
+  },
+  {
+    "id": "sql-119",
+    "subtopic": "Customers With No Activity",
+    "difficulty": "medium",
+    "question": "How would you find customers who have not made a purchase in the last 90 days?",
+    "answer": "First determine each customer's latest purchase date using MAX(). Then compare that date with the current date using an appropriate date-difference function. Customers with no purchase history should also be handled explicitly depending on the business requirement."
+  },
+  {
+    "id": "sql-120",
+    "subtopic": "Average Order Value",
+    "difficulty": "medium",
+    "question": "How would you calculate the average order value?",
+    "answer": "Calculate total revenue divided by the number of orders. If the table contains multiple rows per order, first aggregate the order lines to the order level to avoid treating each line item as a separate order."
+  },
+  {
+    "id": "sql-121",
+    "subtopic": "Revenue By Category",
+    "difficulty": "easy",
+    "question": "How would you calculate total revenue for each product category?",
+    "answer": "Join the sales or order-details table with the product or category table, calculate the revenue for each transaction, then GROUP BY category and use SUM() to calculate total revenue."
+  },
+  {
+    "id": "sql-122",
+    "subtopic": "Top Customers",
+    "difficulty": "medium",
+    "question": "How would you identify the top 10 customers by total revenue?",
+    "answer": "Group transactions by customer_id, calculate SUM(revenue), order the results by total revenue descending, and return the first 10 customers using LIMIT, TOP, or FETCH depending on the database."
+  },
+  {
+    "id": "sql-123",
+    "subtopic": "Bottom Customers",
+    "difficulty": "medium",
+    "question": "How would you find the customers with the lowest total purchase amount?",
+    "answer": "Group transactions by customer_id, calculate SUM(amount), and sort the result in ascending order. Use a ranking or row-limiting method if only a specific number of customers is required."
+  },
+  {
+    "id": "sql-124",
+    "subtopic": "Conditional Aggregation",
+    "difficulty": "medium",
+    "question": "How can you calculate multiple conditional metrics in a single query?",
+    "answer": "Use CASE expressions inside aggregate functions. For example, SUM(CASE WHEN status = 'Completed' THEN amount ELSE 0 END) calculates completed revenue while other statuses are ignored."
+  },
+  {
+    "id": "sql-125",
+    "subtopic": "COUNT with CASE",
+    "difficulty": "medium",
+    "question": "How can you count rows that satisfy a condition?",
+    "answer": "Use conditional aggregation such as SUM(CASE WHEN status = 'Active' THEN 1 ELSE 0 END). Some databases also support COUNT with a CASE expression. This technique allows multiple conditional counts in one query."
+  },
+  {
+    "id": "sql-126",
+    "subtopic": "Pivot",
+    "difficulty": "hard",
+    "question": "What is a PIVOT operation?",
+    "answer": "PIVOT transforms row-based data into columns, usually by turning category values into separate columns and aggregating a measure. It is useful for reports where categories need to appear as columns."
+  },
+  {
+    "id": "sql-127",
+    "subtopic": "Pivot Without PIVOT",
+    "difficulty": "hard",
+    "question": "How can you create a pivot-style result without using a PIVOT operator?",
+    "answer": "Use conditional aggregation with SUM() or COUNT() and CASE expressions. For example, SUM(CASE WHEN month = 'Jan' THEN sales ELSE 0 END) creates a January column."
+  },
+  {
+    "id": "sql-128",
+    "subtopic": "UNPIVOT",
+    "difficulty": "hard",
+    "question": "What is UNPIVOT used for?",
+    "answer": "UNPIVOT converts columns into rows, transforming wide data into a more normalized or analysis-friendly structure. This is useful when monthly or category values are stored as separate columns."
+  },
+  {
+    "id": "sql-129",
+    "subtopic": "Median",
+    "difficulty": "hard",
+    "question": "How can you calculate the median in SQL?",
+    "answer": "The exact approach depends on the database. Some databases provide a built-in percentile or median function. Otherwise, you can use ordered window functions and select the middle value or average the two middle values for an even number of rows."
+  },
+  {
+    "id": "sql-130",
+    "subtopic": "Percentile",
+    "difficulty": "hard",
+    "question": "What is a percentile and how can it be calculated in SQL?",
+    "answer": "A percentile indicates the value below which a specified percentage of observations fall. Many databases provide functions such as PERCENTILE_CONT() or PERCENTILE_DISC(). They are useful for salary, response-time, and customer-value analysis."
+  },
+  {
+    "id": "sql-131",
+    "subtopic": "Gap Detection",
+    "difficulty": "hard",
+    "question": "How can you find gaps in a sequence of numbers?",
+    "answer": "A common approach is to use LAG() to compare each value with the previous value. If the difference is greater than the expected increment, a gap exists. Another approach is to compare the sequence with generated expected values."
+  },
+  {
+    "id": "sql-132",
+    "subtopic": "Consecutive Dates",
+    "difficulty": "hard",
+    "question": "How would you find customers who made purchases on consecutive days?",
+    "answer": "Use LAG() to retrieve the previous purchase date for each customer and compare it with the current date. If the difference is one day, the purchases are consecutive. For multiple consecutive days, a gaps-and-islands technique can group the streaks."
+  },
+  {
+    "id": "sql-133",
+    "subtopic": "Gaps and Islands",
+    "difficulty": "hard",
+    "question": "What is the gaps-and-islands problem in SQL?",
+    "answer": "Gaps-and-islands problems involve identifying consecutive groups of related records, called islands, and separating them from gaps. Window functions such as ROW_NUMBER() and LAG() are commonly used to create grouping keys for these sequences."
+  },
+  {
+    "id": "sql-134",
+    "subtopic": "Duplicate Emails",
+    "difficulty": "easy",
+    "question": "How would you find duplicate email addresses in a customer table?",
+    "answer": "GROUP BY the email column and use HAVING COUNT(*) > 1. This returns email addresses that appear more than once."
+  },
+  {
+    "id": "sql-135",
+    "subtopic": "Employees Above Average",
+    "difficulty": "medium",
+    "question": "How would you find employees earning more than the company average salary?",
+    "answer": "Calculate the average salary in a subquery or CTE and compare each employee's salary against that value in the outer query."
+  },
+  {
+    "id": "sql-136",
+    "subtopic": "Employees Above Department Average",
+    "difficulty": "hard",
+    "question": "How would you find employees earning more than their department's average salary?",
+    "answer": "Use a window function such as AVG(salary) OVER (PARTITION BY department_id), then filter employees whose salary is greater than the calculated department average. A correlated subquery or aggregated CTE can also solve the problem."
+  },
+  {
+    "id": "sql-137",
+    "subtopic": "Percentage of Total",
+    "difficulty": "hard",
+    "question": "How would you calculate each product's percentage contribution to total sales?",
+    "answer": "First calculate sales for each product, then divide each product's sales by the overall sales total. A window SUM() such as SUM(total_sales) OVER () can calculate the grand total without requiring a separate query."
+  },
+  {
+    "id": "sql-138",
+    "subtopic": "Ranking",
+    "difficulty": "medium",
+    "question": "How would you rank customers based on their total revenue?",
+    "answer": "First aggregate revenue by customer, then apply RANK() or DENSE_RANK() with ORDER BY total_revenue DESC. Use DENSE_RANK() when tied customers should receive consecutive ranking numbers."
+  },
+  {
+    "id": "sql-139",
+    "subtopic": "First and Last Record",
+    "difficulty": "hard",
+    "question": "How can you retrieve both the first and last transaction for every customer?",
+    "answer": "Use ROW_NUMBER() twice, once ordered by transaction date ascending and once descending, or use FIRST_VALUE() and LAST_VALUE() with an appropriate window frame. Then select the required records."
+  },
+  {
+    "id": "sql-140",
+    "subtopic": "Orders Above Average",
+    "difficulty": "medium",
+    "question": "How would you find orders whose value is greater than the average order value?",
+    "answer": "Calculate the average order value in a subquery or CTE and compare each order's value against it. If an order contains multiple line items, calculate the order-level total first."
+  },
+  {
+    "id": "sql-141",
+    "subtopic": "Order Frequency",
+    "difficulty": "medium",
+    "question": "How would you calculate the average number of orders per customer?",
+    "answer": "First count orders for each customer, then calculate the average of those customer-level counts. Be clear whether customers with zero orders should be included; if they should, start from the customers table and use a LEFT JOIN."
+  },
+  {
+    "id": "sql-142",
+    "subtopic": "Customer Retention",
+    "difficulty": "hard",
+    "question": "How can SQL be used to analyze customer retention?",
+    "answer": "Create cohorts based on customers' first purchase or signup date, then track whether those customers return in subsequent periods. GROUP BY can calculate cohort counts, while date functions and conditional aggregation can calculate retention percentages."
+  },
+  {
+    "id": "sql-143",
+    "subtopic": "Customer Churn",
+    "difficulty": "hard",
+    "question": "How would you identify customers who may have churned?",
+    "answer": "Define a business rule such as no purchase or activity for 90 days. Find each customer's latest activity date using MAX(), calculate the inactivity period, and classify customers whose inactivity exceeds the defined threshold as churned or at risk."
+  },
+  {
+    "id": "sql-144",
+    "subtopic": "Daily Active Users",
+    "difficulty": "hard",
+    "question": "How would you calculate Daily Active Users (DAU)?",
+    "answer": "Count distinct users who performed the defined activity on each date. The typical pattern is COUNT(DISTINCT user_id) grouped by activity_date."
+  },
+  {
+    "id": "sql-145",
+    "subtopic": "Monthly Active Users",
+    "difficulty": "hard",
+    "question": "How would you calculate Monthly Active Users (MAU)?",
+    "answer": "Convert activity timestamps into a month-level date and count distinct users for each month. COUNT(DISTINCT user_id) is important because one user may perform many activities in the same month."
+  },
+  {
+    "id": "sql-146",
+    "subtopic": "Conversion Rate",
+    "difficulty": "hard",
+    "question": "How would you calculate a conversion rate using SQL?",
+    "answer": "Define the numerator and denominator clearly, then divide the number of converted users by the eligible users and multiply by 100. Use NULLIF() or another method to prevent division by zero."
+  },
+  {
+    "id": "sql-147",
+    "subtopic": "Funnel Analysis",
+    "difficulty": "hard",
+    "question": "How can SQL be used for funnel analysis?",
+    "answer": "Identify users who complete each stage of a process, such as visit, signup, trial, and purchase. Count distinct users at every stage and calculate the conversion rate between stages. Event timestamps can also be used to ensure the steps occur in the correct order."
+  },
+  {
+    "id": "sql-148",
+    "subtopic": "Join Multiplication",
+    "difficulty": "hard",
+    "question": "Why can a JOIN unexpectedly increase the number of rows?",
+    "answer": "If the join is one-to-many or many-to-many, one row from one table can match multiple rows in the other table. This multiplies rows and can cause incorrect aggregates. Before joining, understand the relationship between the tables and aggregate data at the appropriate grain."
+  },
+  {
+    "id": "sql-149",
+    "subtopic": "Incorrect Aggregation After JOIN",
+    "difficulty": "hard",
+    "question": "Why can SUM() return an incorrect value after joining multiple tables?",
+    "answer": "A one-to-many join can duplicate the rows being aggregated. If revenue exists at order level and is joined to multiple order-detail rows, the same revenue may be counted multiple times. Aggregate each dataset at the correct grain before joining when necessary."
+  },
+  {
+    "id": "sql-150",
+    "subtopic": "SQL Interview Follow-up",
+    "difficulty": "hard",
+    "question": "An interviewer asks you to solve a SQL problem. What should you do before writing the query?",
+    "answer": "Clarify the required output, identify the table grain, understand relationships between tables, check how duplicates and NULLs should be handled, define edge cases, and confirm the expected behavior for ties or missing data. Then write the query step by step and validate the result with sample cases."
+  },
+  {
+    "id": "sql-151",
+    "subtopic": "ROW_NUMBER vs RANK",
+    "difficulty": "medium",
+    "question": "What's the difference between ROW_NUMBER() and RANK()?",
+    "answer": "ROW_NUMBER() assigns a unique sequential number to every row, even when values are tied. RANK() gives tied rows the same rank and skips the next ranking numbers. Use ROW_NUMBER() when you need exactly one sequence per row and RANK() when ties should share a rank."
+  },
+  {
+    "id": "sql-152",
+    "subtopic": "RANK vs DENSE_RANK",
+    "difficulty": "medium",
+    "question": "When should you use DENSE_RANK() instead of RANK()?",
+    "answer": "Use DENSE_RANK() when tied values should receive the same rank but ranking numbers should not have gaps. For example, salaries of 100, 100, and 90 receive ranks 1, 1, and 2 with DENSE_RANK(), while RANK() produces 1, 1, and 3."
+  },
+  {
+    "id": "sql-153",
+    "subtopic": "Top N With Ties",
+    "difficulty": "hard",
+    "question": "How would you return the top 3 salaries including ties?",
+    "answer": "Use DENSE_RANK() ordered by salary descending and filter for ranks less than or equal to 3. This returns every employee whose salary belongs to the top three distinct salary levels."
+  },
+  {
+    "id": "sql-154",
+    "subtopic": "Latest Record Per Group",
+    "difficulty": "hard",
+    "question": "How do you get the latest record for every customer when multiple records have the same date?",
+    "answer": "Use ROW_NUMBER() with PARTITION BY customer_id and ORDER BY transaction_date DESC followed by a unique tie-breaker such as transaction_id DESC. The tie-breaker ensures deterministic results when dates are identical."
+  },
+  {
+    "id": "sql-155",
+    "subtopic": "Window Frame",
+    "difficulty": "hard",
+    "question": "What is a window frame in SQL?",
+    "answer": "A window frame defines the specific rows considered by a window function for the current row. Common definitions include ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW for running calculations."
+  },
+  {
+    "id": "sql-156",
+    "subtopic": "ROWS vs RANGE",
+    "difficulty": "hard",
+    "question": "What's the difference between ROWS and RANGE in a window frame?",
+    "answer": "ROWS defines the frame based on physical row positions, while RANGE groups rows based on the ordering value. RANGE can include multiple tied rows with the same ordering value, so the two can produce different results."
+  },
+  {
+    "id": "sql-157",
+    "subtopic": "Running Maximum",
+    "difficulty": "medium",
+    "question": "How would you calculate the highest sales amount seen so far for each day?",
+    "answer": "Use MAX(sales_amount) as a window function ordered by the date. The window frame should include the current row and all preceding rows so the result represents the maximum value observed up to that point."
+  },
+  {
+    "id": "sql-158",
+    "subtopic": "Previous Value",
+    "difficulty": "medium",
+    "question": "How would you compare the current month's sales with the previous month's sales?",
+    "answer": "Aggregate sales by month and use LAG(total_sales) OVER (ORDER BY month) to retrieve the previous month's value. Then subtract or divide the current value by the previous value depending on the required metric."
+  },
+  {
+    "id": "sql-159",
+    "subtopic": "Next Value",
+    "difficulty": "medium",
+    "question": "When would you use LEAD() in data analysis?",
+    "answer": "LEAD() is useful when you need information from the next chronological record. Common examples include finding the next purchase date, calculating time until the next event, and comparing current performance with a future period."
+  },
+  {
+    "id": "sql-160",
+    "subtopic": "Customer Purchase Gap",
+    "difficulty": "hard",
+    "question": "How would you calculate the number of days between consecutive purchases for each customer?",
+    "answer": "Use LAG(purchase_date) partitioned by customer_id and ordered by purchase_date. Then apply a date-difference function between the current purchase date and the previous purchase date."
+  },
+  {
+    "id": "sql-161",
+    "subtopic": "First Purchase Flag",
+    "difficulty": "medium",
+    "question": "How can you identify whether a transaction is a customer's first purchase?",
+    "answer": "Use ROW_NUMBER() OVER (PARTITION BY customer_id ORDER BY purchase_date, transaction_id). Rows with row number 1 represent the customer's first purchase."
+  },
+  {
+    "id": "sql-162",
+    "subtopic": "Repeat Customers",
+    "difficulty": "medium",
+    "question": "How would you identify repeat customers?",
+    "answer": "Group purchases by customer_id and use HAVING COUNT(DISTINCT order_id) > 1. This identifies customers with more than one unique order."
+  },
+  {
+    "id": "sql-163",
+    "subtopic": "Customer Lifetime Value",
+    "difficulty": "hard",
+    "question": "How could you calculate a simple customer lifetime value using SQL?",
+    "answer": "A basic historical approach is to calculate total revenue minus relevant costs for each customer across their recorded transactions. The exact formula depends on the business definition of lifetime value and may include purchase frequency, margin, and retention assumptions."
+  },
+  {
+    "id": "sql-164",
+    "subtopic": "Conditional JOIN",
+    "difficulty": "hard",
+    "question": "Can a JOIN condition contain multiple conditions?",
+    "answer": "Yes. A JOIN can use multiple conditions connected with AND or other logic. For example, records can be matched using both customer_id and date range. Multiple conditions should be carefully designed to avoid unintended row multiplication."
+  },
+  {
+    "id": "sql-165",
+    "subtopic": "ON vs WHERE",
+    "difficulty": "hard",
+    "question": "What is the difference between putting a condition in ON versus WHERE for a LEFT JOIN?",
+    "answer": "A condition in ON controls which rows from the right table are matched while preserving unmatched left-table rows. A condition in WHERE is applied after the join and can remove rows containing NULLs from the right side, effectively turning some LEFT JOIN queries into INNER JOIN behavior."
+  },
+  {
+    "id": "sql-166",
+    "subtopic": "LEFT JOIN Filter",
+    "difficulty": "hard",
+    "question": "Why can adding a WHERE condition on the right table of a LEFT JOIN change the result?",
+    "answer": "Unmatched rows from the right table contain NULL values. If the WHERE clause requires a non-NULL right-table value, those unmatched rows are removed. Therefore, the LEFT JOIN can behave like an INNER JOIN."
+  },
+  {
+    "id": "sql-167",
+    "subtopic": "Anti Join",
+    "difficulty": "hard",
+    "question": "What is an anti join?",
+    "answer": "An anti join returns rows from one table that do not have a matching row in another table. It is commonly implemented using NOT EXISTS or LEFT JOIN with a NULL check."
+  },
+  {
+    "id": "sql-168",
+    "subtopic": "Semi Join",
+    "difficulty": "hard",
+    "question": "What is a semi join?",
+    "answer": "A semi join returns rows from one table when at least one matching row exists in another table, without returning columns from the matching table. EXISTS is a common way to express a semi join."
+  },
+  {
+    "id": "sql-169",
+    "subtopic": "Many-to-Many Join",
+    "difficulty": "hard",
+    "question": "What is a many-to-many relationship and why is it important when joining tables?",
+    "answer": "A many-to-many relationship occurs when multiple rows in one table can relate to multiple rows in another table, usually through a bridge table. Joining the two sides without controlling the relationship can multiply rows and produce incorrect aggregates."
+  },
+  {
+    "id": "sql-170",
+    "subtopic": "Bridge Table",
+    "difficulty": "hard",
+    "question": "What is a bridge table?",
+    "answer": "A bridge table resolves a many-to-many relationship by storing the relationships between entities. For example, a student_course table can connect many students with many courses."
+  },
+  {
+    "id": "sql-171",
+    "subtopic": "Join Duplicate Detection",
+    "difficulty": "hard",
+    "question": "How would you investigate unexpected duplicate rows after a JOIN?",
+    "answer": "First check the grain and uniqueness of the join keys in both tables. Count matching rows per key, inspect whether either side contains duplicates, and verify whether the relationship is one-to-one, one-to-many, or many-to-many. Then aggregate or deduplicate at the correct grain before joining if required."
+  },
+  {
+    "id": "sql-172",
+    "subtopic": "Self Join Hierarchy",
+    "difficulty": "medium",
+    "question": "How would you use a self join to display employees and their managers?",
+    "answer": "Join the employee table to itself using employee.manager_id = manager.employee_id. One alias represents the employee and the other represents the manager."
+  },
+  {
+    "id": "sql-173",
+    "subtopic": "Recursive Hierarchy",
+    "difficulty": "hard",
+    "question": "How would you retrieve all levels of an employee-management hierarchy?",
+    "answer": "Use a recursive CTE with an anchor query for top-level employees and a recursive query that joins employees to their managers or subordinates. Continue until no additional matching records exist."
+  },
+  {
+    "id": "sql-174",
+    "subtopic": "Date Granularity",
+    "difficulty": "medium",
+    "question": "Why is date granularity important when analyzing sales?",
+    "answer": "A timestamp, day, week, month, and year represent different levels of detail. Aggregating at the wrong granularity can produce incorrect metrics, especially when comparing periods or joining transactional data with summary data."
+  },
+  {
+    "id": "sql-175",
+    "subtopic": "Month Extraction",
+    "difficulty": "easy",
+    "question": "How would you calculate monthly sales from transaction-level data?",
+    "answer": "Convert the transaction date into a month-level value using a database-specific date function such as DATE_TRUNC or an equivalent function, then GROUP BY that month and calculate SUM(sales_amount)."
+  },
+  {
+    "id": "sql-176",
+    "subtopic": "Incomplete Date Series",
+    "difficulty": "hard",
+    "question": "How would you show zero sales for dates where no transactions occurred?",
+    "answer": "Create or use a calendar/date table containing every required date, then LEFT JOIN the transaction totals to the calendar. Replace NULL sales values with zero using COALESCE()."
+  },
+  {
+    "id": "sql-177",
+    "subtopic": "Date Range Filtering",
+    "difficulty": "hard",
+    "question": "Why can filtering a timestamp column using DATE functions hurt performance?",
+    "answer": "Applying a function directly to an indexed timestamp column can prevent efficient index usage. Instead, use a range such as timestamp >= start_time AND timestamp < end_time, which is generally more index-friendly."
+  },
+  {
+    "id": "sql-178",
+    "subtopic": "SARGability",
+    "difficulty": "hard",
+    "question": "Why is WHERE YEAR(order_date) = 2026 often less efficient than a date range?",
+    "answer": "Applying YEAR() to the indexed order_date column may prevent the database from efficiently seeking through the index. A range such as order_date >= '2026-01-01' AND order_date < '2027-01-01' can preserve index usability."
+  },
+  {
+    "id": "sql-179",
+    "subtopic": "LIKE Performance",
+    "difficulty": "hard",
+    "question": "Why can LIKE '%abc%' be slow on a large table?",
+    "answer": "A leading wildcard prevents many traditional indexes from efficiently locating the beginning of the search value, often requiring a scan. Depending on the database and workload, full-text search or specialized indexes may be more appropriate."
+  },
+  {
+    "id": "sql-180",
+    "subtopic": "Implicit Conversion",
+    "difficulty": "hard",
+    "question": "What is implicit data type conversion and why can it hurt performance?",
+    "answer": "Implicit conversion occurs when the database automatically converts one data type to another to perform a comparison or operation. It can prevent efficient index usage and may also produce unexpected results. Explicitly using compatible data types is safer."
+  },
+  {
+    "id": "sql-181",
+    "subtopic": "Index Selectivity",
+    "difficulty": "hard",
+    "question": "What does index selectivity mean?",
+    "answer": "Selectivity describes how effectively an index distinguishes rows. A highly selective column has many distinct values and can narrow the result set significantly. Low-selectivity columns such as simple status flags may provide less benefit for some queries."
+  },
+  {
+    "id": "sql-182",
+    "subtopic": "Composite Index Order",
+    "difficulty": "hard",
+    "question": "Why does the order of columns matter in a composite index?",
+    "answer": "Database engines generally use the leading columns of a composite index most effectively. Therefore, column order should reflect common filtering, joining, and sorting patterns. The best order depends on query workload and database optimizer behavior."
+  },
+  {
+    "id": "sql-183",
+    "subtopic": "Index Trade-offs",
+    "difficulty": "medium",
+    "question": "Why shouldn't you create indexes on every column?",
+    "answer": "Indexes consume storage and must be maintained whenever data changes. Too many indexes can slow INSERT, UPDATE, and DELETE operations and increase maintenance costs. Indexes should be created based on actual query patterns."
+  },
+  {
+    "id": "sql-184",
+    "subtopic": "Execution Plan Operators",
+    "difficulty": "hard",
+    "question": "What should you look for when reading an execution plan?",
+    "answer": "Look for expensive scans, inefficient joins, large sorts, repeated operations, inaccurate row estimates, missing or unused indexes, and unexpected data movement. Compare estimated and actual row counts when available."
+  },
+  {
+    "id": "sql-185",
+    "subtopic": "Query Cost",
+    "difficulty": "hard",
+    "question": "What does query cost mean in an execution plan?",
+    "answer": "Query cost is an optimizer estimate representing the relative resources required by different execution strategies. It is useful for comparing plans but should not be treated as an exact measurement of elapsed time."
+  },
+  {
+    "id": "sql-186",
+    "subtopic": "Statistics",
+    "difficulty": "hard",
+    "question": "Why are database statistics important for query performance?",
+    "answer": "Statistics provide the optimizer with information about data distribution and cardinality. Accurate statistics help it estimate row counts and choose efficient execution plans."
+  },
+  {
+    "id": "sql-187",
+    "subtopic": "Cardinality",
+    "difficulty": "hard",
+    "question": "What does cardinality mean in SQL?",
+    "answer": "Cardinality generally refers to the number of rows or the number of distinct values in a dataset, depending on context. Query optimizers use cardinality estimates to decide which execution strategies are efficient."
+  },
+  {
+    "id": "sql-188",
+    "subtopic": "WHERE vs ON",
+    "difficulty": "medium",
+    "question": "When should a filter be placed in WHERE versus ON?",
+    "answer": "For INNER JOINs, many logically equivalent filters can be placed in either location. For OUTER JOINs, placement can change the result. Use ON when the condition controls which rows participate in the match and WHERE when you want to filter the final result."
+  },
+  {
+    "id": "sql-189",
+    "subtopic": "UNION Column Rules",
+    "difficulty": "medium",
+    "question": "What requirements must SELECT statements satisfy when using UNION?",
+    "answer": "The SELECT statements must return the same number of columns in the same order, and corresponding columns must have compatible data types. Column names in the final result usually come from the first SELECT."
+  },
+  {
+    "id": "sql-190",
+    "subtopic": "UNION vs JOIN",
+    "difficulty": "medium",
+    "question": "What's the difference between UNION and JOIN?",
+    "answer": "JOIN combines columns from related rows across tables, while UNION combines rows from separate SELECT results with compatible structures. JOIN expands horizontally, while UNION combines vertically."
+  },
+  {
+    "id": "sql-191",
+    "subtopic": "EXISTS Optimization",
+    "difficulty": "hard",
+    "question": "Why can EXISTS be efficient for existence checks?",
+    "answer": "EXISTS only needs to determine whether at least one matching row exists, so the database can often stop searching after finding a match. This can be more efficient than retrieving or processing all matching rows."
+  },
+  {
+    "id": "sql-192",
+    "subtopic": "NOT IN and NULL",
+    "difficulty": "hard",
+    "question": "Why can NOT IN behave unexpectedly when NULL exists in the subquery?",
+    "answer": "SQL uses three-valued logic. If the subquery contains NULL, comparisons with NOT IN can evaluate to UNKNOWN, potentially causing no rows to be returned. NOT EXISTS is often safer when NULLs may be present."
+  },
+  {
+    "id": "sql-193",
+    "subtopic": "Three-Valued Logic",
+    "difficulty": "hard",
+    "question": "What are the three possible logical results in SQL?",
+    "answer": "SQL uses TRUE, FALSE, and UNKNOWN. UNKNOWN commonly occurs when NULL participates in a comparison. WHERE filters retain only rows where the condition evaluates to TRUE."
+  },
+  {
+    "id": "sql-194",
+    "subtopic": "NULL Aggregation",
+    "difficulty": "medium",
+    "question": "How do aggregate functions generally treat NULL values?",
+    "answer": "Most aggregate functions such as SUM(), AVG(), MIN(), and MAX() ignore NULL values. COUNT(*) counts rows regardless of NULLs, while COUNT(column) counts only non-NULL values."
+  },
+  {
+    "id": "sql-195",
+    "subtopic": "COALESCE in Reporting",
+    "difficulty": "easy",
+    "question": "Why is COALESCE() useful in data analysis reports?",
+    "answer": "COALESCE() allows missing values to be replaced with meaningful defaults such as zero, 'Unknown', or another available value. This makes analytical output easier to interpret and prevents unwanted NULL results."
+  },
+  {
+    "id": "sql-196",
+    "subtopic": "NULL vs Zero",
+    "difficulty": "medium",
+    "question": "What's the difference between NULL and zero in analytical data?",
+    "answer": "Zero represents a known numeric value of zero, while NULL represents missing, unknown, or unavailable information. Treating NULL as zero without understanding the business meaning can produce misleading analysis."
+  },
+  {
+    "id": "sql-197",
+    "subtopic": "Division by Zero",
+    "difficulty": "medium",
+    "question": "How can you safely avoid division-by-zero errors in SQL?",
+    "answer": "Use NULLIF() on the denominator, such as numerator / NULLIF(denominator, 0). This converts a zero denominator into NULL instead of causing an error. COALESCE() can then be used if a specific fallback value is required."
+  },
+  {
+    "id": "sql-198",
+    "subtopic": "CAST",
+    "difficulty": "easy",
+    "question": "What is CAST() used for?",
+    "answer": "CAST() explicitly converts a value from one data type to another, such as converting a string to a date or an integer to a decimal. Explicit conversion makes query behavior clearer and can prevent implicit-conversion issues."
+  },
+  {
+    "id": "sql-199",
+    "subtopic": "Data Validation",
+    "difficulty": "medium",
+    "question": "How can SQL be used to validate data quality?",
+    "answer": "SQL can identify NULLs, duplicates, invalid ranges, unexpected categories, orphan records, inconsistent formats, and referential-integrity problems. COUNT(), GROUP BY, CASE, JOINs, and conditional aggregation are commonly used for validation."
+  },
+  {
+    "id": "sql-200",
+    "subtopic": "SQL Interview Approach",
+    "difficulty": "hard",
+    "question": "How should you approach a complex SQL interview problem?",
+    "answer": "Start by understanding the required output and the grain of the data. Break the problem into smaller steps, use CTEs or subqueries when they improve clarity, validate joins and duplicates, handle NULLs and edge cases, and then optimize the final query if necessary. Explain your reasoning while writing the solution."
+  },
+   {
+    "id": "sql-201",
+    "subtopic": "Normalization",
+    "difficulty": "medium",
+    "question": "What is the difference between normalization and denormalization?",
+    "answer": "Normalization organizes data into related tables to reduce duplication and improve data integrity. Denormalization intentionally combines or duplicates data to reduce joins and improve read performance. OLTP systems commonly favor normalization, while analytical systems may use denormalized structures."
+  },
+  {
+    "id": "sql-202",
+    "subtopic": "1NF",
+    "difficulty": "medium",
+    "question": "What is First Normal Form (1NF)?",
+    "answer": "A table is in 1NF when each column contains atomic values and there are no repeating groups or arrays stored in a single column. Each row should represent a distinct record."
+  },
+  {
+    "id": "sql-203",
+    "subtopic": "2NF",
+    "difficulty": "medium",
+    "question": "What is Second Normal Form (2NF)?",
+    "answer": "A table is in 2NF when it is already in 1NF and every non-key attribute depends on the entire primary key rather than only part of a composite key."
+  },
+  {
+    "id": "sql-204",
+    "subtopic": "3NF",
+    "difficulty": "medium",
+    "question": "What is Third Normal Form (3NF)?",
+    "answer": "A table is in 3NF when it is in 2NF and non-key columns do not depend on other non-key columns. In simple terms, non-key attributes should depend on the key, the whole key, and nothing but the key."
+  },
+  {
+    "id": "sql-205",
+    "subtopic": "Denormalization",
+    "difficulty": "medium",
+    "question": "When would you consider denormalizing a database?",
+    "answer": "Denormalization can be useful when read performance is more important than minimizing redundancy, especially in reporting and analytical workloads. It can reduce expensive joins but increases storage and creates additional data-maintenance considerations."
+  },
+  {
+    "id": "sql-206",
+    "subtopic": "OLTP vs OLAP",
+    "difficulty": "medium",
+    "question": "What's the difference between OLTP and OLAP databases?",
+    "answer": "OLTP systems handle frequent transactional operations such as inserts and updates and usually prioritize consistency and fast individual transactions. OLAP systems are designed for analytical queries over large datasets and commonly use aggregations, historical data, and dimensional models."
+  },
+  {
+    "id": "sql-207",
+    "subtopic": "Fact Table",
+    "difficulty": "medium",
+    "question": "What is a fact table in a data warehouse?",
+    "answer": "A fact table stores measurable business events such as sales, orders, or transactions. It typically contains numeric measures and foreign keys connecting to dimension tables."
+  },
+  {
+    "id": "sql-208",
+    "subtopic": "Dimension Table",
+    "difficulty": "medium",
+    "question": "What is a dimension table?",
+    "answer": "A dimension table stores descriptive attributes used to analyze facts, such as customer, product, employee, or date information. Dimensions provide the context for measures stored in fact tables."
+  },
+  {
+    "id": "sql-209",
+    "subtopic": "Star Schema",
+    "difficulty": "medium",
+    "question": "What is a star schema?",
+    "answer": "A star schema consists of a central fact table surrounded by dimension tables. It is common in data warehouses because its simple structure makes analytical queries and reporting easier."
+  },
+  {
+    "id": "sql-210",
+    "subtopic": "Surrogate Key",
+    "difficulty": "medium",
+    "question": "What is a surrogate key and why is it useful?",
+    "answer": "A surrogate key is an artificial identifier, such as an integer generated by the database, that uniquely identifies a record. It is commonly used in data warehouses because it separates the warehouse identity from changing business keys."
+  },
+  {
+    "id": "sql-211",
+    "subtopic": "Referential Integrity",
+    "difficulty": "medium",
+    "question": "What is referential integrity?",
+    "answer": "Referential integrity ensures that relationships between tables remain valid. A foreign key generally cannot reference a non-existent parent record, unless the database design explicitly permits NULL or other behavior."
+  },
+  {
+    "id": "sql-212",
+    "subtopic": "Foreign Key Actions",
+    "difficulty": "hard",
+    "question": "What do ON DELETE CASCADE and ON UPDATE CASCADE mean?",
+    "answer": "ON DELETE CASCADE automatically removes related child records when the referenced parent record is deleted. ON UPDATE CASCADE propagates changes to the referenced key. These options should be used carefully because one operation can affect many related records."
+  },
+  {
+    "id": "sql-213",
+    "subtopic": "Transactions",
+    "difficulty": "medium",
+    "question": "Why are transactions important in databases?",
+    "answer": "Transactions allow multiple related operations to be treated as one logical unit. They help maintain data consistency by ensuring that changes can be committed together or rolled back when something goes wrong."
+  },
+  {
+    "id": "sql-214",
+    "subtopic": "Atomicity",
+    "difficulty": "medium",
+    "question": "What does Atomicity mean in ACID?",
+    "answer": "Atomicity means a transaction is treated as a single unit: either all required operations succeed or the transaction is rolled back so that partial changes are not committed."
+  },
+  {
+    "id": "sql-215",
+    "subtopic": "Consistency",
+    "difficulty": "medium",
+    "question": "What does Consistency mean in ACID?",
+    "answer": "Consistency means a successful transaction moves the database from one valid state to another while respecting defined rules such as constraints, keys, and business integrity requirements."
+  },
+  {
+    "id": "sql-216",
+    "subtopic": "Isolation",
+    "difficulty": "hard",
+    "question": "What does Isolation mean in ACID?",
+    "answer": "Isolation controls how concurrent transactions interact with each other. It helps prevent one transaction from seeing inappropriate intermediate changes made by another transaction."
+  },
+  {
+    "id": "sql-217",
+    "subtopic": "Durability",
+    "difficulty": "medium",
+    "question": "What does Durability mean in ACID?",
+    "answer": "Durability means that once a transaction is successfully committed, its changes should survive system failures such as crashes or restarts."
+  },
+  {
+    "id": "sql-218",
+    "subtopic": "Isolation Levels",
+    "difficulty": "hard",
+    "question": "What are common transaction isolation levels?",
+    "answer": "Common isolation levels include READ UNCOMMITTED, READ COMMITTED, REPEATABLE READ, and SERIALIZABLE. Some databases also support snapshot-based isolation. Higher isolation generally provides stronger consistency but may reduce concurrency."
+  },
+  {
+    "id": "sql-219",
+    "subtopic": "Dirty Read",
+    "difficulty": "hard",
+    "question": "What is a dirty read?",
+    "answer": "A dirty read occurs when one transaction reads data changed by another transaction before that change has been committed. If the second transaction rolls back, the first transaction has read data that never actually became permanent."
+  },
+  {
+    "id": "sql-220",
+    "subtopic": "Non-Repeatable Read",
+    "difficulty": "hard",
+    "question": "What is a non-repeatable read?",
+    "answer": "A non-repeatable read occurs when a transaction reads the same row twice and gets different values because another transaction committed an update between the two reads."
+  },
+  {
+    "id": "sql-221",
+    "subtopic": "Phantom Read",
+    "difficulty": "hard",
+    "question": "What is a phantom read?",
+    "answer": "A phantom read occurs when a transaction executes the same range query twice and finds additional or missing rows because another transaction inserted or deleted matching records between the reads."
+  },
+  {
+    "id": "sql-222",
+    "subtopic": "Deadlock",
+    "difficulty": "hard",
+    "question": "What is a database deadlock?",
+    "answer": "A deadlock occurs when two or more transactions hold locks that the others need, creating a cycle where none can continue. Database systems usually detect deadlocks and terminate one transaction so the others can proceed."
+  },
+  {
+    "id": "sql-223",
+    "subtopic": "Deadlock Prevention",
+    "difficulty": "hard",
+    "question": "How can you reduce the chance of deadlocks?",
+    "answer": "Keep transactions short, access tables and rows in a consistent order, avoid unnecessary locks, update only required records, and use appropriate indexes to reduce the number of rows that need to be locked."
+  },
+  {
+    "id": "sql-224",
+    "subtopic": "Stored Procedure",
+    "difficulty": "medium",
+    "question": "What is a stored procedure?",
+    "answer": "A stored procedure is a named collection of SQL statements and procedural logic stored in the database. It can accept parameters and perform reusable operations such as data processing or business logic."
+  },
+  {
+    "id": "sql-225",
+    "subtopic": "Function",
+    "difficulty": "medium",
+    "question": "What is a database function?",
+    "answer": "A database function is a reusable database object that accepts inputs and returns a value or, depending on the database, a table. Functions are useful for reusable calculations and transformations."
+  },
+  {
+    "id": "sql-226",
+    "subtopic": "Stored Procedure vs Function",
+    "difficulty": "hard",
+    "question": "What's the difference between a stored procedure and a function?",
+    "answer": "The exact rules vary by database, but generally a function is designed to return a value or table and can often be used within SQL expressions, while a stored procedure is designed to execute a sequence of operations and may return result sets or output parameters."
+  },
+  {
+    "id": "sql-227",
+    "subtopic": "Trigger",
+    "difficulty": "medium",
+    "question": "What is a database trigger?",
+    "answer": "A trigger is database logic that automatically executes when specified events occur, such as INSERT, UPDATE, or DELETE. Triggers can enforce rules or maintain audit information but should be used carefully because their behavior can be hidden from application code."
+  },
+  {
+    "id": "sql-228",
+    "subtopic": "View vs Table",
+    "difficulty": "medium",
+    "question": "What's the difference between a table and a view?",
+    "answer": "A table physically stores data, while a normal view stores a query definition and presents its result as a virtual table. Views are useful for abstraction, reuse, and controlled access to data."
+  },
+  {
+    "id": "sql-229",
+    "subtopic": "Temporary Table",
+    "difficulty": "medium",
+    "question": "What is a temporary table?",
+    "answer": "A temporary table is a temporary database object used to store intermediate results. It typically exists for a session or transaction depending on the database and can often be indexed like a regular table."
+  },
+  {
+    "id": "sql-230",
+    "subtopic": "CTE vs Temporary Table",
+    "difficulty": "hard",
+    "question": "When would you prefer a temporary table over a CTE?",
+    "answer": "A temporary table can be useful when intermediate results need to be reused multiple times, indexed, inspected independently, or persisted across multiple statements. A CTE is generally preferable for improving readability within a single statement."
+  },
+  {
+    "id": "sql-231",
+    "subtopic": "EXPLAIN",
+    "difficulty": "medium",
+    "question": "What is EXPLAIN used for?",
+    "answer": "EXPLAIN shows how the database plans to execute a query. It can reveal operations such as table scans, index usage, joins, sorting, and estimated row counts, helping identify performance problems."
+  },
+  {
+    "id": "sql-232",
+    "subtopic": "EXPLAIN ANALYZE",
+    "difficulty": "hard",
+    "question": "What is the difference between EXPLAIN and EXPLAIN ANALYZE?",
+    "answer": "EXPLAIN generally shows the optimizer's planned execution strategy. EXPLAIN ANALYZE actually executes the query and reports runtime information such as actual rows and execution times. Availability and exact behavior depend on the database."
+  },
+  {
+    "id": "sql-233",
+    "subtopic": "Query Optimization",
+    "difficulty": "hard",
+    "question": "What should you check first when a SQL query is slow?",
+    "answer": "Check the execution plan, row counts, indexes, join conditions, filtering, sorting, and whether functions or implicit conversions prevent index usage. Also determine whether the query is processing far more data than necessary."
+  },
+  {
+    "id": "sql-234",
+    "subtopic": "SELECT Columns",
+    "difficulty": "easy",
+    "question": "How can selecting unnecessary columns affect query performance?",
+    "answer": "Retrieving unnecessary columns increases data read, memory usage, network transfer, and potentially disk I/O. Selecting only required columns makes queries clearer and can improve performance."
+  },
+  {
+    "id": "sql-235",
+    "subtopic": "DISTINCT Performance",
+    "difficulty": "hard",
+    "question": "Why can DISTINCT make a query slower?",
+    "answer": "DISTINCT requires the database to identify and remove duplicate rows, which may involve sorting or hashing a large result set. If duplicates are caused by an incorrect join, fixing the join is usually better than adding DISTINCT."
+  },
+  {
+    "id": "sql-236",
+    "subtopic": "OR vs UNION",
+    "difficulty": "hard",
+    "question": "Can replacing OR with UNION improve query performance?",
+    "answer": "Sometimes. Separate UNION branches can allow the optimizer to use different indexes for different conditions. However, UNION adds its own work and may remove duplicates, so the execution plan should be checked rather than assuming one approach is always faster."
+  },
+  {
+    "id": "sql-237",
+    "subtopic": "Subquery vs JOIN",
+    "difficulty": "hard",
+    "question": "Should you always replace subqueries with JOINs for better performance?",
+    "answer": "No. Modern database optimizers can transform many equivalent queries into similar execution plans. The better choice depends on readability, semantics, data size, indexes, and the optimizer. Compare actual execution plans when performance matters."
+  },
+  {
+    "id": "sql-238",
+    "subtopic": "Correlated Subquery Performance",
+    "difficulty": "hard",
+    "question": "Why can correlated subqueries be expensive?",
+    "answer": "A correlated subquery conceptually evaluates the inner query for each row of the outer query. Depending on the optimizer and indexes, this can lead to repeated work. A JOIN, aggregation, or window function may provide a more efficient alternative."
+  },
+  {
+    "id": "sql-239",
+    "subtopic": "Index Maintenance",
+    "difficulty": "hard",
+    "question": "Why does index maintenance matter?",
+    "answer": "Indexes must be updated when indexed data changes. Large or poorly designed indexes can increase write costs, storage requirements, and maintenance time. Database-specific maintenance such as statistics updates or index rebuilding may also be needed."
+  },
+  {
+    "id": "sql-240",
+    "subtopic": "Partitioning",
+    "difficulty": "hard",
+    "question": "What is table partitioning?",
+    "answer": "Partitioning divides a large table into smaller logical or physical partitions based on a key such as date or region. It can improve manageability and, when queries filter on the partition key, reduce the amount of data that needs to be scanned."
+  },
+  {
+    "id": "sql-241",
+    "subtopic": "Partition Pruning",
+    "difficulty": "hard",
+    "question": "What is partition pruning?",
+    "answer": "Partition pruning allows the database to skip partitions that cannot contain rows matching a query. Effective filtering on the partition key can significantly reduce the amount of data scanned."
+  },
+  {
+    "id": "sql-242",
+    "subtopic": "Data Grain",
+    "difficulty": "hard",
+    "question": "What does the grain of a table mean?",
+    "answer": "The grain describes what one row represents. For example, one row might represent one order, one order line, one customer per month, or one daily transaction. Understanding grain is critical for avoiding duplicate counts and incorrect aggregations."
+  },
+  {
+    "id": "sql-243",
+    "subtopic": "Grain After JOIN",
+    "difficulty": "hard",
+    "question": "Why should you identify the grain before joining tables?",
+    "answer": "Knowing the grain tells you how rows relate and whether a join can multiply records. Without understanding grain, you may accidentally double-count revenue, orders, customers, or other metrics."
+  },
+  {
+    "id": "sql-244",
+    "subtopic": "Aggregation Before JOIN",
+    "difficulty": "hard",
+    "question": "Why might you aggregate data before joining tables?",
+    "answer": "Aggregating to the required grain before a join can prevent one-to-many relationships from multiplying rows. It can also reduce the amount of data that the join needs to process, improving both correctness and performance."
+  },
+  {
+    "id": "sql-245",
+    "subtopic": "Data Quality Checks",
+    "difficulty": "medium",
+    "question": "What SQL checks would you perform before using a dataset for analysis?",
+    "answer": "Check row counts, duplicate keys, NULL values, invalid dates, unexpected categories, numeric ranges, orphan foreign keys, duplicate business records, and consistency between related tables. These checks help ensure that analytical results are trustworthy."
+  },
+  {
+    "id": "sql-246",
+    "subtopic": "Duplicate Business Keys",
+    "difficulty": "medium",
+    "question": "What's the difference between duplicate rows and duplicate business keys?",
+    "answer": "Duplicate rows are records that are identical or nearly identical across their columns. Duplicate business keys occur when multiple records share a value that is expected to uniquely identify a business entity, such as customer email or account number."
+  },
+  {
+    "id": "sql-247",
+    "subtopic": "Orphan Records",
+    "difficulty": "medium",
+    "question": "What is an orphan record and how can you find one?",
+    "answer": "An orphan record is a child record whose referenced parent record does not exist. You can find orphan records using a LEFT JOIN from the child table to the parent table and filtering where the parent key is NULL, or by using NOT EXISTS."
+  },
+  {
+    "id": "sql-248",
+    "subtopic": "Data Reconciliation",
+    "difficulty": "hard",
+    "question": "How would you reconcile totals between two systems using SQL?",
+    "answer": "Compare row counts, distinct business keys, totals, NULL counts, and key-level differences between the two datasets. FULL OUTER JOIN or set operations such as EXCEPT can help identify records present in one system but not the other."
+  },
+  {
+    "id": "sql-249",
+    "subtopic": "EXCEPT",
+    "difficulty": "medium",
+    "question": "What is EXCEPT used for?",
+    "answer": "EXCEPT returns rows from the first query that are not present in the second query. It is useful for identifying differences between two datasets, although exact support and behavior vary by database."
+  },
+  {
+    "id": "sql-250",
+    "subtopic": "SQL Interview Optimization",
+    "difficulty": "hard",
+    "question": "An interviewer says your SQL query works but is slow. How would you improve it?",
+    "answer": "First reproduce the performance issue and inspect the execution plan. Then check whether the query reads unnecessary rows or columns, whether joins are multiplying data, whether appropriate indexes exist, whether predicates are SARGable, and whether expensive sorting, grouping, or DISTINCT operations are necessary. Make one change at a time and compare execution metrics to verify the improvement."
+  },
+  
+  {
+    "id": "sql-251",
+    "subtopic": "Second Highest Salary Without Window Functions",
+    "difficulty": "medium",
+    "question": "How can you find the second highest salary without using a window function?",
+    "answer": "One approach is to find the maximum salary below the overall maximum salary. For example, SELECT MAX(salary) FROM employees WHERE salary < (SELECT MAX(salary) FROM employees). This returns the second highest distinct salary."
+  },
+  {
+    "id": "sql-252",
+    "subtopic": "Nth Highest Salary With LIMIT",
+    "difficulty": "medium",
+    "question": "How can you find the third highest distinct salary using ORDER BY and LIMIT?",
+    "answer": "First remove duplicate salaries using DISTINCT, sort them in descending order, and then skip the first two values before taking one row. For example, in databases supporting LIMIT and OFFSET: SELECT DISTINCT salary FROM employees ORDER BY salary DESC LIMIT 1 OFFSET 2."
+  },
+  {
+    "id": "sql-253",
+    "subtopic": "Employees With Same Salary",
+    "difficulty": "easy",
+    "question": "How would you find employees who have the same salary?",
+    "answer": "Group employees by salary and identify salary values with COUNT(*) greater than 1. You can then join those salary values back to the employee table to retrieve the employee details."
+  },
+  {
+    "id": "sql-254",
+    "subtopic": "Duplicate Customers",
+    "difficulty": "medium",
+    "question": "How would you identify customers who have duplicate names but different customer IDs?",
+    "answer": "GROUP BY the customer name and use HAVING COUNT(DISTINCT customer_id) > 1. However, names alone may not uniquely identify people, so additional attributes such as email or phone should be considered before declaring records duplicates."
+  },
+  {
+    "id": "sql-255",
+    "subtopic": "Missing IDs",
+    "difficulty": "medium",
+    "question": "How would you find missing numbers in an ID sequence?",
+    "answer": "You can compare the existing IDs with an expected sequence generated using a recursive CTE, numbers table, or database-specific sequence generator. IDs should not automatically be assumed to be gap-free because deletes and failed transactions can create gaps."
+  },
+  {
+    "id": "sql-256",
+    "subtopic": "Consecutive Login Days",
+    "difficulty": "hard",
+    "question": "How would you find users who logged in for at least three consecutive days?",
+    "answer": "Remove duplicate login dates per user, order the dates, and use a gaps-and-islands technique. A common approach is to compare each date with ROW_NUMBER() to create a grouping key for consecutive dates, then group by user and that key and filter groups having at least three dates."
+  },
+  {
+    "id": "sql-257",
+    "subtopic": "Longest Consecutive Streak",
+    "difficulty": "hard",
+    "question": "How would you find the longest consecutive activity streak for each user?",
+    "answer": "Create a distinct user-date dataset, identify consecutive date islands using ROW_NUMBER() or LAG(), group each island, count its dates, and then use RANK() or ROW_NUMBER() to select the longest streak per user."
+  },
+  {
+    "id": "sql-258",
+    "subtopic": "Inactive Customers",
+    "difficulty": "medium",
+    "question": "How would you find customers who have not purchased in the last 6 months?",
+    "answer": "Calculate each customer's latest purchase date using MAX(), then compare it with the six-month cutoff date. Customers with no purchase date should be handled separately based on whether the business considers them inactive."
+  },
+  {
+    "id": "sql-259",
+    "subtopic": "New Customers",
+    "difficulty": "medium",
+    "question": "How would you find customers whose first purchase occurred in a particular month?",
+    "answer": "Calculate MIN(purchase_date) for each customer and then filter customers whose first purchase date falls within the target month. Using a date range is generally preferable to applying a function directly to the date column when index usage matters."
+  },
+  {
+    "id": "sql-260",
+    "subtopic": "Repeat Purchase Rate",
+    "difficulty": "hard",
+    "question": "How would you calculate the percentage of customers who made more than one purchase?",
+    "answer": "First count distinct orders for each customer, classify customers with more than one order as repeat customers, and divide the number of repeat customers by the total number of customers in the relevant population. Use NULLIF() to protect against division by zero."
+  },
+  {
+    "id": "sql-261",
+    "subtopic": "Average Days Between Purchases",
+    "difficulty": "hard",
+    "question": "How would you calculate the average number of days between purchases for each customer?",
+    "answer": "Use LAG() to obtain the previous purchase date for each customer, calculate the difference between the current and previous purchase dates, and then average those differences by customer. The first purchase has no previous purchase and should be excluded from the average."
+  },
+  {
+    "id": "sql-262",
+    "subtopic": "Customer Lifetime Orders",
+    "difficulty": "easy",
+    "question": "How would you calculate the total number of orders placed by each customer?",
+    "answer": "GROUP BY customer_id and use COUNT(DISTINCT order_id). COUNT(DISTINCT) is important when the source table contains multiple rows for the same order."
+  },
+  {
+    "id": "sql-263",
+    "subtopic": "Revenue With Discounts",
+    "difficulty": "medium",
+    "question": "How would you calculate net revenue when orders have discounts?",
+    "answer": "Calculate the gross amount first and subtract the applicable discount. The exact formula depends on whether the discount is stored as a percentage or fixed amount. Apply the calculation consistently at the correct grain, such as order or order line."
+  },
+  {
+    "id": "sql-264",
+    "subtopic": "Profit Margin",
+    "difficulty": "medium",
+    "question": "How would you calculate profit margin using SQL?",
+    "answer": "Calculate profit as revenue minus cost, then divide profit by revenue and multiply by 100. Use NULLIF(revenue, 0) as the denominator protection when revenue can be zero."
+  },
+  {
+    "id": "sql-265",
+    "subtopic": "Category Ranking",
+    "difficulty": "hard",
+    "question": "How would you rank product categories by revenue within each region?",
+    "answer": "First aggregate revenue by region and category. Then apply RANK() or DENSE_RANK() with PARTITION BY region ORDER BY revenue DESC. This produces an independent ranking for each region."
+  },
+  {
+    "id": "sql-266",
+    "subtopic": "Top Product Per Category",
+    "difficulty": "hard",
+    "question": "How would you find the best-selling product in every category?",
+    "answer": "Aggregate sales by category and product, rank products within each category using ROW_NUMBER() or DENSE_RANK(), and select rank 1. Use DENSE_RANK() if tied products should all be returned."
+  },
+  {
+    "id": "sql-267",
+    "subtopic": "Bottom Product Per Category",
+    "difficulty": "hard",
+    "question": "How would you find the lowest-selling product in each category?",
+    "answer": "Aggregate sales by category and product, then use ROW_NUMBER() OVER (PARTITION BY category ORDER BY sales ASC). Filter for row number 1. Make sure products with no sales are included if the business requirement calls for them."
+  },
+  {
+    "id": "sql-268",
+    "subtopic": "Products With No Sales",
+    "difficulty": "medium",
+    "question": "How would you include products with zero sales when calculating product performance?",
+    "answer": "Start from the products table and LEFT JOIN sales data. Aggregate the sales after the join and use COALESCE() to convert NULL sales totals to zero. Starting from the sales table would exclude products with no transactions."
+  },
+  {
+    "id": "sql-269",
+    "subtopic": "Conditional JOIN",
+    "difficulty": "hard",
+    "question": "How can you join a transaction to the correct historical customer record?",
+    "answer": "Use a temporal or effective-date join. Match the customer identifier and require the transaction date to fall between the record's effective start and end dates. This is common with slowly changing dimensions."
+  },
+  {
+    "id": "sql-270",
+    "subtopic": "Slowly Changing Dimension",
+    "difficulty": "hard",
+    "question": "What is a Slowly Changing Dimension (SCD)?",
+    "answer": "An SCD is a data-warehouse technique for managing changes to dimension attributes over time. Type 1 overwrites the old value, while Type 2 preserves history by creating a new record with effective dates or version information."
+  },
+  {
+    "id": "sql-271",
+    "subtopic": "SCD Type 1 vs Type 2",
+    "difficulty": "hard",
+    "question": "What's the difference between SCD Type 1 and Type 2?",
+    "answer": "Type 1 overwrites the previous attribute value, so historical changes are not preserved. Type 2 creates a new version of the dimension record and keeps the previous version, allowing historical analysis."
+  },
+  {
+    "id": "sql-272",
+    "subtopic": "Cohort Analysis",
+    "difficulty": "hard",
+    "question": "How would you create a customer cohort based on first purchase month?",
+    "answer": "First calculate each customer's first purchase date, convert it to the first day or month identifier, and use that value as the cohort month. Then join or aggregate subsequent activity by customer and activity month to analyze retention over time."
+  },
+  {
+    "id": "sql-273",
+    "subtopic": "Retention Rate",
+    "difficulty": "hard",
+    "question": "How would you calculate monthly customer retention?",
+    "answer": "Assign customers to an initial cohort, identify customers active in later months, count retained customers for each cohort-period combination, and divide by the original cohort size. Clearly define what counts as active or retained."
+  },
+  {
+    "id": "sql-274",
+    "subtopic": "Churn Rate",
+    "difficulty": "hard",
+    "question": "How would you calculate monthly customer churn rate?",
+    "answer": "Define churn according to the business rule, identify customers who churned during the month, and divide churned customers by the appropriate starting customer population. The denominator should be clearly defined because different businesses use different churn formulas."
+  },
+  {
+    "id": "sql-275",
+    "subtopic": "Rolling 30-Day Users",
+    "difficulty": "hard",
+    "question": "How would you calculate rolling 30-day active users?",
+    "answer": "For each reporting date, count distinct users who performed an activity within the preceding 30-day period. Depending on the database, this can be implemented using date-range joins, window functions, or a calendar table. Be careful because simple ROWS frames represent rows rather than calendar days."
+  },
+  {
+    "id": "sql-276",
+    "subtopic": "Sessionization",
+    "difficulty": "hard",
+    "question": "What is sessionization in SQL?",
+    "answer": "Sessionization groups user events into sessions based on inactivity thresholds. A common approach is to use LAG() to compare each event with the previous event, flag a new session when the gap exceeds a threshold such as 30 minutes, and then use a cumulative SUM() to assign session IDs."
+  },
+  {
+    "id": "sql-277",
+    "subtopic": "Session Duration",
+    "difficulty": "hard",
+    "question": "How would you calculate the duration of each user session?",
+    "answer": "After assigning a session ID, group events by user and session and calculate the difference between the minimum event timestamp and maximum event timestamp. Depending on the business definition, sessions containing only one event may have zero duration or may require a special rule."
+  },
+  {
+    "id": "sql-278",
+    "subtopic": "Conversion Funnel",
+    "difficulty": "hard",
+    "question": "How would you make sure funnel events occurred in the correct order?",
+    "answer": "For each user, calculate the earliest timestamp for each funnel stage and ensure that each subsequent stage occurs after the previous stage. Conditional aggregation or CTEs can be used to build the stage timestamps before calculating conversion."
+  },
+  {
+    "id": "sql-279",
+    "subtopic": "A/B Test Analysis",
+    "difficulty": "hard",
+    "question": "How could SQL be used to compare two groups in an A/B test?",
+    "answer": "Separate users into control and treatment groups, calculate the relevant metric for each group, and compare metrics such as conversion rate or average revenue. SQL can prepare the analysis dataset, while statistical significance should generally be evaluated using an appropriate statistical method."
+  },
+  {
+    "id": "sql-280",
+    "subtopic": "Conversion by Segment",
+    "difficulty": "hard",
+    "question": "How would you calculate conversion rate separately for each customer segment?",
+    "answer": "Join the conversion events to the customer segment information, group by segment, count distinct converted users, and divide by the eligible users in each segment. Ensure that each user is counted once in both numerator and denominator."
+  },
+  {
+    "id": "sql-281",
+    "subtopic": "Median Salary",
+    "difficulty": "hard",
+    "question": "How would you find the median salary for each department?",
+    "answer": "Use a database-specific median or percentile function if available. Otherwise, rank salaries within each department and identify the middle value or values, averaging the two middle values when the department has an even number of employees."
+  },
+  {
+    "id": "sql-282",
+    "subtopic": "Percentile Analysis",
+    "difficulty": "hard",
+    "question": "Why might a data analyst use percentiles instead of averages?",
+    "answer": "Percentiles show the distribution of values and are less affected by extreme values than averages. For example, the 95th percentile of response time can reveal how slow the worst typical experiences are even when the average looks acceptable."
+  },
+  {
+    "id": "sql-283",
+    "subtopic": "Outlier Detection",
+    "difficulty": "hard",
+    "question": "How can SQL help identify outliers?",
+    "answer": "SQL can calculate statistical thresholds such as percentiles, averages, standard deviations, or interquartile ranges and flag values outside those thresholds. The correct method depends on the data distribution and business context."
+  },
+  {
+    "id": "sql-284",
+    "subtopic": "Data Completeness",
+    "difficulty": "medium",
+    "question": "How would you measure data completeness for an important column?",
+    "answer": "Count total rows and compare them with the number of non-NULL values. The completeness percentage can be calculated as non_null_count divided by total_count multiplied by 100."
+  },
+  {
+    "id": "sql-285",
+    "subtopic": "Data Uniqueness",
+    "difficulty": "medium",
+    "question": "How would you measure uniqueness of a column?",
+    "answer": "Compare COUNT(DISTINCT column) with the total number of non-NULL records. A uniqueness percentage can be calculated as distinct_non_null_values divided by non_null_values multiplied by 100."
+  },
+  {
+    "id": "sql-286",
+    "subtopic": "Data Freshness",
+    "difficulty": "medium",
+    "question": "How would you check whether a dataset has been refreshed recently?",
+    "answer": "Use the latest available ingestion, update, or transaction timestamp and compare it with the expected refresh time. A freshness query can flag data as delayed when the latest timestamp is older than the defined threshold."
+  },
+  {
+    "id": "sql-287",
+    "subtopic": "Reconciliation",
+    "difficulty": "hard",
+    "question": "Two reports show different revenue totals. How would you investigate the difference using SQL?",
+    "answer": "First compare row counts and date ranges, then verify filters, joins, duplicate records, currency conversions, refunds, NULL handling, and aggregation grain. Reconcile totals at progressively smaller levels such as date, region, product, and transaction ID until the discrepancy is isolated."
+  },
+  {
+    "id": "sql-288",
+    "subtopic": "SQL Debugging",
+    "difficulty": "medium",
+    "question": "How do you debug a SQL query that returns incorrect results?",
+    "answer": "Break the query into smaller steps, inspect intermediate results, verify join keys and table grain, check filters, NULL behavior, aggregation levels, and duplicate rows. Add conditions one at a time and compare the results against known sample records."
+  },
+  {
+    "id": "sql-289",
+    "subtopic": "SQL Debugging",
+    "difficulty": "hard",
+    "question": "A query returns fewer rows after adding a JOIN. What could be the reason?",
+    "answer": "The join may be an INNER JOIN that removes unmatched records, or the join condition may be too restrictive or incorrect. Check whether the relationship is expected to have matches for every row and test the join using a LEFT JOIN to identify unmatched records."
+  },
+  {
+    "id": "sql-290",
+    "subtopic": "SQL Debugging",
+    "difficulty": "hard",
+    "question": "A query returns more rows than expected after adding a JOIN. What should you check?",
+    "answer": "Check whether the join is one-to-many or many-to-many, whether the join key is unique, and whether the condition is missing part of the relationship. Count matches per key and compare the table grain before and after the join."
+  },
+  {
+    "id": "sql-291",
+    "subtopic": "SQL Security",
+    "difficulty": "medium",
+    "question": "What is SQL injection?",
+    "answer": "SQL injection is a security vulnerability where untrusted input is interpreted as part of a SQL statement, potentially allowing attackers to alter the intended query. Applications should use parameterized queries or prepared statements rather than concatenating user input into SQL."
+  },
+  {
+    "id": "sql-292",
+    "subtopic": "Parameterized Queries",
+    "difficulty": "medium",
+    "question": "Why should applications use parameterized SQL queries?",
+    "answer": "Parameterized queries separate SQL code from user-provided values. They help prevent SQL injection, improve consistency, and can allow databases to reuse query execution strategies."
+  },
+  {
+    "id": "sql-293",
+    "subtopic": "Least Privilege",
+    "difficulty": "medium",
+    "question": "What does the principle of least privilege mean in database security?",
+    "answer": "Users and applications should receive only the database permissions required to perform their tasks. For example, a reporting user may need SELECT access but should not automatically have permission to DELETE or ALTER production data."
+  },
+  {
+    "id": "sql-294",
+    "subtopic": "Transactions and Error Handling",
+    "difficulty": "hard",
+    "question": "Why should related data modifications often be placed inside a transaction?",
+    "answer": "A transaction ensures related changes succeed or fail as a unit. If one operation fails, the transaction can be rolled back to avoid leaving the database in a partially updated state."
+  },
+  {
+    "id": "sql-295",
+    "subtopic": "SQL Dialects",
+    "difficulty": "medium",
+    "question": "Why can the same SQL query work in one database but fail in another?",
+    "answer": "SQL has a common standard, but databases implement different dialects, functions, data types, date operations, pagination syntax, and procedural features. For example, SQL Server commonly uses TOP, while MySQL and PostgreSQL commonly use LIMIT."
+  },
+  {
+    "id": "sql-296",
+    "subtopic": "SQL Interview Scenario",
+    "difficulty": "hard",
+    "question": "You have 500 million transaction rows and a query is scanning the entire table. What would you investigate?",
+    "answer": "Check the execution plan, filtering conditions, indexes, partitioning, statistics, data types, and whether predicates are SARGable. Determine whether partition pruning or an appropriate index can reduce the amount of data read. Also verify that the query genuinely needs all requested rows."
+  },
+  {
+    "id": "sql-297",
+    "subtopic": "SQL Interview Scenario",
+    "difficulty": "hard",
+    "question": "A dashboard query takes 30 seconds and users need it to load in under 5 seconds. How would you approach optimization?",
+    "answer": "Start with the execution plan and measure where time is spent. Reduce unnecessary columns and rows, optimize joins, verify indexes and statistics, pre-aggregate data if appropriate, and consider materialized views or summary tables for repeated analytical queries. Validate every optimization with actual performance measurements."
+  },
+  {
+    "id": "sql-298",
+    "subtopic": "SQL Interview Scenario",
+    "difficulty": "hard",
+    "question": "An interviewer gives you a large SQL problem and you are not sure how to start. What should you do?",
+    "answer": "Clarify the expected output and business definition first. Identify the tables, relationships, and grain, then break the problem into smaller steps using CTEs or subqueries. Solve and validate each step before combining them. Explain your assumptions and explicitly discuss edge cases such as NULLs, duplicates, and ties."
+  },
+  {
+    "id": "sql-299",
+    "subtopic": "SQL Interview Follow-up",
+    "difficulty": "hard",
+    "question": "After solving a SQL problem, what follow-up questions might an interviewer ask?",
+    "answer": "They may ask how your query handles duplicates, NULLs, ties, missing dates, large datasets, or performance issues. They may also ask whether a JOIN, CTE, subquery, or window function could be used instead and how you would modify the solution for a different business requirement."
+  },
+  {
+    "id": "sql-300",
+    "subtopic": "SQL Interview Master Strategy",
+    "difficulty": "hard",
+    "question": "What is the best strategy for preparing SQL for a Data Analyst interview?",
+    "answer": "Master the fundamentals first, especially filtering, aggregation, GROUP BY, HAVING, JOINs, subqueries, CTEs, and window functions. Then practice real business problems such as customer retention, sales analysis, ranking, duplicates, date calculations, and funnel analysis. Finally, practice explaining your reasoning, validating edge cases, and optimizing queries because interviewers often evaluate both the solution and how you think."
+  }
+],
+  "practice": [
+  {
+    "question": "Write a query to find all employees whose salary is greater than 50000 from an `employees` table."
+  },
+  {
+    "question": "Write a query to find employees who belong to the `Sales` department and have a salary greater than 60000."
+  },
+  {
+    "question": "Write a query to return the distinct department names from an `employees` table."
+  },
+  {
+    "question": "Write a query to find employees whose names start with the letter 'A'."
+  },
+  {
+    "question": "Write a query to find all employees whose salary is between 50000 and 100000."
+  },
+  {
+    "question": "Write a query to count the total number of employees in an `employees` table."
+  },
+  {
+    "question": "Write a query to calculate the average salary of all employees."
+  },
+  {
+    "question": "Write a query to find the highest and lowest salary in the `employees` table."
+  },
+  {
+    "question": "Write a query to calculate the total salary paid by each department."
+  },
+  {
+    "question": "Write a query to find departments where the average salary is greater than 70000."
+  },
+  {
+    "question": "Write a query to classify employees into `High`, `Medium`, and `Low` salary categories using a CASE statement. Assume High >= 100000, Medium >= 50000, and Low < 50000."
+  },
+  {
+    "question": "Write a query to find the second-highest salary in an `employees` table without using LIMIT or OFFSET."
+  },
+  {
+    "question": "Write a query to find the third-highest distinct salary using a window function."
+  },
+  {
+    "question": "Write a query to find the top 3 highest-paid employees in each department."
+  },
+  {
+    "question": "Write a query to find the employee with the highest salary in each department. If multiple employees have the same highest salary, return all of them."
+  },
+  {
+    "question": "Write a query to rank employees by salary within each department using a window function."
+  },
+  {
+    "question": "Write a query to find employees whose salary is greater than the average salary of their department."
+  },
+  {
+    "question": "Write a query to find the difference between each employee's salary and the average salary of their department."
+  },
+  {
+    "question": "Write a query to find the duplicate email addresses in a `customers(customer_id, name, email)` table."
+  },
+  {
+    "question": "You have a `customers` table containing duplicate records. Write a query using ROW_NUMBER() to identify duplicate rows while keeping the first record."
+  },
+  {
+    "question": "Write a query to remove duplicate customer records while keeping only the record with the smallest `customer_id`."
+  },
+  {
+    "question": "You have `customers(customer_id, name)` and `orders(order_id, customer_id, order_date, amount)`. Write a query to find customers who have never placed an order."
+  },
+  {
+    "question": "Using `customers` and `orders` tables, write a query to find customers who have placed more than 5 orders."
+  },
+  {
+    "question": "Write a query to find the total revenue generated by each customer."
+  },
+  {
+    "question": "Write a query to find the top 10 customers by total revenue."
+  },
+  {
+    "question": "Write a query to find the most recent order placed by every customer."
+  },
+  {
+    "question": "Write a query to find the first order placed by every customer."
+  },
+  {
+    "question": "Write a query to find the second order placed by every customer."
+  },
+  {
+    "question": "Write a query to calculate the number of days between a customer's first and most recent order."
+  },
+  {
+    "question": "Write a query to find customers who placed an order in January but did not place any order in February."
+  },
+  {
+    "question": "You have `products(product_id, product_name, category_id)` and `sales(product_id, quantity, amount)`. Write a query to find products that have never been sold."
+  },
+  {
+    "question": "Write a query to calculate total sales revenue for each product category."
+  },
+  {
+    "question": "Write a query to find the best-selling product in each category based on total revenue."
+  },
+  {
+    "question": "Write a query to calculate each product's percentage contribution to the overall company revenue."
+  },
+  {
+    "question": "You have a `sales(order_date, amount)` table. Write a query to calculate total revenue for each month."
+  },
+  {
+    "question": "Write a query that returns month-over-month revenue growth percentage from a `sales(order_date, amount)` table."
+  },
+  {
+    "question": "Write a query to calculate year-over-year revenue growth from a `sales(order_date, amount)` table."
+  },
+  {
+    "question": "Write a query to calculate a running total of revenue ordered by transaction date."
+  },
+  {
+    "question": "Write a query to calculate a running total of revenue separately for each customer."
+  },
+  {
+    "question": "Write a query to calculate a 7-day moving average of daily sales."
+  },
+  {
+    "question": "Write a query using LAG() to compare each month's revenue with the previous month's revenue."
+  },
+  {
+    "question": "Write a query using LEAD() to find the next order date for each customer."
+  },
+  {
+    "question": "Write a query to calculate the number of days between consecutive orders for each customer."
+  },
+  {
+    "question": "Write a query to find customers who made purchases on at least 3 consecutive days."
+  },
+  {
+    "question": "Write a query to identify the longest consecutive login streak for each user from a `user_logins(user_id, login_date)` table."
+  },
+  {
+    "question": "Write a query to find users who logged in yesterday but did not log in today."
+  },
+  {
+    "question": "You have `transactions(transaction_id, customer_id, transaction_date, amount)`. Write a query to find each customer's highest-value transaction."
+  },
+  {
+    "question": "Write a query to find transactions whose amount is greater than the average transaction amount."
+  },
+  {
+    "question": "Write a query to calculate the average order value for each month."
+  },
+  {
+    "question": "Write a query to calculate Daily Active Users from an `events(user_id, event_date, event_type)` table."
+  },
+  {
+    "question": "Write a query to calculate Monthly Active Users from an `events(user_id, event_date)` table."
+  },
+  {
+    "question": "Write a query to calculate the conversion rate from users who signed up to users who made at least one purchase."
+  },
+  {
+    "question": "Write a query to find customers whose total purchase amount is greater than the average total purchase amount across all customers."
+  },
+  {
+    "question": "Write a query to find the percentage of customers who are repeat customers, where a repeat customer is someone who has placed at least two orders."
+  },
+  {
+    "question": "Write a query to find customers who have not made a purchase in the last 90 days."
+  },
+  {
+    "question": "Write a query to find each customer's first purchase month and use it to create customer cohorts."
+  },
+  {
+    "question": "Write a query to calculate monthly customer retention for each cohort."
+  },
+  {
+    "question": "Write a query to identify potentially churned customers, assuming a customer is churned if they have not purchased for 180 days."
+  },
+  {
+    "question": "Write a query to find the median salary for each department."
+  },
+  {
+    "question": "Write a query to calculate the 90th percentile of transaction amounts."
+  },
+  {
+    "question": "Write a query to find missing dates in a daily sales dataset."
+  },
+  {
+    "question": "You have a `transactions` table with duplicate rows. Write a query to identify and remove the duplicates, keeping only one copy of each."
+  },
+  {
+    "question": "Write a query to identify orphan records in an `orders` table where the referenced customer does not exist in the `customers` table."
+  },
+  {
+    "question": "Write a query using NOT EXISTS to find customers who have never placed an order."
+  },
+  {
+    "question": "Write a query using a CTE to find departments whose total salary expense is greater than the company's average department salary expense."
+  },
+  {
+    "question": "Write a recursive CTE to display an employee hierarchy starting from the top-level manager."
+  },
+  {
+    "question": "Write a stored procedure that transfers money between two accounts (debit one, credit another) and rolls back if either step fails."
+  },
+  {
+    "question": "Explain when you'd choose a stored procedure over just writing the same logic in your application code (e.g. Python)."
+  },
+  {
+    "question": "A query joining `orders` and `order_items` is returning much higher revenue than expected. Explain why this could happen and write a corrected approach."
+  },
+  {
+    "question": "A SQL query that previously took 2 seconds now takes 30 seconds after the table grew significantly. Explain how you would investigate and optimize it."
+  },
+  {
+    "question": "A LEFT JOIN query is unexpectedly returning fewer rows than the original table. Explain why this can happen and show how you would troubleshoot it."
+  },
+  {
+    "question": "Write a query to compare two tables and identify records that exist in the first table but not in the second table."
+  },
+  {
+    "question": "Write a query to reconcile two sales datasets by comparing row counts, total revenue, and distinct transaction IDs."
+  }
+]
+}
