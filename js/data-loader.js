@@ -4,6 +4,7 @@
 // ============================================
 const TOPICS = [
   { id: 'sql',        name: 'SQL',                 icon: '◱', file: 'data/sql.json' },
+  { id: 'sql-basics', name: 'SQL Basics', icon: '◱', file: 'data/sql-basics.json' },
   { id: 'excel',       name: 'Excel',                icon: '◱', file: 'data/excel.json' },
   { id: 'powerbi',     name: 'Power BI',             icon: '◱', file: 'data/powerbi.json' },
   { id: 'python',      name: 'Python',               icon: '◱', file: 'data/python.json' },
