@@ -1,0 +1,2334 @@
+{
+  "description": "DAX, data modeling, and Power BI service concepts — the PL-300 core plus common interview curveballs.",
+  "questions": [
+  {
+    "id": "pbi-001",
+    "subtopic": "Power BI Fundamentals",
+    "difficulty": "easy",
+    "question": "What is Power BI?",
+    "answer": "Power BI is Microsoft's business intelligence and data visualization platform. It allows users to connect to different data sources, clean and transform data, build data models, create interactive reports and dashboards, and share insights with others."
+  },
+  {
+    "id": "pbi-002",
+    "subtopic": "Power BI Components",
+    "difficulty": "easy",
+    "question": "What are the main components of Power BI?",
+    "answer": "The main components include Power BI Desktop for developing reports and data models, Power BI Service for publishing and sharing content, Power BI Mobile for viewing reports on mobile devices, Power BI Gateway for connecting cloud services to on-premises data, and Power BI Report Server for on-premises reporting."
+  },
+  {
+    "id": "pbi-003",
+    "subtopic": "Power BI Desktop",
+    "difficulty": "easy",
+    "question": "What is Power BI Desktop used for?",
+    "answer": "Power BI Desktop is primarily used to connect to data, transform data using Power Query, create data models, write DAX calculations, and build interactive reports. Developers generally create and test reports in Desktop before publishing them to Power BI Service."
+  },
+  {
+    "id": "pbi-004",
+    "subtopic": "Power BI Service",
+    "difficulty": "easy",
+    "question": "What is Power BI Service?",
+    "answer": "Power BI Service is the cloud-based platform used to publish, share, manage, and collaborate on Power BI content. It provides features such as workspaces, apps, scheduled refresh, sharing, dashboards, alerts, and security."
+  },
+  {
+    "id": "pbi-005",
+    "subtopic": "Power BI Desktop vs Service",
+    "difficulty": "easy",
+    "question": "What's the difference between Power BI Desktop and Power BI Service?",
+    "answer": "Power BI Desktop is mainly a development tool used for data transformation, modeling, DAX, and report creation. Power BI Service is mainly used for publishing, sharing, collaboration, refresh management, security, dashboards, and distributing reports to users."
+  },
+  {
+    "id": "pbi-006",
+    "subtopic": "Reports",
+    "difficulty": "easy",
+    "question": "What is a Power BI report?",
+    "answer": "A Power BI report is a collection of interactive pages containing visualizations built from a semantic model. Users can interact with slicers, filters, charts, tables, and other visuals to analyze the underlying data."
+  },
+  {
+    "id": "pbi-007",
+    "subtopic": "Dashboards",
+    "difficulty": "easy",
+    "question": "What is a Power BI dashboard?",
+    "answer": "A dashboard is a single-page canvas in Power BI Service containing tiles that provide a high-level view of important metrics and insights. Unlike a report, a dashboard is created in the Power BI Service and can contain tiles pinned from different reports or other sources."
+  },
+  {
+    "id": "pbi-008",
+    "subtopic": "Report vs Dashboard",
+    "difficulty": "medium",
+    "question": "What's the difference between a Power BI report and a dashboard?",
+    "answer": "A report can contain multiple pages and provides detailed interactive analysis. A dashboard is a single-page monitoring view in Power BI Service. Reports are primarily designed for exploration and analysis, while dashboards are commonly used for high-level monitoring and KPI tracking."
+  },
+  {
+    "id": "pbi-009",
+    "subtopic": "Semantic Model",
+    "difficulty": "easy",
+    "question": "What is a semantic model in Power BI?",
+    "answer": "A semantic model is the structured data layer used by Power BI reports. It contains tables, relationships, measures, calculated columns, hierarchies, and metadata that define how users can analyze the underlying data."
+  },
+  {
+    "id": "pbi-010",
+    "subtopic": "Dataset vs Semantic Model",
+    "difficulty": "medium",
+    "question": "What is the difference between a dataset and a semantic model?",
+    "answer": "In current Power BI terminology, Microsoft generally uses the term semantic model for the reusable analytical data model behind reports. The older term dataset referred to essentially the same concept. A semantic model contains tables, relationships, measures, and other modeling metadata."
+  },
+  {
+    "id": "pbi-011",
+    "subtopic": "Workspace",
+    "difficulty": "easy",
+    "question": "What is a workspace in Power BI?",
+    "answer": "A workspace is a collaborative area in Power BI Service where users can create, store, manage, and share content such as reports, semantic models, dashboards, and dataflows. Workspaces also provide role-based access control."
+  },
+  {
+    "id": "pbi-012",
+    "subtopic": "Workspace Roles",
+    "difficulty": "medium",
+    "question": "What are the main workspace roles in Power BI?",
+    "answer": "The main workspace roles are Admin, Member, Contributor, and Viewer. They provide different levels of permissions for managing workspace settings, creating and modifying content, publishing content, and viewing content."
+  },
+  {
+    "id": "pbi-013",
+    "subtopic": "Power BI App",
+    "difficulty": "medium",
+    "question": "What is a Power BI App?",
+    "answer": "A Power BI App is a packaged collection of reports, dashboards, and related content published from a workspace for consumers. Apps provide a controlled and user-friendly way to distribute BI content to a larger audience."
+  },
+  {
+    "id": "pbi-014",
+    "subtopic": "Import Mode",
+    "difficulty": "easy",
+    "question": "What is Import mode in Power BI?",
+    "answer": "Import mode loads a copy of the selected data into Power BI's in-memory analytical engine. It generally provides fast report performance but requires the data to be refreshed when the source data changes."
+  },
+  {
+    "id": "pbi-015",
+    "subtopic": "DirectQuery",
+    "difficulty": "medium",
+    "question": "What is DirectQuery in Power BI?",
+    "answer": "DirectQuery keeps the data in the source system instead of importing the full dataset into Power BI. When users interact with a report, Power BI sends queries to the source. This can provide access to more current data but may introduce performance and modeling limitations."
+  },
+  {
+    "id": "pbi-016",
+    "subtopic": "Import vs DirectQuery",
+    "difficulty": "medium",
+    "question": "What's the difference between Import and DirectQuery?",
+    "answer": "Import stores data inside Power BI and usually provides faster report performance, but data must be refreshed. DirectQuery keeps data in the source and queries it when needed, which can provide fresher data but makes report performance more dependent on the source system and network."
+  },
+  {
+    "id": "pbi-017",
+    "subtopic": "Composite Model",
+    "difficulty": "medium",
+    "question": "What is a composite model in Power BI?",
+    "answer": "A composite model allows a Power BI semantic model to use multiple storage modes, such as Import and DirectQuery, within the same model. It can be useful when some data needs fast in-memory analysis while other data needs to remain in the source."
+  },
+  {
+    "id": "pbi-018",
+    "subtopic": "Live Connection",
+    "difficulty": "medium",
+    "question": "What is a Live Connection in Power BI?",
+    "answer": "A Live Connection connects Power BI to an existing semantic model or supported Analysis Services model rather than importing the underlying data into the report. The centralized model controls the available data and calculations."
+  },
+  {
+    "id": "pbi-019",
+    "subtopic": "Power Query",
+    "difficulty": "easy",
+    "question": "What is Power Query?",
+    "answer": "Power Query is Power BI's data preparation and transformation technology. It is used to connect to data sources, clean data, change data types, merge and append queries, remove errors, reshape data, and perform other ETL operations before the data is loaded into the model."
+  },
+  {
+    "id": "pbi-020",
+    "subtopic": "Power Query vs DAX",
+    "difficulty": "medium",
+    "question": "What's the difference between Power Query and DAX?",
+    "answer": "Power Query is primarily used for extracting, cleaning, and transforming data before it enters the model. DAX is primarily used for calculations and analytical logic inside the semantic model. A good rule is to perform data preparation in Power Query and business calculations in DAX when appropriate."
+  },
+  {
+    "id": "pbi-021",
+    "subtopic": "ETL",
+    "difficulty": "easy",
+    "question": "What does ETL mean in Power BI?",
+    "answer": "ETL stands for Extract, Transform, Load. Extract means retrieving data from sources, Transform means cleaning and reshaping the data, and Load means bringing the prepared data into the Power BI model or another destination."
+  },
+  {
+    "id": "pbi-022",
+    "subtopic": "Applied Steps",
+    "difficulty": "easy",
+    "question": "What are Applied Steps in Power Query?",
+    "answer": "Applied Steps are the sequence of transformations performed on a Power Query. Each transformation creates a step that can be reviewed, modified, reordered in some cases, or removed."
+  },
+  {
+    "id": "pbi-023",
+    "subtopic": "Power Query Data Types",
+    "difficulty": "easy",
+    "question": "Why are data types important in Power Query?",
+    "answer": "Correct data types ensure that calculations, filtering, sorting, relationships, and transformations work as expected. For example, a date column should be stored as a date rather than text, and numeric values should use appropriate numeric types."
+  },
+  {
+    "id": "pbi-024",
+    "subtopic": "Merge Queries",
+    "difficulty": "easy",
+    "question": "What is Merge Queries in Power Query?",
+    "answer": "Merge Queries combines columns from two queries based on matching values in one or more columns. It is similar to a SQL JOIN and is commonly used to enrich one dataset with information from another."
+  },
+  {
+    "id": "pbi-025",
+    "subtopic": "Append Queries",
+    "difficulty": "easy",
+    "question": "What is Append Queries in Power Query?",
+    "answer": "Append Queries combines rows from two or more tables or queries into one table. It is similar to UNION or UNION ALL in SQL and is commonly used when multiple datasets have the same or compatible column structure."
+  },
+  {
+    "id": "pbi-026",
+    "subtopic": "Merge vs Append",
+    "difficulty": "easy",
+    "question": "What's the difference between Merge and Append in Power Query?",
+    "answer": "Merge combines columns from related tables based on matching keys, similar to a JOIN. Append combines rows from tables with similar structures, similar to UNION ALL."
+  },
+  {
+    "id": "pbi-027",
+    "subtopic": "Query Folding",
+    "difficulty": "hard",
+    "question": "What is query folding in Power Query?",
+    "answer": "Query folding is the process where Power Query translates transformation steps into operations that can be executed by the source system. When supported, this can improve performance because the source performs part of the data processing before Power BI receives the data."
+  },
+  {
+    "id": "pbi-028",
+    "subtopic": "Query Folding Performance",
+    "difficulty": "hard",
+    "question": "Why is query folding important for Power BI performance?",
+    "answer": "When transformations can be folded back to the source, less data may need to be transferred and processed locally. This can reduce refresh time and resource usage, especially with large relational data sources."
+  },
+  {
+    "id": "pbi-029",
+    "subtopic": "M Language",
+    "difficulty": "medium",
+    "question": "What is M in Power BI?",
+    "answer": "M is the functional language used by Power Query to define data transformations. The Power Query interface generates M code automatically, but developers can also view and edit the code using the Advanced Editor."
+  },
+  {
+    "id": "pbi-030",
+    "subtopic": "Data Cleaning",
+    "difficulty": "easy",
+    "question": "What are common data-cleaning tasks performed in Power Query?",
+    "answer": "Common tasks include removing duplicates, handling NULL or blank values, changing data types, trimming text, replacing values, splitting and merging columns, removing errors, filtering rows, and standardizing inconsistent data."
+  },
+  {
+    "id": "pbi-031",
+    "subtopic": "Data Model",
+    "difficulty": "easy",
+    "question": "What is data modeling in Power BI?",
+    "answer": "Data modeling is the process of organizing tables and defining relationships so that data can be analyzed correctly and efficiently. It includes choosing fact and dimension tables, defining relationships, creating measures, and designing an appropriate schema."
+  },
+  {
+    "id": "pbi-032",
+    "subtopic": "Star Schema",
+    "difficulty": "medium",
+    "question": "What is a star schema and why is it recommended in Power BI?",
+    "answer": "A star schema contains a central fact table connected to descriptive dimension tables. It is recommended because it provides a simple structure, clearer relationships, better filter behavior, and generally more efficient analytical queries."
+  },
+  {
+    "id": "pbi-033",
+    "subtopic": "Fact Table",
+    "difficulty": "easy",
+    "question": "What is a fact table in Power BI?",
+    "answer": "A fact table stores business events and measurable values, such as sales transactions, orders, or expenses. It usually contains numeric measures and foreign keys that connect it to dimension tables."
+  },
+  {
+    "id": "pbi-034",
+    "subtopic": "Dimension Table",
+    "difficulty": "easy",
+    "question": "What is a dimension table?",
+    "answer": "A dimension table contains descriptive attributes used to filter, group, and analyze facts. Examples include Customer, Product, Date, Region, and Employee dimensions."
+  },
+  {
+    "id": "pbi-035",
+    "subtopic": "Fact vs Dimension",
+    "difficulty": "medium",
+    "question": "What's the difference between a fact table and a dimension table?",
+    "answer": "A fact table contains measurable business events and numeric values, while a dimension table contains descriptive information used to provide context for those events. For example, Sales can be a fact table and Product can be a dimension."
+  },
+  {
+    "id": "pbi-036",
+    "subtopic": "Relationships",
+    "difficulty": "easy",
+    "question": "What is a relationship in a Power BI data model?",
+    "answer": "A relationship connects two tables through related columns, allowing filters and calculations to work across those tables. For example, CustomerID can connect a Customer dimension to a Sales fact table."
+  },
+  {
+    "id": "pbi-037",
+    "subtopic": "Cardinality",
+    "difficulty": "medium",
+    "question": "What is cardinality in Power BI relationships?",
+    "answer": "Cardinality defines how rows in two related tables correspond. Common relationship types are one-to-many, many-to-one, one-to-one, and many-to-many. In a typical star schema, a dimension has the one side and a fact table has the many side."
+  },
+  {
+    "id": "pbi-038",
+    "subtopic": "Cross Filter Direction",
+    "difficulty": "medium",
+    "question": "What is cross-filter direction in Power BI?",
+    "answer": "Cross-filter direction determines how filters propagate between related tables. Single-direction filtering generally flows from the dimension side to the fact side, while bidirectional filtering allows filters to travel in both directions."
+  },
+  {
+    "id": "pbi-039",
+    "subtopic": "Single vs Both Direction",
+    "difficulty": "hard",
+    "question": "Why is single-direction filtering generally preferred over bidirectional filtering?",
+    "answer": "Single-direction relationships provide more predictable filter behavior and reduce the risk of ambiguous filter paths. Bidirectional filtering can be useful in specific scenarios, but overusing it can create ambiguity, unexpected results, and performance issues."
+  },
+  {
+    "id": "pbi-040",
+    "subtopic": "Many-to-Many",
+    "difficulty": "hard",
+    "question": "What is a many-to-many relationship in Power BI?",
+    "answer": "A many-to-many relationship occurs when multiple rows on both sides can match each other. It can be used when the business model genuinely requires it, but a bridge table is often a better design because it provides clearer and more predictable filter behavior."
+  },
+  {
+    "id": "pbi-041",
+    "subtopic": "Active Relationship",
+    "difficulty": "medium",
+    "question": "What is an active relationship in Power BI?",
+    "answer": "An active relationship is the relationship Power BI automatically uses when propagating filters between related tables. A model can contain multiple relationships between the same tables, but only one can normally be active between a given pair at a time."
+  },
+  {
+    "id": "pbi-042",
+    "subtopic": "Inactive Relationship",
+    "difficulty": "medium",
+    "question": "What is an inactive relationship and when would you use one?",
+    "answer": "An inactive relationship exists in the model but is not automatically used for filter propagation. It is useful when a fact table contains multiple date columns, such as Order Date and Ship Date. DAX can activate the required relationship for a specific calculation using USERELATIONSHIP()."
+  },
+  {
+    "id": "pbi-043",
+    "subtopic": "Date Table",
+    "difficulty": "medium",
+    "question": "Why should you create a dedicated Date table in Power BI?",
+    "answer": "A dedicated Date table provides a continuous and consistent calendar for time-based analysis. It supports reliable time-intelligence calculations such as YTD, MTD, previous year, and year-over-year comparisons."
+  },
+  {
+    "id": "pbi-044",
+    "subtopic": "DAX",
+    "difficulty": "easy",
+    "question": "What is DAX?",
+    "answer": "DAX stands for Data Analysis Expressions. It is the formula language used in Power BI for creating measures, calculated columns, calculated tables, and analytical calculations."
+  },
+  {
+    "id": "pbi-045",
+    "subtopic": "Measure",
+    "difficulty": "easy",
+    "question": "What is a measure in Power BI?",
+    "answer": "A measure is a DAX calculation evaluated dynamically based on the current filter context. Measures are commonly used for KPIs, totals, percentages, ratios, and other analytical calculations."
+  },
+  {
+    "id": "pbi-046",
+    "subtopic": "Calculated Column",
+    "difficulty": "easy",
+    "question": "What is a calculated column in Power BI?",
+    "answer": "A calculated column is a DAX expression evaluated for each row of a table when the model is processed. Its result is stored in the model and can be used for categorization, filtering, grouping, or relationships."
+  },
+  {
+    "id": "pbi-047",
+    "subtopic": "Measure vs Calculated Column",
+    "difficulty": "medium",
+    "question": "What's the difference between a measure and a calculated column?",
+    "answer": "A calculated column is evaluated row by row and stored in the model, while a measure is calculated dynamically when a visual or query requests it. Measures are generally preferred for aggregations and dynamic calculations, while calculated columns are useful when a row-level value is required for filtering, grouping, or relationships."
+  },
+  {
+    "id": "pbi-048",
+    "subtopic": "Calculated Table",
+    "difficulty": "medium",
+    "question": "What is a calculated table in Power BI?",
+    "answer": "A calculated table is a table created using DAX. It is calculated during model processing and can be useful for scenarios such as helper tables, disconnected tables, or specialized modeling requirements."
+  },
+  {
+    "id": "pbi-049",
+    "subtopic": "Row Context",
+    "difficulty": "medium",
+    "question": "What is row context in DAX?",
+    "answer": "Row context refers to the current row being evaluated. It is commonly encountered in calculated columns and iterator functions such as SUMX(). Row context allows DAX to evaluate expressions using values from the current row."
+  },
+  {
+    "id": "pbi-050",
+    "subtopic": "Filter Context",
+    "difficulty": "medium",
+    "question": "What is filter context in DAX?",
+    "answer": "Filter context is the set of filters applied to a DAX calculation. It can come from slicers, visual filters, page filters, report filters, relationships, and DAX expressions. Measures are evaluated within the current filter context, which is why the same measure can return different values in different visuals."
+  },
+  {
+    "id": "pbi-051",
+    "subtopic": "Power Query Data Sources",
+    "difficulty": "easy",
+    "question": "What types of data sources can Power BI connect to?",
+    "answer": "Power BI can connect to many sources, including Excel, CSV, JSON, XML, SQL Server, Oracle, PostgreSQL, MySQL, SharePoint, web sources, APIs, cloud services, and many other connectors. The exact capabilities depend on the connector and storage mode."
+  },
+  {
+    "id": "pbi-052",
+    "subtopic": "Get Data",
+    "difficulty": "easy",
+    "question": "What is the purpose of the Get Data option in Power BI?",
+    "answer": "Get Data is used to connect Power BI to a data source. After selecting a connector, Power BI allows you to choose the required tables or files and then transform or load the data."
+  },
+  {
+    "id": "pbi-053",
+    "subtopic": "Power Query Editor",
+    "difficulty": "easy",
+    "question": "What is Power Query Editor?",
+    "answer": "Power Query Editor is the interface where you prepare and transform data before loading it into the Power BI model. It provides operations such as filtering, changing data types, merging, appending, grouping, pivoting, and unpivoting."
+  },
+  {
+    "id": "pbi-054",
+    "subtopic": "Close & Apply",
+    "difficulty": "easy",
+    "question": "What does Close & Apply do in Power Query?",
+    "answer": "Close & Apply saves the Power Query transformations and loads the resulting data into the Power BI model. The transformations are executed according to the query steps before the data becomes available for modeling and reporting."
+  },
+  {
+    "id": "pbi-055",
+    "subtopic": "Duplicate Queries",
+    "difficulty": "easy",
+    "question": "What's the difference between Duplicate and Reference in Power Query?",
+    "answer": "Duplicate creates a separate copy of the existing query and its transformation steps. Reference creates a new query that starts from the result of another query, so changes to the original query can flow into the referenced query."
+  },
+  {
+    "id": "pbi-056",
+    "subtopic": "Reference Query",
+    "difficulty": "medium",
+    "question": "When would you use Reference in Power Query?",
+    "answer": "Reference is useful when multiple queries need to start from the same transformed dataset. For example, one staging query can clean raw sales data and multiple reference queries can create separate fact or dimension tables from it."
+  },
+  {
+    "id": "pbi-057",
+    "subtopic": "Staging Queries",
+    "difficulty": "medium",
+    "question": "What is a staging query in Power Query?",
+    "answer": "A staging query is an intermediate query used to connect to and prepare source data before creating final analytical tables. It can centralize common transformations and make the overall Power Query solution easier to maintain."
+  },
+  {
+    "id": "pbi-058",
+    "subtopic": "Enable Load",
+    "difficulty": "medium",
+    "question": "What does Enable Load mean in Power Query?",
+    "answer": "Enable Load determines whether a query's result should be loaded into the Power BI semantic model. A staging or helper query can have loading disabled when its output is only used as an intermediate step for other queries."
+  },
+  {
+    "id": "pbi-059",
+    "subtopic": "Filter Rows",
+    "difficulty": "easy",
+    "question": "How do you filter rows in Power Query?",
+    "answer": "You can use the filter dropdown on a column, choose conditions such as equals, contains, greater than, or use advanced filtering. The selected operation becomes an Applied Step and is represented by M code."
+  },
+  {
+    "id": "pbi-060",
+    "subtopic": "Remove Rows",
+    "difficulty": "easy",
+    "question": "How can you remove unwanted rows in Power Query?",
+    "answer": "Power Query provides options such as Remove Top Rows, Remove Bottom Rows, Remove Blank Rows, Remove Errors, and Remove Duplicates. You can also use filtering conditions to exclude unwanted records."
+  },
+  {
+    "id": "pbi-061",
+    "subtopic": "Remove Duplicates",
+    "difficulty": "easy",
+    "question": "How does Remove Duplicates work in Power Query?",
+    "answer": "Remove Duplicates keeps one occurrence of a combination of selected column values and removes subsequent duplicate combinations. The columns selected determine what Power Query considers a duplicate."
+  },
+  {
+    "id": "pbi-062",
+    "subtopic": "Remove Errors",
+    "difficulty": "easy",
+    "question": "What is the difference between Remove Errors and Replace Errors in Power Query?",
+    "answer": "Remove Errors deletes rows containing errors in the selected column. Replace Errors keeps the rows but substitutes the error with a specified value. The appropriate choice depends on whether the problematic records should be retained."
+  },
+  {
+    "id": "pbi-063",
+    "subtopic": "Null vs Blank",
+    "difficulty": "medium",
+    "question": "What's the difference between null and blank values in Power Query?",
+    "answer": "A null represents the absence of a value in Power Query. A blank or empty text value can be represented differently depending on the data source and transformation. They should not automatically be treated as the same thing because their behavior can differ during transformations."
+  },
+  {
+    "id": "pbi-064",
+    "subtopic": "Replace Values",
+    "difficulty": "easy",
+    "question": "How can you replace values in Power Query?",
+    "answer": "Use Replace Values to substitute one value with another in a selected column. For example, you can replace 'M' and 'Male' with a standardized value such as 'Male' or replace an invalid category with 'Unknown'."
+  },
+  {
+    "id": "pbi-065",
+    "subtopic": "Fill Down",
+    "difficulty": "easy",
+    "question": "What does Fill Down do in Power Query?",
+    "answer": "Fill Down copies the last non-null value downward into subsequent null cells. It is useful when source files use a grouped layout where a category or identifier appears only on the first row of a group."
+  },
+  {
+    "id": "pbi-066",
+    "subtopic": "Fill Up",
+    "difficulty": "easy",
+    "question": "What does Fill Up do in Power Query?",
+    "answer": "Fill Up fills null cells using the next non-null value below them. It is useful when the desired category or identifier appears later in a group rather than above it."
+  },
+  {
+    "id": "pbi-067",
+    "subtopic": "Split Column",
+    "difficulty": "easy",
+    "question": "How can you split a column in Power Query?",
+    "answer": "A column can be split by delimiter, number of characters, positions, or other available rules. For example, a FullName column can be split into FirstName and LastName using a space delimiter."
+  },
+  {
+    "id": "pbi-068",
+    "subtopic": "Merge Columns",
+    "difficulty": "easy",
+    "question": "How can you combine multiple columns into one column in Power Query?",
+    "answer": "Use Merge Columns and select the columns to combine along with a separator such as a space, hyphen, or comma. For example, FirstName and LastName can be combined into a FullName column."
+  },
+  {
+    "id": "pbi-069",
+    "subtopic": "Text Transformations",
+    "difficulty": "easy",
+    "question": "What common text transformations are available in Power Query?",
+    "answer": "Common transformations include Trim, Clean, Uppercase, Lowercase, Capitalize Each Word, Replace Values, Extract, Split Column, and text formatting operations. These are useful for standardizing inconsistent source data."
+  },
+  {
+    "id": "pbi-070",
+    "subtopic": "Trim vs Clean",
+    "difficulty": "medium",
+    "question": "What's the difference between Trim and Clean in Power Query?",
+    "answer": "Trim removes unnecessary spaces, particularly leading and trailing spaces and repeated spaces in text. Clean removes non-printable characters. Both are useful when preparing text fields for matching and analysis."
+  },
+  {
+    "id": "pbi-071",
+    "subtopic": "Extract Text",
+    "difficulty": "medium",
+    "question": "How can you extract part of a text value in Power Query?",
+    "answer": "Power Query provides options such as Extract First Characters, Extract Last Characters, Extract Range, Extract Text Before Delimiter, Extract Text After Delimiter, and Extract Text Between Delimiters."
+  },
+  {
+    "id": "pbi-072",
+    "subtopic": "Conditional Column",
+    "difficulty": "easy",
+    "question": "What is a Conditional Column in Power Query?",
+    "answer": "A Conditional Column creates a new column based on logical conditions. For example, you can classify sales as High, Medium, or Low depending on the sales amount."
+  },
+  {
+    "id": "pbi-073",
+    "subtopic": "Custom Column",
+    "difficulty": "medium",
+    "question": "What is a Custom Column in Power Query?",
+    "answer": "A Custom Column allows you to create a new column using an M expression. It can perform calculations, text transformations, conditional logic, date operations, or more complex transformations."
+  },
+  {
+    "id": "pbi-074",
+    "subtopic": "Conditional vs Custom Column",
+    "difficulty": "medium",
+    "question": "What's the difference between a Conditional Column and a Custom Column?",
+    "answer": "A Conditional Column provides a user-friendly interface for creating IF-style logic. A Custom Column allows you to write an M expression directly and therefore provides much more flexibility for complex transformations."
+  },
+  {
+    "id": "pbi-075",
+    "subtopic": "Group By",
+    "difficulty": "medium",
+    "question": "What is Group By in Power Query?",
+    "answer": "Group By summarizes rows based on one or more grouping columns. You can calculate operations such as Sum, Count Rows, Average, Minimum, Maximum, or create custom aggregations."
+  },
+  {
+    "id": "pbi-076",
+    "subtopic": "Group By Advanced",
+    "difficulty": "hard",
+    "question": "What is the difference between grouping with one column and grouping with multiple columns?",
+    "answer": "Grouping by one column creates one group for each unique value in that column. Grouping by multiple columns creates groups based on each unique combination of those columns. For example, grouping by Region and Product creates a separate group for every Region-Product combination."
+  },
+  {
+    "id": "pbi-077",
+    "subtopic": "Pivot Column",
+    "difficulty": "medium",
+    "question": "What does Pivot Column do in Power Query?",
+    "answer": "Pivot transforms unique values from a column into separate columns and uses another column for the values. It is useful when row-based category data needs to be converted into a wider structure."
+  },
+  {
+    "id": "pbi-078",
+    "subtopic": "Unpivot Columns",
+    "difficulty": "medium",
+    "question": "What does Unpivot do in Power Query?",
+    "answer": "Unpivot converts multiple columns into attribute-value rows. It is commonly used when data is stored in a wide format, such as separate columns for January, February, and March, and needs to be converted into Month and Sales columns."
+  },
+  {
+    "id": "pbi-079",
+    "subtopic": "Pivot vs Unpivot",
+    "difficulty": "medium",
+    "question": "What's the difference between Pivot and Unpivot?",
+    "answer": "Pivot turns row values into columns, making data wider. Unpivot turns columns into rows, making data longer. Unpivot is especially useful for converting spreadsheets designed for human reporting into a structure better suited for analysis."
+  },
+  {
+    "id": "pbi-080",
+    "subtopic": "Transpose",
+    "difficulty": "medium",
+    "question": "What does Transpose do in Power Query?",
+    "answer": "Transpose swaps rows and columns. It is useful when the structure of a source file is rotated and the data needs to be reorganized before further transformation."
+  },
+  {
+    "id": "pbi-081",
+    "subtopic": "Promote Headers",
+    "difficulty": "easy",
+    "question": "What does Use First Row as Headers do?",
+    "answer": "It converts the first row of the dataset into column names. This is useful when source files contain headers as regular data rows rather than recognized column headers."
+  },
+  {
+    "id": "pbi-082",
+    "subtopic": "Demote Headers",
+    "difficulty": "easy",
+    "question": "What does Demote Headers do in Power Query?",
+    "answer": "Demote Headers moves the existing column names into the first row of the data. It can be useful when reshaping or restructuring a dataset."
+  },
+  {
+    "id": "pbi-083",
+    "subtopic": "Index Column",
+    "difficulty": "medium",
+    "question": "What is an Index Column in Power Query?",
+    "answer": "An Index Column adds sequential numeric values to rows. It can be useful for creating row identifiers, preserving order, creating helper calculations, or supporting certain transformation patterns."
+  },
+  {
+    "id": "pbi-084",
+    "subtopic": "Conditional Logic",
+    "difficulty": "medium",
+    "question": "How would you create an IF condition in Power Query?",
+    "answer": "You can create a Conditional Column through the interface or use M syntax such as if [Sales] > 100000 then 'High' else 'Low'. Power Query uses the M language for conditional expressions."
+  },
+  {
+    "id": "pbi-085",
+    "subtopic": "M if-then-else",
+    "difficulty": "medium",
+    "question": "What is the basic syntax of an if statement in Power Query M?",
+    "answer": "The basic syntax is `if condition then value1 else value2`. For example: `if [Sales] > 100000 then 'High' else 'Low'`."
+  },
+  {
+    "id": "pbi-086",
+    "subtopic": "M let Expression",
+    "difficulty": "hard",
+    "question": "What is a let expression in Power Query M?",
+    "answer": "A let expression defines intermediate steps or variables and then returns a final expression. Power Query queries commonly use a `let ... in` structure where transformation steps are defined in the let section and the final result is returned after `in`."
+  },
+  {
+    "id": "pbi-087",
+    "subtopic": "Advanced Editor",
+    "difficulty": "medium",
+    "question": "What is the Advanced Editor in Power Query?",
+    "answer": "The Advanced Editor displays the complete M code behind a query. It allows developers to inspect, modify, copy, and write Power Query transformations directly using M."
+  },
+  {
+    "id": "pbi-088",
+    "subtopic": "Parameters",
+    "difficulty": "medium",
+    "question": "What are parameters in Power Query?",
+    "answer": "Parameters are reusable values that can control query behavior. They can be used for things such as file paths, server names, database names, date filters, or environment-specific settings."
+  },
+  {
+    "id": "pbi-089",
+    "subtopic": "Dynamic File Path",
+    "difficulty": "hard",
+    "question": "How can Power Query use a parameter for a file path?",
+    "answer": "Create a text parameter containing the folder or file location and reference that parameter in the source step. This allows the same query to work across different environments or locations without manually editing the query."
+  },
+  {
+    "id": "pbi-090",
+    "subtopic": "Folder Connector",
+    "difficulty": "medium",
+    "question": "How would you combine multiple files from a folder in Power Query?",
+    "answer": "Use the Folder connector to retrieve the files, filter the file list if necessary, and use the Combine Files functionality to apply a transformation to each file and combine the results. This is useful for recurring files with a consistent structure."
+  },
+  {
+    "id": "pbi-091",
+    "subtopic": "Combine Files",
+    "difficulty": "medium",
+    "question": "What happens when you use Combine Files in Power Query?",
+    "answer": "Power Query creates a transformation pattern based on a sample file and applies it to the other compatible files in the folder. The resulting data is then combined into a single query."
+  },
+  {
+    "id": "pbi-092",
+    "subtopic": "Folder Data Issues",
+    "difficulty": "hard",
+    "question": "What problems can occur when combining files from a folder?",
+    "answer": "Common problems include inconsistent column names, different data types, extra files, empty files, different schemas, corrupt files, and header differences. It is important to filter unwanted files and validate the transformation against multiple source files."
+  },
+  {
+    "id": "pbi-093",
+    "subtopic": "Merge Join Types",
+    "difficulty": "medium",
+    "question": "What join types are available when merging queries in Power Query?",
+    "answer": "Common join types include Left Outer, Right Outer, Full Outer, Inner, Left Anti, and Right Anti. They correspond closely to common SQL join concepts and determine which matching and unmatched rows are retained."
+  },
+  {
+    "id": "pbi-094",
+    "subtopic": "Left Anti Join",
+    "difficulty": "medium",
+    "question": "What is a Left Anti Join in Power Query?",
+    "answer": "A Left Anti Join returns rows from the first table that have no matching rows in the second table. It is useful for finding records such as customers who do not have orders or products missing from another dataset."
+  },
+  {
+    "id": "pbi-095",
+    "subtopic": "Full Outer Join",
+    "difficulty": "medium",
+    "question": "When would you use a Full Outer Join in Power Query?",
+    "answer": "A Full Outer Join returns matching records as well as unmatched records from both tables. It is useful for reconciliation tasks where you need to identify records that exist in either dataset."
+  },
+  {
+    "id": "pbi-096",
+    "subtopic": "Merge Multiple Columns",
+    "difficulty": "hard",
+    "question": "Can you merge Power Query tables using multiple columns as keys?",
+    "answer": "Yes. You can select multiple columns from both tables in the same order to create a composite matching key. This is useful when a single column is not sufficient to uniquely identify the relationship."
+  },
+  {
+    "id": "pbi-097",
+    "subtopic": "Data Type Errors",
+    "difficulty": "medium",
+    "question": "Why might Power Query generate errors after changing a column's data type?",
+    "answer": "Some source values may not be compatible with the new data type. For example, converting a text column containing values such as 'N/A' into a numeric type can create errors. The data should be cleaned or invalid values handled before or during conversion."
+  },
+  {
+    "id": "pbi-098",
+    "subtopic": "Locale",
+    "difficulty": "hard",
+    "question": "Why can locale settings matter when converting text to dates or numbers in Power Query?",
+    "answer": "Different regions use different date and number formats. For example, `01/02/2026` can be interpreted differently depending on whether the source uses day-month-year or month-day-year. Choosing the correct locale prevents incorrect conversions."
+  },
+  {
+    "id": "pbi-099",
+    "subtopic": "Query Folding Troubleshooting",
+    "difficulty": "hard",
+    "question": "How would you check whether a Power Query transformation supports query folding?",
+    "answer": "For supported data sources, you can inspect the query step and use the View Native Query option when available. If the option is unavailable, it may indicate that folding is not supported for that step or source. Query Diagnostics and source-specific tools can also help investigate performance."
+  },
+  {
+    "id": "pbi-100",
+    "subtopic": "Power Query Performance",
+    "difficulty": "hard",
+    "question": "A Power BI refresh is taking too long. What Power Query optimizations would you consider?",
+    "answer": "Filter unnecessary rows and columns as early as practical, preserve query folding where possible, avoid unnecessary transformations, remove unused queries, reduce expensive custom operations, use appropriate data types, and perform heavy transformations at the source when practical. For large datasets, also review incremental refresh and the overall data architecture."
+  },
+   {
+    "id": "pbi-101",
+    "subtopic": "M Functions",
+    "difficulty": "medium",
+    "question": "What is a function in Power Query M?",
+    "answer": "A function in Power Query M is a reusable piece of logic that accepts input parameters and returns an output. Functions are useful when the same transformation needs to be applied to multiple values, files, or tables."
+  },
+  {
+    "id": "pbi-102",
+    "subtopic": "Custom Functions",
+    "difficulty": "hard",
+    "question": "What is a custom function in Power Query?",
+    "answer": "A custom function is an M function created by the developer to perform a reusable transformation. For example, you can create a function that cleans a customer's name and then apply it to multiple columns or queries."
+  },
+  {
+    "id": "pbi-103",
+    "subtopic": "Function Parameters",
+    "difficulty": "medium",
+    "question": "Why would you use parameters in a Power Query custom function?",
+    "answer": "Parameters allow the same function to work with different input values. For example, a function could accept a file path, customer ID, date, or table as an input and return the transformed result."
+  },
+  {
+    "id": "pbi-104",
+    "subtopic": "Invoke Custom Function",
+    "difficulty": "medium",
+    "question": "What does Invoke Custom Function do in Power Query?",
+    "answer": "Invoke Custom Function applies a previously created custom function to values in a query. For example, if you have a function that transforms a file, you can invoke it for every file listed in a folder."
+  },
+  {
+    "id": "pbi-105",
+    "subtopic": "List",
+    "difficulty": "hard",
+    "question": "What is a List in Power Query M?",
+    "answer": "A List is an ordered collection of values in Power Query M. It can contain values such as numbers, text, dates, records, or even other lists. List functions are useful for generating sequences and performing transformations across values."
+  },
+  {
+    "id": "pbi-106",
+    "subtopic": "Record",
+    "difficulty": "hard",
+    "question": "What is a Record in Power Query M?",
+    "answer": "A Record is a collection of named fields and their corresponding values. It is similar to a row or a key-value structure and is commonly used internally by Power Query when working with structured data."
+  },
+  {
+    "id": "pbi-107",
+    "subtopic": "Table",
+    "difficulty": "hard",
+    "question": "What is a Table value in Power Query M?",
+    "answer": "A Table is a structured collection of rows and columns in Power Query. Many Power Query transformations are implemented through Table functions that modify, filter, combine, or summarize table data."
+  },
+  {
+    "id": "pbi-108",
+    "subtopic": "List.Generate",
+    "difficulty": "hard",
+    "question": "What is List.Generate() used for in Power Query?",
+    "answer": "List.Generate() creates a list by repeatedly evaluating an initial value, a condition, and a transformation. It can be used for generating sequences, dates, numbers, or other dynamically generated values."
+  },
+  {
+    "id": "pbi-109",
+    "subtopic": "List.Dates",
+    "difficulty": "medium",
+    "question": "How can List.Dates() be used in Power BI?",
+    "answer": "List.Dates() can generate a sequence of dates starting from a specified date for a specified number of periods and interval. It is useful when creating a date table or generating missing dates during data preparation."
+  },
+  {
+    "id": "pbi-110",
+    "subtopic": "List.Numbers",
+    "difficulty": "medium",
+    "question": "What does List.Numbers() do in Power Query?",
+    "answer": "List.Numbers() generates a sequence of numbers based on a starting value, count, and optional increment. It can be used to create index-like sequences, test data, or helper tables."
+  },
+  {
+    "id": "pbi-111",
+    "subtopic": "Table.SelectRows",
+    "difficulty": "medium",
+    "question": "What is Table.SelectRows() used for?",
+    "answer": "Table.SelectRows() filters a table based on a condition. It is the M equivalent of applying a row filter and is commonly used when writing custom Power Query transformations."
+  },
+  {
+    "id": "pbi-112",
+    "subtopic": "Table.AddColumn",
+    "difficulty": "medium",
+    "question": "What does Table.AddColumn() do?",
+    "answer": "Table.AddColumn() creates a new column in a table using an expression or function. It can be used to perform row-level calculations or apply custom transformations."
+  },
+  {
+    "id": "pbi-113",
+    "subtopic": "Table.TransformColumns",
+    "difficulty": "hard",
+    "question": "What is Table.TransformColumns() used for?",
+    "answer": "Table.TransformColumns() applies a transformation function to one or more existing columns. It is useful when you need to programmatically modify column values, such as converting text to uppercase or applying custom cleaning logic."
+  },
+  {
+    "id": "pbi-114",
+    "subtopic": "Table.Group",
+    "difficulty": "hard",
+    "question": "What does Table.Group() do in Power Query?",
+    "answer": "Table.Group() groups rows based on one or more columns and performs aggregations or custom calculations on each group. It is the M equivalent of many GROUP BY operations in SQL."
+  },
+  {
+    "id": "pbi-115",
+    "subtopic": "Table.Combine",
+    "difficulty": "hard",
+    "question": "What does Table.Combine() do?",
+    "answer": "Table.Combine() combines multiple tables into a single table by appending their rows. It is useful when dynamically combining tables or lists of tables."
+  },
+  {
+    "id": "pbi-116",
+    "subtopic": "Table.NestedJoin",
+    "difficulty": "hard",
+    "question": "What is Table.NestedJoin() used for?",
+    "answer": "Table.NestedJoin() combines two tables based on matching key columns and creates a nested table column containing the matching rows. It is commonly generated when using Merge Queries."
+  },
+  {
+    "id": "pbi-117",
+    "subtopic": "Expand Column",
+    "difficulty": "medium",
+    "question": "Why do you need to expand a column after performing a Merge in Power Query?",
+    "answer": "A Merge initially creates a column containing nested tables of matching records. Expanding that column extracts selected fields from those nested tables and adds them as regular columns to the main table."
+  },
+  {
+    "id": "pbi-118",
+    "subtopic": "Error Handling",
+    "difficulty": "hard",
+    "question": "How can you handle errors in Power Query M?",
+    "answer": "Power Query supports error-handling expressions such as `try ... otherwise`. You can use them to safely evaluate an expression and provide a fallback value when an error occurs."
+  },
+  {
+    "id": "pbi-119",
+    "subtopic": "try otherwise",
+    "difficulty": "hard",
+    "question": "What does `try ... otherwise` do in Power Query?",
+    "answer": "`try` evaluates an expression without immediately failing the query when an error occurs. `otherwise` provides a fallback result if the expression produces an error. It is useful for handling inconsistent source data."
+  },
+  {
+    "id": "pbi-120",
+    "subtopic": "Error Record",
+    "difficulty": "hard",
+    "question": "What information can a Power Query error contain?",
+    "answer": "A Power Query error can contain information such as an error reason, message, and detail. Using `try` can expose the error information as a record, which can then be inspected or transformed into useful diagnostic columns."
+  },
+  {
+    "id": "pbi-121",
+    "subtopic": "Query Dependencies",
+    "difficulty": "medium",
+    "question": "What are Query Dependencies in Power Query?",
+    "answer": "Query Dependencies provide a visual representation of how queries depend on one another. They help developers understand the flow of transformations and identify which queries are sources, references, or downstream outputs."
+  },
+  {
+    "id": "pbi-122",
+    "subtopic": "Query Organization",
+    "difficulty": "medium",
+    "question": "How would you organize a large Power Query project?",
+    "answer": "Use meaningful query names, separate staging queries from final dimension and fact queries, disable loading for intermediate queries when appropriate, group related queries into folders, centralize reusable transformations, and avoid unnecessary duplicated logic."
+  },
+  {
+    "id": "pbi-123",
+    "subtopic": "Query Folding Breakers",
+    "difficulty": "hard",
+    "question": "What types of Power Query transformations can potentially break query folding?",
+    "answer": "The exact behavior depends on the connector, but operations such as certain custom functions, complex row-by-row transformations, and some unsupported transformations can prevent folding. Always verify folding for the specific source and step rather than assuming a particular transformation always breaks it."
+  },
+  {
+    "id": "pbi-124",
+    "subtopic": "Query Folding Strategy",
+    "difficulty": "hard",
+    "question": "Why should you perform filter and column-selection operations early in a Power Query process?",
+    "answer": "Removing unnecessary rows and columns early can reduce the amount of data that later transformations need to process. When query folding is supported, these operations may also be pushed back to the source, reducing data transfer and improving refresh performance."
+  },
+  {
+    "id": "pbi-125",
+    "subtopic": "Source vs Power Query Transformation",
+    "difficulty": "hard",
+    "question": "When should a transformation be performed in the source database instead of Power Query?",
+    "answer": "For large datasets, transformations that are stable, reusable, and efficiently handled by the source database can often be performed there. This can reduce data movement and refresh time. However, Power Query remains useful for transformations that belong specifically to the BI layer or are easier to maintain there."
+  },
+  {
+    "id": "pbi-126",
+    "subtopic": "Data Modeling",
+    "difficulty": "easy",
+    "question": "Why is data modeling important in Power BI?",
+    "answer": "Data modeling defines how tables relate to each other and how filters and calculations flow through the model. A well-designed model improves report accuracy, performance, maintainability, and makes DAX calculations easier to write."
+  },
+  {
+    "id": "pbi-127",
+    "subtopic": "Star Schema",
+    "difficulty": "medium",
+    "question": "Explain the star schema in Power BI with an example.",
+    "answer": "A star schema has a central fact table surrounded by dimension tables. For example, a Sales fact table can connect to Customer, Product, Date, and Store dimensions. The fact table contains transactions and numeric measures, while dimensions provide descriptive information for filtering and grouping."
+  },
+  {
+    "id": "pbi-128",
+    "subtopic": "Snowflake Schema",
+    "difficulty": "medium",
+    "question": "What is a snowflake schema?",
+    "answer": "A snowflake schema is a dimensional model where dimension tables are further normalized into related tables. For example, Product may connect to Category and Category may connect to Department. It reduces some duplication but creates additional relationships and joins."
+  },
+  {
+    "id": "pbi-129",
+    "subtopic": "Star vs Snowflake",
+    "difficulty": "medium",
+    "question": "What's the difference between a star schema and a snowflake schema?",
+    "answer": "A star schema keeps dimensions relatively denormalized and connects them directly to the fact table. A snowflake schema normalizes dimensions into multiple related tables. Star schemas are generally simpler and often preferred in Power BI because they make filtering and DAX easier to understand."
+  },
+  {
+    "id": "pbi-130",
+    "subtopic": "Fact Table Grain",
+    "difficulty": "hard",
+    "question": "What does the grain of a fact table mean?",
+    "answer": "The grain defines exactly what one row in the fact table represents. For example, one row could represent one order, one order line, or one customer per day. Defining the grain clearly is essential because it determines how measures should be calculated."
+  },
+  {
+    "id": "pbi-131",
+    "subtopic": "Fact Table Design",
+    "difficulty": "hard",
+    "question": "Why should you define the grain before designing a fact table?",
+    "answer": "The grain determines which dimensions can relate to the fact table and how numeric values should be aggregated. If the grain is unclear, you can create incorrect relationships, duplicate values, and inaccurate measures."
+  },
+  {
+    "id": "pbi-132",
+    "subtopic": "Dimension Table Design",
+    "difficulty": "medium",
+    "question": "What characteristics should a good dimension table have?",
+    "answer": "A dimension should have a clear business meaning, a unique key on its one side of the relationship, descriptive attributes for filtering and grouping, and a consistent grain. It should ideally avoid unnecessary duplication and ambiguous relationships."
+  },
+  {
+    "id": "pbi-133",
+    "subtopic": "Relationship Cardinality",
+    "difficulty": "medium",
+    "question": "What relationship cardinalities are available in Power BI?",
+    "answer": "Power BI supports One-to-Many, Many-to-One, One-to-One, and Many-to-Many relationships. In a typical star schema, the dimension is on the one side and the fact table is on the many side."
+  },
+  {
+    "id": "pbi-134",
+    "subtopic": "One-to-Many",
+    "difficulty": "easy",
+    "question": "What is a one-to-many relationship in Power BI?",
+    "answer": "A one-to-many relationship means one row in one table can correspond to multiple rows in another table. For example, one customer can have many sales transactions. The Customer table is normally on the one side and Sales on the many side."
+  },
+  {
+    "id": "pbi-135",
+    "subtopic": "Many-to-One",
+    "difficulty": "easy",
+    "question": "What is a many-to-one relationship?",
+    "answer": "A many-to-one relationship is the same relationship viewed from the opposite direction. Many rows in one table relate to one row in another table, such as many sales records belonging to one customer."
+  },
+  {
+    "id": "pbi-136",
+    "subtopic": "One-to-One",
+    "difficulty": "medium",
+    "question": "When would you use a one-to-one relationship?",
+    "answer": "A one-to-one relationship means each row in one table matches at most one row in the other table. It can be useful in specialized modeling scenarios, but if the tables contain related attributes at the same grain, combining them may sometimes be simpler."
+  },
+  {
+    "id": "pbi-137",
+    "subtopic": "Many-to-Many",
+    "difficulty": "hard",
+    "question": "What problems can a many-to-many relationship cause in Power BI?",
+    "answer": "Many-to-many relationships can create ambiguous filtering, unexpected totals, and difficult-to-understand DAX behavior. They can be appropriate in genuine many-to-many business scenarios, but a bridge table is often preferred for clearer modeling."
+  },
+  {
+    "id": "pbi-138",
+    "subtopic": "Bridge Table",
+    "difficulty": "hard",
+    "question": "What is a bridge table in Power BI?",
+    "answer": "A bridge table is an intermediate table used to resolve a many-to-many relationship. For example, if customers can belong to multiple segments, a CustomerSegment bridge table can store the customer-segment combinations and connect the entities through one-to-many relationships."
+  },
+  {
+    "id": "pbi-139",
+    "subtopic": "Bridge Table Scenario",
+    "difficulty": "hard",
+    "question": "A customer can have multiple accounts and an account can belong to multiple customers. How would you model this in Power BI?",
+    "answer": "Use a bridge table containing CustomerID and AccountID combinations. The Customer and Account dimensions can connect to the bridge table, allowing the many-to-many relationship to be represented through controlled one-to-many relationships."
+  },
+  {
+    "id": "pbi-140",
+    "subtopic": "Cross Filter Direction",
+    "difficulty": "medium",
+    "question": "What is the recommended cross-filter direction for a typical star schema?",
+    "answer": "Single-direction filtering from dimension tables toward fact tables is generally preferred. It provides predictable filter propagation and reduces ambiguity. Bidirectional filtering should be used only when the business requirement genuinely needs it."
+  },
+  {
+    "id": "pbi-141",
+    "subtopic": "Bidirectional Filtering",
+    "difficulty": "hard",
+    "question": "What problems can excessive use of bidirectional relationships cause?",
+    "answer": "Bidirectional filtering can create ambiguous filter paths, unexpected results, circular dependencies, and potentially slower queries. It can also make a model difficult to understand and troubleshoot."
+  },
+  {
+    "id": "pbi-142",
+    "subtopic": "Filter Propagation",
+    "difficulty": "medium",
+    "question": "How does filter propagation work in a Power BI model?",
+    "answer": "Filters applied to a table can propagate through active relationships according to their cross-filter direction. In a standard star schema, filters typically move from dimensions to the fact table, allowing visuals to automatically show filtered measures."
+  },
+  {
+    "id": "pbi-143",
+    "subtopic": "Active Relationship",
+    "difficulty": "easy",
+    "question": "What is an active relationship?",
+    "answer": "An active relationship is the relationship Power BI automatically uses for filter propagation. It appears as a solid line in the model view and is used by default when calculating measures."
+  },
+  {
+    "id": "pbi-144",
+    "subtopic": "Inactive Relationship",
+    "difficulty": "medium",
+    "question": "What is an inactive relationship?",
+    "answer": "An inactive relationship exists in the model but is not automatically used for filtering. It is commonly created when two tables have multiple possible relationships, such as Sales having both OrderDate and ShipDate linked to the same Date table."
+  },
+  {
+    "id": "pbi-145",
+    "subtopic": "USERELATIONSHIP",
+    "difficulty": "hard",
+    "question": "How can you use an inactive relationship in a DAX measure?",
+    "answer": "Use USERELATIONSHIP() inside CALCULATE() to temporarily activate the required relationship for that calculation. For example, a Ship Date Sales measure can activate the Date[Date] to Sales[ShipDate] relationship."
+  },
+  {
+    "id": "pbi-146",
+    "subtopic": "Multiple Date Columns",
+    "difficulty": "hard",
+    "question": "A Sales table has Order Date, Ship Date, and Delivery Date. How would you model this in Power BI?",
+    "answer": "One common approach is to use a single Date dimension with one active relationship, usually for the primary date such as Order Date, and inactive relationships for Ship Date and Delivery Date. Separate measures can use USERELATIONSHIP() when analysis by those dates is required."
+  },
+  {
+    "id": "pbi-147",
+    "subtopic": "Role-Playing Dimension",
+    "difficulty": "hard",
+    "question": "What is a role-playing dimension?",
+    "answer": "A role-playing dimension is a dimension that is used in multiple business roles. A Date dimension is a common example because it can represent Order Date, Ship Date, Delivery Date, or Due Date."
+  },
+  {
+    "id": "pbi-148",
+    "subtopic": "Multiple Date Tables",
+    "difficulty": "hard",
+    "question": "When might you create separate Date tables instead of using inactive relationships?",
+    "answer": "Separate role-playing Date tables can simplify report behavior when users need to independently filter multiple date roles at the same time. The choice depends on the reporting requirements and model complexity."
+  },
+  {
+    "id": "pbi-149",
+    "subtopic": "Date Table",
+    "difficulty": "medium",
+    "question": "What should a proper Date table contain?",
+    "answer": "A Date table should normally contain a continuous date column and useful attributes such as Year, Quarter, Month Number, Month Name, Week, Day, and possibly fiscal periods. The date column should contain unique dates at the intended daily grain."
+  },
+  {
+    "id": "pbi-150",
+    "subtopic": "Mark as Date Table",
+    "difficulty": "medium",
+    "question": "What does Mark as Date Table do in Power BI?",
+    "answer": "Mark as Date Table tells Power BI which table and date column should be treated as the model's official date table for time-based analysis. The selected date column must contain unique, contiguous dates."
+  },
+  {
+    "id": "pbi-151",
+    "subtopic": "Auto Date/Time",
+    "difficulty": "medium",
+    "question": "What is Auto Date/Time in Power BI?",
+    "answer": "Auto Date/Time automatically creates hidden date tables and date hierarchies for eligible date columns. It can be convenient for simple models, but for professional models a dedicated Date table usually provides better control and consistency."
+  },
+  {
+    "id": "pbi-152",
+    "subtopic": "Date Table vs Auto Date/Time",
+    "difficulty": "medium",
+    "question": "Why might you disable Auto Date/Time in a professional Power BI model?",
+    "answer": "Auto Date/Time can create multiple hidden date tables and increase model complexity. A dedicated Date dimension provides consistent fiscal calendars, custom attributes, and a single reusable date structure."
+  },
+  {
+    "id": "pbi-153",
+    "subtopic": "Surrogate Key",
+    "difficulty": "hard",
+    "question": "What is a surrogate key and why might it be useful in Power BI?",
+    "answer": "A surrogate key is an artificial identifier assigned to a dimension record. It can provide a stable unique key for relationships and is especially useful in data warehouse models where business keys may change or where historical versions of dimension records need to be maintained."
+  },
+  {
+    "id": "pbi-154",
+    "subtopic": "Natural Key",
+    "difficulty": "medium",
+    "question": "What is a natural key?",
+    "answer": "A natural key is an identifier that comes from the business domain, such as CustomerID, ProductCode, or AccountNumber. It has real business meaning, unlike a surrogate key, which is usually generated specifically for the data model."
+  },
+  {
+    "id": "pbi-155",
+    "subtopic": "Duplicate Dimension Keys",
+    "difficulty": "hard",
+    "question": "What happens if the key column on the dimension side of a relationship contains duplicates?",
+    "answer": "Power BI may not allow the relationship to be configured as one-to-many because the supposed one side is not unique. The dimension key should normally be unique. Duplicates may indicate a data-quality issue or an incorrect table grain."
+  },
+  {
+    "id": "pbi-156",
+    "subtopic": "Unknown Member",
+    "difficulty": "hard",
+    "question": "What is an Unknown or Unassigned member in a dimension?",
+    "answer": "An Unknown member is a special dimension record used when a fact row does not have a valid matching dimension value. It helps maintain referential integrity and prevents unmatched facts from disappearing from reports."
+  },
+  {
+    "id": "pbi-157",
+    "subtopic": "Referential Integrity",
+    "difficulty": "hard",
+    "question": "What is referential integrity in a Power BI model?",
+    "answer": "Referential integrity means that foreign keys in the fact table should correspond to valid keys in the related dimension table. Missing dimension keys can result in unmatched records and unexpected blank or unknown categories in reports."
+  },
+  {
+    "id": "pbi-158",
+    "subtopic": "Blank Row",
+    "difficulty": "hard",
+    "question": "Why might Power BI show a blank category in a dimension?",
+    "answer": "A blank category can appear when fact rows contain keys that do not have corresponding records in the dimension table. Power BI can create an automatic blank member to represent those unmatched fact rows."
+  },
+  {
+    "id": "pbi-159",
+    "subtopic": "Model Granularity",
+    "difficulty": "hard",
+    "question": "Why should related tables have compatible granularity?",
+    "answer": "If tables operate at different grains, joining or relating them incorrectly can produce duplicated values or misleading measures. For example, a daily sales table should not be treated as if each row represents an individual transaction."
+  },
+  {
+    "id": "pbi-160",
+    "subtopic": "Multiple Fact Tables",
+    "difficulty": "hard",
+    "question": "How should you model multiple fact tables such as Sales and Returns?",
+    "answer": "Use shared conformed dimensions such as Date, Product, Customer, and Store, and keep Sales and Returns as separate fact tables at their appropriate grains. Avoid directly relating the fact tables to each other unless there is a specific modeling requirement."
+  },
+  {
+    "id": "pbi-161",
+    "subtopic": "Conformed Dimensions",
+    "difficulty": "hard",
+    "question": "What is a conformed dimension?",
+    "answer": "A conformed dimension is a shared dimension used consistently across multiple fact tables. For example, the same Date and Product dimensions can filter both Sales and Returns facts, allowing metrics from different processes to be analyzed consistently."
+  },
+  {
+    "id": "pbi-162",
+    "subtopic": "Fact-to-Fact Relationship",
+    "difficulty": "hard",
+    "question": "Why should you generally avoid directly connecting two fact tables?",
+    "answer": "Fact tables often have different grains, and directly connecting them can create ambiguous relationships and incorrect aggregations. Shared dimensions provide a cleaner structure for analyzing multiple business processes."
+  },
+  {
+    "id": "pbi-163",
+    "subtopic": "Degenerate Dimension",
+    "difficulty": "hard",
+    "question": "What is a degenerate dimension?",
+    "answer": "A degenerate dimension is a business identifier stored directly in the fact table without a separate dimension table. An Order Number is a common example when it is used for analysis but has no additional descriptive attributes."
+  },
+  {
+    "id": "pbi-164",
+    "subtopic": "Junk Dimension",
+    "difficulty": "hard",
+    "question": "What is a junk dimension?",
+    "answer": "A junk dimension combines multiple low-cardinality flags or indicators into a single dimension table. This can reduce the number of small dimension tables and simplify the model."
+  },
+  {
+    "id": "pbi-165",
+    "subtopic": "Role of Dimensions",
+    "difficulty": "easy",
+    "question": "What is the purpose of dimensions in a Power BI model?",
+    "answer": "Dimensions provide descriptive context for analyzing facts. They allow users to filter and group metrics by attributes such as customer, product, geography, date, department, or channel."
+  },
+  {
+    "id": "pbi-166",
+    "subtopic": "Measures vs Columns in Model",
+    "difficulty": "medium",
+    "question": "Why should business aggregations usually be created as measures instead of calculated columns?",
+    "answer": "Measures are evaluated dynamically according to filter context and generally avoid storing one result per row. This makes them more flexible for reports and often more efficient for analytical calculations."
+  },
+  {
+    "id": "pbi-167",
+    "subtopic": "High Cardinality",
+    "difficulty": "hard",
+    "question": "What does high cardinality mean in Power BI?",
+    "answer": "High cardinality means a column contains many distinct values relative to its row count. Examples include transaction IDs, timestamps, and unique identifiers. High-cardinality columns can increase model size and affect compression."
+  },
+  {
+    "id": "pbi-168",
+    "subtopic": "Cardinality Optimization",
+    "difficulty": "hard",
+    "question": "How can you reduce the impact of high-cardinality columns?",
+    "answer": "Remove columns that are not needed, avoid storing unnecessary unique identifiers, split or simplify timestamp information when appropriate, use suitable data types, and move technical columns out of the analytical model when they are not required for reporting."
+  },
+  {
+    "id": "pbi-169",
+    "subtopic": "VertiPaq",
+    "difficulty": "hard",
+    "question": "What is the VertiPaq storage engine?",
+    "answer": "VertiPaq is the in-memory columnar storage engine used by Power BI for Import-mode semantic models. It uses techniques such as columnar storage and compression to efficiently store and query analytical data."
+  },
+  {
+    "id": "pbi-170",
+    "subtopic": "Columnar Storage",
+    "difficulty": "hard",
+    "question": "Why does Power BI benefit from columnar storage?",
+    "answer": "Analytical queries often access only a subset of columns across many rows. Columnar storage allows the engine to read only the required columns and compress similar values efficiently, improving memory usage and query performance."
+  },
+  {
+    "id": "pbi-171",
+    "subtopic": "Model Size",
+    "difficulty": "hard",
+    "question": "What factors can increase the size of a Power BI semantic model?",
+    "answer": "Large row counts, unnecessary columns, high-cardinality columns, detailed timestamps, long text fields, duplicate data, and inefficient modeling can increase model size. Removing unnecessary data and improving the model design can significantly reduce memory usage."
+  },
+  {
+    "id": "pbi-172",
+    "subtopic": "Model Optimization",
+    "difficulty": "hard",
+    "question": "How would you optimize a large Power BI data model?",
+    "answer": "Remove unused columns and rows, reduce cardinality where possible, use appropriate data types, build a star schema, avoid unnecessary calculated columns, optimize Power Query transformations, preserve query folding, and use incremental refresh when appropriate."
+  },
+  {
+    "id": "pbi-173",
+    "subtopic": "Composite Model Storage Modes",
+    "difficulty": "hard",
+    "question": "What storage modes are available in Power BI?",
+    "answer": "The main storage modes are Import, DirectQuery, and Dual. Import stores data in the Power BI model, DirectQuery queries the source when needed, and Dual allows a table to operate in a way that can support both imported and DirectQuery scenarios depending on the query."
+  },
+  {
+    "id": "pbi-174",
+    "subtopic": "Dual Storage Mode",
+    "difficulty": "hard",
+    "question": "What is Dual storage mode and when can it be useful?",
+    "answer": "Dual storage mode allows a table to behave as both Import and DirectQuery depending on the query context. It is commonly useful for dimension tables in composite models where the dimensions need to efficiently interact with both imported and DirectQuery fact tables."
+  },
+  {
+    "id": "pbi-175",
+    "subtopic": "Data Modeling Scenario",
+    "difficulty": "hard",
+    "question": "You receive one large sales table containing customer, product, region, date, and transaction information. How would you redesign it for Power BI?",
+    "answer": "First identify the grain of the sales table and keep transactional measures in a Sales fact table. Then create separate Customer, Product, Region, and Date dimensions with unique keys and establish one-to-many relationships from dimensions to the fact. This star-schema approach provides cleaner filtering, reusable dimensions, and better analytical performance."
+  },
+  {
+    "id": "pbi-176",
+    "subtopic": "DAX Fundamentals",
+    "difficulty": "easy",
+    "question": "What is DAX and why is it used in Power BI?",
+    "answer": "DAX stands for Data Analysis Expressions. It is the formula language used in Power BI to create measures, calculated columns, and calculated tables. It is mainly used for analytical calculations that depend on the data model and filter context."
+  },
+  {
+    "id": "pbi-177",
+    "subtopic": "Measures",
+    "difficulty": "easy",
+    "question": "What is a DAX measure?",
+    "answer": "A measure is a dynamic calculation that is evaluated when a visual or query requests it. Its result changes based on the current filter context. For example: Total Sales = SUM(Sales[SalesAmount])."
+  },
+  {
+    "id": "pbi-178",
+    "subtopic": "Calculated Columns",
+    "difficulty": "easy",
+    "question": "What is a calculated column in DAX?",
+    "answer": "A calculated column is calculated row by row when the semantic model is processed and its result is stored in the model. It is useful when you need a value at the individual row level for grouping, filtering, or relationships."
+  },
+  {
+    "id": "pbi-179",
+    "subtopic": "Calculated Table",
+    "difficulty": "medium",
+    "question": "What is a calculated table in DAX?",
+    "answer": "A calculated table is created using a DAX expression and becomes part of the semantic model. It can be useful for helper tables, disconnected tables, or specific modeling scenarios."
+  },
+  {
+    "id": "pbi-180",
+    "subtopic": "Measure vs Calculated Column",
+    "difficulty": "medium",
+    "question": "When would you use a measure instead of a calculated column?",
+    "answer": "Use a measure when the calculation needs to respond dynamically to filters, slicers, and visual context, such as Total Sales or Profit Margin. Use a calculated column when you need a row-level value that can be used as a category, filter, or relationship."
+  },
+  {
+    "id": "pbi-181",
+    "subtopic": "SUM",
+    "difficulty": "easy",
+    "question": "What does the SUM() function do in DAX?",
+    "answer": "SUM() adds all numeric values in a column. For example: Total Sales = SUM(Sales[Amount]). The result is evaluated according to the current filter context."
+  },
+  {
+    "id": "pbi-182",
+    "subtopic": "AVERAGE",
+    "difficulty": "easy",
+    "question": "What does AVERAGE() do in DAX?",
+    "answer": "AVERAGE() calculates the arithmetic mean of the numeric values in a column. It is useful for metrics such as average sales, average salary, or average order value."
+  },
+  {
+    "id": "pbi-183",
+    "subtopic": "COUNT",
+    "difficulty": "easy",
+    "question": "What is the difference between COUNT() and COUNTA() in DAX?",
+    "answer": "COUNT() counts non-blank values in a numeric column, while COUNTA() counts non-blank values in a column and can work with different data types. The appropriate function depends on what you are trying to count."
+  },
+  {
+    "id": "pbi-184",
+    "subtopic": "COUNTROWS",
+    "difficulty": "easy",
+    "question": "What does COUNTROWS() do in DAX?",
+    "answer": "COUNTROWS() counts the number of rows in a table or table expression. It is commonly used when you want to count records rather than count values in a particular column."
+  },
+  {
+    "id": "pbi-185",
+    "subtopic": "DISTINCTCOUNT",
+    "difficulty": "easy",
+    "question": "What does DISTINCTCOUNT() do?",
+    "answer": "DISTINCTCOUNT() counts the number of unique values in a column. For example, DISTINCTCOUNT(Sales[CustomerID]) can calculate the number of unique customers who appear in the current filter context."
+  },
+  {
+    "id": "pbi-186",
+    "subtopic": "DIVIDE",
+    "difficulty": "medium",
+    "question": "Why is DIVIDE() often preferred over the division operator in DAX?",
+    "answer": "DIVIDE() safely handles division when the denominator is zero or blank. For example: DIVIDE([Profit], [Sales], 0) returns 0 when the denominator cannot be used, instead of producing an error."
+  },
+  {
+    "id": "pbi-187",
+    "subtopic": "IF",
+    "difficulty": "easy",
+    "question": "How is IF() used in DAX?",
+    "answer": "IF() evaluates a logical condition and returns one value when the condition is true and another when it is false. For example: Sales Category = IF([Total Sales] > 100000, \"High\", \"Low\")."
+  },
+  {
+    "id": "pbi-188",
+    "subtopic": "SWITCH",
+    "difficulty": "medium",
+    "question": "When would you use SWITCH() instead of multiple IF statements?",
+    "answer": "SWITCH() is useful when you need to evaluate multiple conditions or return different results based on an expression. It usually makes complex branching logic easier to read and maintain than deeply nested IF statements."
+  },
+  {
+    "id": "pbi-189",
+    "subtopic": "BLANK",
+    "difficulty": "medium",
+    "question": "Why is handling BLANK() important in DAX?",
+    "answer": "BLANK() represents a missing or undefined result in DAX. Properly handling blanks helps avoid misleading visuals, incorrect ratios, and unexpected output. Functions such as COALESCE() can be used when a default value is required."
+  },
+  {
+    "id": "pbi-190",
+    "subtopic": "COALESCE",
+    "difficulty": "medium",
+    "question": "What does COALESCE() do in DAX?",
+    "answer": "COALESCE() returns the first expression that is not BLANK(). It is useful when you want to provide a fallback value, such as displaying zero instead of a blank result."
+  },
+  {
+    "id": "pbi-191",
+    "subtopic": "CALCULATE",
+    "difficulty": "medium",
+    "question": "What is CALCULATE() in DAX?",
+    "answer": "CALCULATE() evaluates an expression after modifying the filter context. It is one of the most important DAX functions because it allows you to create calculations such as sales for a particular year, region, product category, or other filtered condition."
+  },
+  {
+    "id": "pbi-192",
+    "subtopic": "CALCULATE Example",
+    "difficulty": "medium",
+    "question": "How would you calculate total sales only for the year 2025 using CALCULATE()?",
+    "answer": "You could write a measure such as: Sales 2025 = CALCULATE([Total Sales], 'Date'[Year] = 2025). CALCULATE modifies the filter context so the measure evaluates only for the specified year."
+  },
+  {
+    "id": "pbi-193",
+    "subtopic": "Filter Context",
+    "difficulty": "medium",
+    "question": "What is filter context in DAX?",
+    "answer": "Filter context is the set of filters that determine which rows are considered by a calculation. It can come from slicers, visual axes, page filters, report filters, relationships, and DAX functions such as CALCULATE()."
+  },
+  {
+    "id": "pbi-194",
+    "subtopic": "Row Context",
+    "difficulty": "medium",
+    "question": "What is row context in DAX?",
+    "answer": "Row context means DAX is evaluating an expression for the current row. It commonly occurs in calculated columns and iterator functions such as SUMX() and AVERAGEX()."
+  },
+  {
+    "id": "pbi-195",
+    "subtopic": "Row Context vs Filter Context",
+    "difficulty": "hard",
+    "question": "What's the difference between row context and filter context?",
+    "answer": "Row context identifies the current row being evaluated, while filter context defines the set of rows visible to a calculation. Calculated columns commonly use row context, while measures primarily operate in filter context."
+  },
+  {
+    "id": "pbi-196",
+    "subtopic": "Context Transition",
+    "difficulty": "hard",
+    "question": "What is context transition in DAX?",
+    "answer": "Context transition occurs when CALCULATE() converts an existing row context into filter context. This is especially important when CALCULATE() is used inside calculated columns or iterator functions."
+  },
+  {
+    "id": "pbi-197",
+    "subtopic": "CALCULATE and Context Transition",
+    "difficulty": "hard",
+    "question": "Why is CALCULATE() important for understanding context transition?",
+    "answer": "CALCULATE() can transform the current row context into filter context. This allows a measure or expression to evaluate based on the current row while also respecting the model's filter behavior."
+  },
+  {
+    "id": "pbi-198",
+    "subtopic": "FILTER",
+    "difficulty": "medium",
+    "question": "What does the FILTER() function do in DAX?",
+    "answer": "FILTER() returns a table containing only rows that satisfy a specified condition. It is commonly used inside CALCULATE() when the filtering requirement is more complex than a simple column filter."
+  },
+  {
+    "id": "pbi-199",
+    "subtopic": "CALCULATE vs FILTER",
+    "difficulty": "hard",
+    "question": "What's the difference between using a simple filter argument in CALCULATE() and using FILTER()?",
+    "answer": "A simple filter argument such as Product[Category] = \"Electronics\" is often more efficient and easier to read. FILTER() creates a filtered table expression and is useful when the filtering logic requires row-by-row evaluation or more complex conditions."
+  },
+  {
+    "id": "pbi-200",
+    "subtopic": "ALL",
+    "difficulty": "medium",
+    "question": "What does ALL() do in DAX?",
+    "answer": "ALL() removes filters from the specified table or column when used in an appropriate filter context. It is commonly used to calculate totals or percentages against an overall total."
+  },
+  {
+    "id": "pbi-201",
+    "subtopic": "ALL Example",
+    "difficulty": "hard",
+    "question": "How would you calculate each product's percentage of total company sales using ALL()?",
+    "answer": "Create a total sales measure and divide the current product sales by a total calculated with the product filter removed. For example: Sales % = DIVIDE([Total Sales], CALCULATE([Total Sales], ALL(Product)))."
+  },
+  {
+    "id": "pbi-202",
+    "subtopic": "REMOVEFILTERS",
+    "difficulty": "medium",
+    "question": "What is REMOVEFILTERS() used for?",
+    "answer": "REMOVEFILTERS() explicitly removes filters from specified tables or columns within a calculation. It is commonly used with CALCULATE() when you want to compare a filtered value against a broader total."
+  },
+  {
+    "id": "pbi-203",
+    "subtopic": "ALL vs REMOVEFILTERS",
+    "difficulty": "hard",
+    "question": "What's the difference between ALL() and REMOVEFILTERS()?",
+    "answer": "Both can be used to remove filters in CALCULATE(), but REMOVEFILTERS() communicates the intention more clearly when the goal is specifically to remove filters. ALL() can also return a table and has broader use in DAX expressions."
+  },
+  {
+    "id": "pbi-204",
+    "subtopic": "ALLEXCEPT",
+    "difficulty": "hard",
+    "question": "What does ALLEXCEPT() do?",
+    "answer": "ALLEXCEPT() removes filters from a table except for the columns explicitly specified. It is useful when you want to preserve one grouping level while ignoring other filters from the same table."
+  },
+  {
+    "id": "pbi-205",
+    "subtopic": "ALLSELECTED",
+    "difficulty": "hard",
+    "question": "What is ALLSELECTED() used for?",
+    "answer": "ALLSELECTED() removes some visual-level or lower-level filters while retaining filters explicitly selected by the user or coming from the outer query context. It is commonly used for visual totals and percentage-of-selected-total calculations."
+  },
+  {
+    "id": "pbi-206",
+    "subtopic": "VALUES",
+    "difficulty": "medium",
+    "question": "What does VALUES() return in DAX?",
+    "answer": "VALUES() returns a table containing the distinct values of a column or, depending on usage, the rows of a table within the current filter context. It is frequently used when building dynamic DAX logic."
+  },
+  {
+    "id": "pbi-207",
+    "subtopic": "SELECTEDVALUE",
+    "difficulty": "medium",
+    "question": "What does SELECTEDVALUE() do?",
+    "answer": "SELECTEDVALUE() returns the single value from a column when exactly one value is selected in the current filter context. If multiple values or no value are selected, it returns BLANK() or a specified alternate result."
+  },
+  {
+    "id": "pbi-208",
+    "subtopic": "HASONEVALUE",
+    "difficulty": "medium",
+    "question": "What does HASONEVALUE() check?",
+    "answer": "HASONEVALUE() checks whether the specified column has exactly one distinct value in the current filter context. It is useful when a calculation should behave differently when a single item is selected."
+  },
+  {
+    "id": "pbi-209",
+    "subtopic": "HASONEFILTER",
+    "difficulty": "hard",
+    "question": "What is the difference between HASONEVALUE() and HASONEFILTER()?",
+    "answer": "HASONEVALUE() checks whether exactly one distinct value exists in the current filter context. HASONEFILTER() checks whether a column is being directly filtered down to one value. They can produce different results depending on how the filter reaches the column."
+  },
+  {
+    "id": "pbi-210",
+    "subtopic": "ISFILTERED",
+    "difficulty": "medium",
+    "question": "What does ISFILTERED() do?",
+    "answer": "ISFILTERED() checks whether a table or column is being directly filtered. It can be useful when the result of a measure should change depending on whether a particular field has been filtered."
+  },
+  {
+    "id": "pbi-211",
+    "subtopic": "ISINSCOPE",
+    "difficulty": "hard",
+    "question": "What is ISINSCOPE() used for?",
+    "answer": "ISINSCOPE() checks whether a column is currently being used as a level in a hierarchy within a visual. It is particularly useful for creating different calculations at different hierarchy levels, such as custom subtotals."
+  },
+  {
+    "id": "pbi-212",
+    "subtopic": "SUMX",
+    "difficulty": "medium",
+    "question": "What is SUMX() and how is it different from SUM()?",
+    "answer": "SUM() adds the values of a single column. SUMX() is an iterator that evaluates an expression for each row of a table and then adds the results. SUMX() is useful when the value being summed must first be calculated row by row."
+  },
+  {
+    "id": "pbi-213",
+    "subtopic": "SUMX Example",
+    "difficulty": "medium",
+    "question": "When would you use SUMX() to calculate sales revenue?",
+    "answer": "If the Sales table has Quantity and UnitPrice columns but no Revenue column, you can use SUMX(Sales, Sales[Quantity] * Sales[UnitPrice]). SUMX calculates the revenue for each row and then sums those row-level results."
+  },
+  {
+    "id": "pbi-214",
+    "subtopic": "AVERAGEX",
+    "difficulty": "medium",
+    "question": "What does AVERAGEX() do?",
+    "answer": "AVERAGEX() evaluates an expression for each row of a table and then calculates the average of the resulting values. It is useful when the value being averaged needs to be calculated row by row."
+  },
+  {
+    "id": "pbi-215",
+    "subtopic": "COUNTX",
+    "difficulty": "medium",
+    "question": "What does COUNTX() do?",
+    "answer": "COUNTX() iterates over a table and counts the results of an expression that evaluate to non-blank values. It is useful when the values to count are produced by an expression rather than directly stored in a column."
+  },
+  {
+    "id": "pbi-216",
+    "subtopic": "Iterator Functions",
+    "difficulty": "hard",
+    "question": "What are iterator functions in DAX?",
+    "answer": "Iterator functions evaluate an expression row by row over a table and then perform an aggregation or other operation. Common examples include SUMX(), AVERAGEX(), MINX(), MAXX(), and COUNTX()."
+  },
+  {
+    "id": "pbi-217",
+    "subtopic": "Iterator vs Aggregator",
+    "difficulty": "hard",
+    "question": "When should you use SUMX() instead of SUM()?",
+    "answer": "Use SUM() when you simply need to add the values of an existing numeric column. Use SUMX() when you need to calculate an expression for every row before aggregating the results, such as Quantity multiplied by Unit Price."
+  },
+  {
+    "id": "pbi-218",
+    "subtopic": "RANKX",
+    "difficulty": "medium",
+    "question": "What is RANKX() used for?",
+    "answer": "RANKX() calculates the ranking of an item within a specified table or set of values. It is commonly used to rank products by sales, customers by revenue, or employees by performance."
+  },
+  {
+    "id": "pbi-219",
+    "subtopic": "Ranking Products",
+    "difficulty": "hard",
+    "question": "How would you create a DAX measure to rank products by total sales?",
+    "answer": "A common pattern is to use RANKX over ALL or ALLSELECTED of the Product table and rank by the [Total Sales] measure. The choice between ALL and ALLSELECTED depends on whether the ranking should ignore or respect the user's current selections."
+  },
+  {
+    "id": "pbi-220",
+    "subtopic": "Dynamic Ranking",
+    "difficulty": "hard",
+    "question": "How would you create a ranking that changes when a user selects a region?",
+    "answer": "Use RANKX over a product set that respects the region filter while removing only the product filter. ALLSELECTED() can be useful when the ranking should respect the user's broader selections but rank products against one another."
+  },
+  {
+    "id": "pbi-221",
+    "subtopic": "CALCULATE Filter Modification",
+    "difficulty": "hard",
+    "question": "How does CALCULATE() modify existing filters?",
+    "answer": "CALCULATE() changes the filter context of an expression. Depending on the filter argument, it can add filters, replace filters on specific columns, or remove filters using functions such as REMOVEFILTERS(). Understanding which existing filters are preserved or replaced is essential for writing correct DAX."
+  },
+  {
+    "id": "pbi-222",
+    "subtopic": "KEEPFILTERS",
+    "difficulty": "hard",
+    "question": "What does KEEPFILTERS() do in DAX?",
+    "answer": "KEEPFILTERS() changes how a filter argument inside CALCULATE() interacts with existing filters. Instead of replacing an existing filter on the same columns, it intersects the new filter with the existing filter."
+  },
+  {
+    "id": "pbi-223",
+    "subtopic": "CALCULATE and KEEPFILTERS",
+    "difficulty": "hard",
+    "question": "Why would you use KEEPFILTERS() inside CALCULATE()?",
+    "answer": "You use KEEPFILTERS() when you want a new filter condition to narrow the existing filter rather than replace it. This is useful when a measure should respect the user's current selection while applying an additional condition."
+  },
+  {
+    "id": "pbi-224",
+    "subtopic": "DAX Variables",
+    "difficulty": "medium",
+    "question": "Why should you use VAR in DAX?",
+    "answer": "VAR allows you to store intermediate results in named variables. Variables make complex DAX easier to read, reduce repeated calculations, and can sometimes improve performance by avoiding unnecessary repeated evaluation."
+  },
+  {
+    "id": "pbi-225",
+    "subtopic": "RETURN",
+    "difficulty": "easy",
+    "question": "What is the purpose of RETURN in a DAX expression using VAR?",
+    "answer": "RETURN specifies the final expression whose result should be returned by the measure or calculated expression. Variables defined with VAR are available to the expression after RETURN."
+  },
+  {
+    "id": "pbi-226",
+    "subtopic": "Time Intelligence",
+    "difficulty": "medium",
+    "question": "What is time intelligence in Power BI?",
+    "answer": "Time intelligence refers to DAX calculations that analyze data across dates and periods. Common examples include Year-to-Date, Month-to-Date, Quarter-to-Date, previous year, year-over-year growth, month-over-month growth, and rolling-period calculations."
+  },
+  {
+    "id": "pbi-227",
+    "subtopic": "Date Table",
+    "difficulty": "medium",
+    "question": "Why is a proper Date table important for time-intelligence calculations?",
+    "answer": "A proper Date table provides a continuous sequence of dates and consistent attributes such as Year, Month, Quarter, and Fiscal Year. It allows time-intelligence functions to correctly understand the date context and compare different periods."
+  },
+  {
+    "id": "pbi-228",
+    "subtopic": "TOTALYTD",
+    "difficulty": "medium",
+    "question": "What does TOTALYTD() do in DAX?",
+    "answer": "TOTALYTD() calculates the cumulative value from the beginning of the year through the current date context. For example, a YTD Sales measure can show sales accumulated from January 1 through the selected date."
+  },
+  {
+    "id": "pbi-229",
+    "subtopic": "YTD Sales",
+    "difficulty": "medium",
+    "question": "How would you create a Year-to-Date Sales measure?",
+    "answer": "A common pattern is `Sales YTD = TOTALYTD([Total Sales], 'Date'[Date])`. The measure calculates sales from the start of the relevant year through the current date context."
+  },
+  {
+    "id": "pbi-230",
+    "subtopic": "MTD Sales",
+    "difficulty": "medium",
+    "question": "How would you calculate Month-to-Date sales in DAX?",
+    "answer": "You can use TOTALMTD(), for example: `Sales MTD = TOTALMTD([Total Sales], 'Date'[Date])`. It calculates the measure from the beginning of the current month through the selected date."
+  },
+  {
+    "id": "pbi-231",
+    "subtopic": "QTD Sales",
+    "difficulty": "medium",
+    "question": "How would you calculate Quarter-to-Date sales?",
+    "answer": "Use TOTALQTD(), for example: `Sales QTD = TOTALQTD([Total Sales], 'Date'[Date])`. It calculates sales from the beginning of the current quarter through the current date."
+  },
+  {
+    "id": "pbi-232",
+    "subtopic": "Previous Year",
+    "difficulty": "medium",
+    "question": "How would you calculate sales for the same period in the previous year?",
+    "answer": "A common approach is to use `CALCULATE()` with `SAMEPERIODLASTYEAR()`, such as `Sales PY = CALCULATE([Total Sales], SAMEPERIODLASTYEAR('Date'[Date]))`. This shifts the current date context back one year."
+  },
+  {
+    "id": "pbi-233",
+    "subtopic": "SAMEPERIODLASTYEAR",
+    "difficulty": "medium",
+    "question": "What does SAMEPERIODLASTYEAR() do?",
+    "answer": "SAMEPERIODLASTYEAR() returns a date set shifted back by one year from the current date context. It is commonly used to compare the current period with the corresponding period in the previous year."
+  },
+  {
+    "id": "pbi-234",
+    "subtopic": "DATEADD",
+    "difficulty": "medium",
+    "question": "What does DATEADD() do in DAX?",
+    "answer": "DATEADD() shifts a date context forward or backward by a specified number of intervals, such as days, months, quarters, or years. It is useful for flexible period comparisons."
+  },
+  {
+    "id": "pbi-235",
+    "subtopic": "SAMEPERIODLASTYEAR vs DATEADD",
+    "difficulty": "hard",
+    "question": "What's the difference between SAMEPERIODLASTYEAR() and DATEADD()?",
+    "answer": "SAMEPERIODLASTYEAR() is specifically designed to shift the current date context one year backward. DATEADD() is more flexible because it allows you to specify the number and type of intervals. Both can be used for time-based comparisons, but DATEADD() provides more general control."
+  },
+  {
+    "id": "pbi-236",
+    "subtopic": "Year-over-Year",
+    "difficulty": "medium",
+    "question": "How would you calculate Year-over-Year sales growth percentage?",
+    "answer": "First calculate current sales and previous-year sales. Then calculate the percentage change using `DIVIDE([Total Sales] - [Sales PY], [Sales PY])`. This gives the relative growth or decline compared with the previous year."
+  },
+  {
+    "id": "pbi-237",
+    "subtopic": "MoM Growth",
+    "difficulty": "medium",
+    "question": "How would you calculate Month-over-Month growth percentage?",
+    "answer": "Calculate the current month's sales and previous month's sales, then use `DIVIDE([Total Sales] - [Sales PM], [Sales PM])`. The previous-month measure can be created using DATEADD() or another appropriate date-shifting technique."
+  },
+  {
+    "id": "pbi-238",
+    "subtopic": "Previous Month",
+    "difficulty": "medium",
+    "question": "How would you calculate previous month's sales?",
+    "answer": "One common approach is `Sales PM = CALCULATE([Total Sales], DATEADD('Date'[Date], -1, MONTH))`. This shifts the current date context back by one month."
+  },
+  {
+    "id": "pbi-239",
+    "subtopic": "Rolling Average",
+    "difficulty": "hard",
+    "question": "How would you calculate a rolling 3-month average in DAX?",
+    "answer": "Create a date range covering the current month and the previous two months, calculate total sales over that range, and divide by the appropriate number of periods. Functions such as DATESINPERIOD() can be used to create the rolling date window."
+  },
+  {
+    "id": "pbi-240",
+    "subtopic": "DATESINPERIOD",
+    "difficulty": "hard",
+    "question": "What does DATESINPERIOD() do?",
+    "answer": "DATESINPERIOD() returns a table of dates covering a specified period relative to a starting date. It is commonly used for rolling calculations such as rolling 7-day sales, rolling 3-month sales, or trailing 12-month revenue."
+  },
+  {
+    "id": "pbi-241",
+    "subtopic": "Trailing 12 Months",
+    "difficulty": "hard",
+    "question": "How would you calculate Trailing Twelve Months sales?",
+    "answer": "Use DATESINPERIOD() to create a date range covering the previous 12 months and evaluate total sales over that range. A common pattern is `CALCULATE([Total Sales], DATESINPERIOD('Date'[Date], MAX('Date'[Date]), -12, MONTH))`."
+  },
+  {
+    "id": "pbi-242",
+    "subtopic": "Running Total",
+    "difficulty": "hard",
+    "question": "How would you create a running total of sales in DAX?",
+    "answer": "A common approach is to calculate sales over all dates up to the current date, for example using CALCULATE() with FILTER() or a suitable date-range function. The key idea is to remove the current date restriction and then keep dates less than or equal to the current date."
+  },
+  {
+    "id": "pbi-243",
+    "subtopic": "Running Total Example",
+    "difficulty": "hard",
+    "question": "Write a DAX measure for a cumulative sales total.",
+    "answer": "A common pattern is: `Running Sales = CALCULATE([Total Sales], FILTER(ALL('Date'[Date]), 'Date'[Date] <= MAX('Date'[Date])))`. It evaluates sales for all dates up to the current date."
+  },
+  {
+    "id": "pbi-244",
+    "subtopic": "Fiscal Year",
+    "difficulty": "hard",
+    "question": "How would you handle a fiscal year that does not start in January?",
+    "answer": "Create fiscal-year attributes in the Date table, such as Fiscal Year, Fiscal Quarter, and Fiscal Month Number. Time-intelligence calculations can then use the appropriate fiscal calendar logic. Some DAX time-intelligence functions also support a year-end parameter where applicable."
+  },
+  {
+    "id": "pbi-245",
+    "subtopic": "Week Analysis",
+    "difficulty": "hard",
+    "question": "How would you calculate week-over-week sales growth?",
+    "answer": "Create a proper week attribute in the Date table and calculate current-week sales and previous-week sales. Then calculate the percentage difference between them. A dedicated Week Start Date can make week-based calculations more reliable."
+  },
+  {
+    "id": "pbi-246",
+    "subtopic": "Working Days",
+    "difficulty": "hard",
+    "question": "How would you calculate sales only for working days?",
+    "answer": "Add a WorkingDay flag to the Date table that identifies weekdays and excludes holidays if required. Then use CALCULATE() with the appropriate Date filters to calculate sales for rows where WorkingDay is TRUE."
+  },
+  {
+    "id": "pbi-247",
+    "subtopic": "Holiday Calendar",
+    "difficulty": "hard",
+    "question": "How would you incorporate company holidays into Power BI time analysis?",
+    "answer": "Maintain a Date table containing a holiday flag or holiday category. The Date table can identify weekends and company holidays so calculations such as working-day sales, productivity, or SLA metrics can exclude those dates."
+  },
+  {
+    "id": "pbi-248",
+    "subtopic": "DAX Table Functions",
+    "difficulty": "hard",
+    "question": "What are DAX table functions?",
+    "answer": "Table functions return tables rather than a single scalar value. Examples include FILTER(), VALUES(), DISTINCT(), ALL(), SUMMARIZE(), ADDCOLUMNS(), SELECTCOLUMNS(), and CALCULATETABLE(). They are often used to build intermediate tables for more advanced calculations."
+  },
+  {
+    "id": "pbi-249",
+    "subtopic": "CALCULATETABLE",
+    "difficulty": "hard",
+    "question": "What is CALCULATETABLE()?",
+    "answer": "CALCULATETABLE() evaluates a table expression in a modified filter context. It is similar to CALCULATE(), but instead of returning a scalar value, it returns a table."
+  },
+  {
+    "id": "pbi-250",
+    "subtopic": "CALCULATE vs CALCULATETABLE",
+    "difficulty": "hard",
+    "question": "What's the difference between CALCULATE() and CALCULATETABLE()?",
+    "answer": "CALCULATE() evaluates a scalar expression under a modified filter context, while CALCULATETABLE() evaluates a table expression under a modified filter context. CALCULATETABLE() is useful when the intermediate result needs to be used as a table."
+  },
+  {
+    "id": "pbi-251",
+    "subtopic": "SUMMARIZE",
+    "difficulty": "hard",
+    "question": "What does SUMMARIZE() do in DAX?",
+    "answer": "SUMMARIZE() creates a summary table grouped by specified columns and can include additional calculated expressions. It is useful for creating grouped intermediate tables, although the appropriate table function depends on the specific requirement."
+  },
+  {
+    "id": "pbi-252",
+    "subtopic": "SUMMARIZECOLUMNS",
+    "difficulty": "hard",
+    "question": "What is SUMMARIZECOLUMNS() used for?",
+    "answer": "SUMMARIZECOLUMNS() creates a grouped table based on specified columns and expressions while working naturally with filter context. It is commonly used in analytical queries and is often preferred over older summarization patterns for certain scenarios."
+  },
+  {
+    "id": "pbi-253",
+    "subtopic": "ADDCOLUMNS",
+    "difficulty": "hard",
+    "question": "What does ADDCOLUMNS() do in DAX?",
+    "answer": "ADDCOLUMNS() adds calculated columns to an existing table expression. The new columns are generated from DAX expressions evaluated in the context of each row of the input table."
+  },
+  {
+    "id": "pbi-254",
+    "subtopic": "SELECTCOLUMNS",
+    "difficulty": "hard",
+    "question": "What does SELECTCOLUMNS() do?",
+    "answer": "SELECTCOLUMNS() creates a new table containing selected or calculated columns from an existing table expression. It is useful when you want to control exactly which columns appear in an intermediate table."
+  },
+  {
+    "id": "pbi-255",
+    "subtopic": "DISTINCT",
+    "difficulty": "medium",
+    "question": "What does DISTINCT() return in DAX?",
+    "answer": "DISTINCT() returns a table containing unique values from a column or unique rows from a table, depending on how it is used. It is commonly used when creating a distinct set of values for an intermediate calculation."
+  },
+  {
+    "id": "pbi-256",
+    "subtopic": "EXCEPT",
+    "difficulty": "hard",
+    "question": "What does EXCEPT() do in DAX?",
+    "answer": "EXCEPT() returns the rows from the first table that do not appear in the second table. It is useful for finding differences between two sets, such as customers present in one period but not another."
+  },
+  {
+    "id": "pbi-257",
+    "subtopic": "INTERSECT",
+    "difficulty": "hard",
+    "question": "What does INTERSECT() do in DAX?",
+    "answer": "INTERSECT() returns the rows that exist in both input tables. It can be used to identify common customers, products, or other entities between two filtered sets."
+  },
+  {
+    "id": "pbi-258",
+    "subtopic": "UNION",
+    "difficulty": "hard",
+    "question": "What does UNION() do in DAX?",
+    "answer": "UNION() combines rows from two or more table expressions into one table. The tables must have compatible column structures, and duplicate rows are not automatically removed."
+  },
+  {
+    "id": "pbi-259",
+    "subtopic": "TREATAS",
+    "difficulty": "hard",
+    "question": "What is TREATAS() used for in DAX?",
+    "answer": "TREATAS() applies the values from one table expression as filters to columns in another table. It is especially useful when there is no physical relationship between the tables or when a virtual relationship is required."
+  },
+  {
+    "id": "pbi-260",
+    "subtopic": "Virtual Relationship",
+    "difficulty": "hard",
+    "question": "What is a virtual relationship in Power BI?",
+    "answer": "A virtual relationship is a logical filter relationship created through DAX rather than a physical relationship in the model. TREATAS() is one common technique for applying values from one table as filters to another."
+  },
+  {
+    "id": "pbi-261",
+    "subtopic": "Disconnected Table",
+    "difficulty": "hard",
+    "question": "What is a disconnected table in Power BI?",
+    "answer": "A disconnected table is a table that has no physical relationship with other model tables. It can be used for user selections, what-if parameters, dynamic measures, scenario analysis, or other control logic."
+  },
+  {
+    "id": "pbi-262",
+    "subtopic": "Disconnected Slicer",
+    "difficulty": "hard",
+    "question": "How can a disconnected table be used to create a dynamic measure selector?",
+    "answer": "Create a disconnected table containing metric names such as Sales, Profit, and Quantity. Use SELECTEDVALUE() to identify the user's selection and SWITCH() to return the corresponding measure."
+  },
+  {
+    "id": "pbi-263",
+    "subtopic": "Dynamic Measure",
+    "difficulty": "hard",
+    "question": "How would you create a DAX measure that changes based on a user's slicer selection?",
+    "answer": "Create a disconnected selection table and use SELECTEDVALUE() to retrieve the selected option. Then use SWITCH() to return the appropriate measure. This allows one visual to dynamically display different metrics."
+  },
+  {
+    "id": "pbi-264",
+    "subtopic": "What-If Analysis",
+    "difficulty": "medium",
+    "question": "What is a What-If parameter in Power BI?",
+    "answer": "A What-If parameter allows users to change a numeric input and see how that change affects calculations. For example, a user could adjust a discount percentage and see the impact on projected revenue."
+  },
+  {
+    "id": "pbi-265",
+    "subtopic": "USERELATIONSHIP",
+    "difficulty": "hard",
+    "question": "How would you calculate sales based on Ship Date instead of the active Order Date relationship?",
+    "answer": "Create an inactive relationship between Date[Date] and Sales[ShipDate], then activate it inside the measure using USERELATIONSHIP(). For example: `Ship Date Sales = CALCULATE([Total Sales], USERELATIONSHIP('Date'[Date], Sales[ShipDate]))`."
+  },
+  {
+    "id": "pbi-266",
+    "subtopic": "Dynamic Date Analysis",
+    "difficulty": "hard",
+    "question": "How would you allow users to switch between analyzing sales by Order Date and Ship Date?",
+    "answer": "One approach is to create a disconnected selector containing the available date roles and use SWITCH() to choose between measures that activate the appropriate relationship. Another option is to use separate role-playing Date dimensions when independent filtering is required."
+  },
+  {
+    "id": "pbi-267",
+    "subtopic": "Filter Context Scenario",
+    "difficulty": "hard",
+    "question": "A Total Sales measure shows the correct grand total but incorrect values when placed in a matrix by category. How would you troubleshoot it?",
+    "answer": "Check the measure definition, relationships, filter propagation, table grain, and whether CALCULATE() or filter-removal functions are unexpectedly removing the category filter. Test the measure with simpler calculations and inspect the filter context at both detail and total levels."
+  },
+  {
+    "id": "pbi-268",
+    "subtopic": "Incorrect Total",
+    "difficulty": "hard",
+    "question": "Why can a DAX measure show a grand total that is different from simply adding the visible rows?",
+    "answer": "Measures are recalculated in the grand-total filter context rather than necessarily summing the displayed row results. For non-additive calculations such as averages, ratios, distinct counts, or conditional logic, the correct grand total may naturally differ from the sum of the visible rows."
+  },
+  {
+    "id": "pbi-269",
+    "subtopic": "Non-Additive Measures",
+    "difficulty": "hard",
+    "question": "What is a non-additive measure and why does it matter in Power BI?",
+    "answer": "A non-additive measure cannot always be meaningfully summed across dimensions. Examples include percentages, averages, ratios, and distinct counts. These measures should be recalculated at the required filter context rather than simply summed."
+  },
+  {
+    "id": "pbi-270",
+    "subtopic": "Semi-Additive Measures",
+    "difficulty": "hard",
+    "question": "What is a semi-additive measure?",
+    "answer": "A semi-additive measure can be aggregated across some dimensions but not others. Account balance is a common example: balances can be summed across accounts, but summing balances across dates may not make business sense. Usually a closing or ending balance is required for time."
+  },
+  {
+    "id": "pbi-271",
+    "subtopic": "Closing Balance",
+    "difficulty": "hard",
+    "question": "How would you calculate an ending balance for each month?",
+    "answer": "Identify the last relevant date in the current month and return the balance associated with that date. The exact implementation depends on the grain and whether the source stores daily snapshots or transaction-level changes."
+  },
+  {
+    "id": "pbi-272",
+    "subtopic": "Customer Count",
+    "difficulty": "medium",
+    "question": "What's the difference between COUNTROWS(Customer) and DISTINCTCOUNT(Sales[CustomerID])?",
+    "answer": "COUNTROWS(Customer) counts rows in the Customer table under the current filter context, while DISTINCTCOUNT(Sales[CustomerID]) counts unique customers appearing in the Sales table. They answer different business questions and can produce different results."
+  },
+  {
+    "id": "pbi-273",
+    "subtopic": "Active Customers",
+    "difficulty": "hard",
+    "question": "How would you calculate the number of active customers in the current month?",
+    "answer": "Define what active means, such as having at least one transaction during the month. Then use DISTINCTCOUNT(CustomerID) over the relevant filtered Sales table or customer activity table."
+  },
+  {
+    "id": "pbi-274",
+    "subtopic": "Customer Retention",
+    "difficulty": "hard",
+    "question": "How would you calculate customer retention using DAX?",
+    "answer": "First define the customer cohort and the retention period. Then identify customers active in both the original and subsequent periods, count the retained customers, and divide by the original cohort size. The exact DAX depends on the business definition of retention."
+  },
+  {
+    "id": "pbi-275",
+    "subtopic": "Advanced DAX Scenario",
+    "difficulty": "hard",
+    "question": "A business wants a dashboard showing Current Sales, Previous Year Sales, YoY %, YTD Sales, and a 12-month rolling average. How would you design the DAX solution?",
+    "answer": "Start with a base [Total Sales] measure and build reusable time-intelligence measures on top of it. Create Previous Year Sales using a date-shifting function, YoY % using DIVIDE(), YTD using TOTALYTD(), and the rolling average using DATESINPERIOD() or an appropriate rolling-date pattern. Keep the calculations as measures so they respond dynamically to slicers and filter context."
+  },
+   {
+    "id": "pbi-276",
+    "subtopic": "Power BI Service",
+    "difficulty": "easy",
+    "question": "What is the Power BI Service used for after a report is developed in Power BI Desktop?",
+    "answer": "Power BI Service is used to publish, share, manage, refresh, secure, and collaborate on Power BI content. After publishing from Desktop, developers can configure workspaces, semantic model refresh, security, apps, dashboards, and access permissions."
+  },
+  {
+    "id": "pbi-277",
+    "subtopic": "Publish to Power BI Service",
+    "difficulty": "easy",
+    "question": "How do you publish a Power BI report from Desktop to Power BI Service?",
+    "answer": "In Power BI Desktop, select Publish, sign in with the appropriate organizational account, and choose the target workspace. Power BI uploads the report and its associated semantic model to the selected workspace."
+  },
+  {
+    "id": "pbi-278",
+    "subtopic": "Workspace",
+    "difficulty": "medium",
+    "question": "How would you organize Power BI content in a production workspace?",
+    "answer": "Use meaningful workspace names and separate development, testing, and production content where appropriate. Keep related reports and semantic models together, apply appropriate workspace roles, and avoid giving users more permissions than they need."
+  },
+  {
+    "id": "pbi-279",
+    "subtopic": "Workspace Roles",
+    "difficulty": "medium",
+    "question": "What is the difference between Admin, Member, Contributor, and Viewer roles in a Power BI workspace?",
+    "answer": "Admin has the broadest workspace management permissions. Member can manage and publish content with substantial permissions. Contributor can create and modify content but has fewer management permissions. Viewer is primarily intended for consuming content."
+  },
+  {
+    "id": "pbi-280",
+    "subtopic": "Sharing",
+    "difficulty": "easy",
+    "question": "What are different ways to share Power BI content with users?",
+    "answer": "Content can be shared through workspace access, Power BI Apps, report or dashboard sharing, and other organization-controlled distribution methods. The appropriate method depends on the audience, security requirements, and whether users need to consume or manage the content."
+  },
+  {
+    "id": "pbi-281",
+    "subtopic": "Power BI App",
+    "difficulty": "medium",
+    "question": "Why would you use a Power BI App instead of directly giving users workspace access?",
+    "answer": "An App provides a controlled consumption experience for report users without requiring them to have broad workspace permissions. It allows developers to package selected content and distribute it to a defined audience."
+  },
+  {
+    "id": "pbi-282",
+    "subtopic": "Semantic Model Permissions",
+    "difficulty": "medium",
+    "question": "What is Build permission in Power BI?",
+    "answer": "Build permission allows a user to create new content based on a semantic model, such as creating their own reports or analyzing the model in supported experiences. It is different from simply having permission to view an existing report."
+  },
+  {
+    "id": "pbi-283",
+    "subtopic": "Scheduled Refresh",
+    "difficulty": "easy",
+    "question": "What is scheduled refresh in Power BI?",
+    "answer": "Scheduled refresh automatically updates an Import-mode semantic model from its source according to a configured schedule. It allows reports to display refreshed data without requiring the developer to manually refresh and republish the report."
+  },
+  {
+    "id": "pbi-284",
+    "subtopic": "Refresh Failure",
+    "difficulty": "medium",
+    "question": "What are common reasons for a Power BI scheduled refresh failure?",
+    "answer": "Common causes include expired credentials, unavailable data sources, gateway problems, schema changes, query errors, data type issues, timeouts, source-system failures, and capacity or refresh limitations. The refresh history and error message should be checked first."
+  },
+  {
+    "id": "pbi-285",
+    "subtopic": "Refresh History",
+    "difficulty": "easy",
+    "question": "Where would you investigate a failed Power BI refresh?",
+    "answer": "Open the semantic model settings in Power BI Service and review the refresh history. The failure details can identify issues such as authentication, gateway connectivity, source errors, or transformation failures."
+  },
+  {
+    "id": "pbi-286",
+    "subtopic": "On-Premises Data Gateway",
+    "difficulty": "medium",
+    "question": "What is the On-premises Data Gateway in Power BI?",
+    "answer": "The On-premises Data Gateway provides a secure connection between Power BI Service and supported on-premises data sources. It allows cloud-based Power BI services to access data that is hosted inside an organization's network."
+  },
+  {
+    "id": "pbi-287",
+    "subtopic": "Gateway Modes",
+    "difficulty": "hard",
+    "question": "What is the difference between standard mode and personal mode for the Power BI gateway?",
+    "answer": "Standard mode is designed for shared organizational use and supports multiple users and services with centralized management. Personal mode is intended for individual use and has more limited capabilities."
+  },
+  {
+    "id": "pbi-288",
+    "subtopic": "Gateway Troubleshooting",
+    "difficulty": "hard",
+    "question": "A Power BI report works in Desktop but scheduled refresh fails in Service. How would you troubleshoot it?",
+    "answer": "First check whether the source is on-premises and requires a gateway. Verify gateway status, data-source configuration, credentials, privacy settings, and whether the server or database is reachable. Then review refresh history and confirm that the Power Query source definitions match the configured gateway data source."
+  },
+  {
+    "id": "pbi-289",
+    "subtopic": "Incremental Refresh",
+    "difficulty": "hard",
+    "question": "What is incremental refresh in Power BI?",
+    "answer": "Incremental refresh allows Power BI to refresh only the data that needs to be updated instead of reprocessing the entire historical dataset. It is useful for large datasets where most historical data does not change frequently."
+  },
+  {
+    "id": "pbi-290",
+    "subtopic": "Incremental Refresh Parameters",
+    "difficulty": "hard",
+    "question": "What are RangeStart and RangeEnd used for in incremental refresh?",
+    "answer": "RangeStart and RangeEnd are Power Query parameters used to define a date or datetime filtering range. The filter allows Power BI to identify the relevant partitions or data ranges for incremental refresh."
+  },
+  {
+    "id": "pbi-291",
+    "subtopic": "Incremental Refresh Strategy",
+    "difficulty": "hard",
+    "question": "A sales table contains 5 years of data but only the last 7 days change. How would you configure incremental refresh?",
+    "answer": "A typical approach is to keep several years of historical data but configure Power BI to refresh only a recent period such as the last 7 days. The exact policy depends on how late-arriving or corrected historical records are handled."
+  },
+  {
+    "id": "pbi-292",
+    "subtopic": "Row-Level Security",
+    "difficulty": "medium",
+    "question": "What is Row-Level Security in Power BI?",
+    "answer": "Row-Level Security, or RLS, restricts which rows of data a user can see. For example, regional managers can be configured to see only sales belonging to their assigned region."
+  },
+  {
+    "id": "pbi-293",
+    "subtopic": "Static RLS",
+    "difficulty": "medium",
+    "question": "What is static Row-Level Security?",
+    "answer": "Static RLS uses fixed filter rules for each security role. For example, a North Region role could contain a filter such as Region = \"North\". It is simple but becomes difficult to maintain when there are many users or regions."
+  },
+  {
+    "id": "pbi-294",
+    "subtopic": "Dynamic RLS",
+    "difficulty": "hard",
+    "question": "What is dynamic Row-Level Security?",
+    "answer": "Dynamic RLS determines the data a user can see based on the identity of the logged-in user. A common pattern is to maintain a user-to-region mapping table and use USERPRINCIPALNAME() or another supported identity function to filter the appropriate records."
+  },
+  {
+    "id": "pbi-295",
+    "subtopic": "USERPRINCIPALNAME",
+    "difficulty": "hard",
+    "question": "What is USERPRINCIPALNAME() commonly used for in Power BI?",
+    "answer": "USERPRINCIPALNAME() returns the user's principal name in the current Power BI security context. It is commonly used in dynamic RLS to match the logged-in user against a security mapping table."
+  },
+  {
+    "id": "pbi-296",
+    "subtopic": "RLS Implementation",
+    "difficulty": "hard",
+    "question": "How would you implement dynamic RLS for regional managers?",
+    "answer": "Create a security mapping table containing user identity and region, relate it appropriately to the Region dimension, create an RLS role that filters the mapping table using the current user's identity, and then test the role with representative users."
+  },
+  {
+    "id": "pbi-297",
+    "subtopic": "RLS Testing",
+    "difficulty": "medium",
+    "question": "How would you test Row-Level Security before giving a report to business users?",
+    "answer": "Use the Power BI Service security features to test the role with representative accounts or use the appropriate role-viewing functionality in Desktop and Service. Verify that authorized users see the correct rows and that they cannot access data belonging to another region or group."
+  },
+  {
+    "id": "pbi-298",
+    "subtopic": "Object-Level Security",
+    "difficulty": "hard",
+    "question": "What is Object-Level Security in Power BI?",
+    "answer": "Object-Level Security, or OLS, restricts access to model objects such as tables or columns rather than individual rows. It can be used when certain users should not even be able to see specific sensitive fields or tables."
+  },
+  {
+    "id": "pbi-299",
+    "subtopic": "RLS vs OLS",
+    "difficulty": "medium",
+    "question": "What's the difference between RLS and OLS?",
+    "answer": "RLS controls which rows a user can access. OLS controls whether users can access specific tables or columns. For example, RLS could restrict a manager to their region, while OLS could hide a sensitive Salary column entirely."
+  },
+  {
+    "id": "pbi-300",
+    "subtopic": "Deployment Pipelines",
+    "difficulty": "hard",
+    "question": "What are deployment pipelines in Power BI?",
+    "answer": "Deployment pipelines help organizations move Power BI content through development, test, and production stages in a controlled process. They support a more structured deployment workflow and reduce the risk of manually moving content between environments."
+  },
+  {
+    "id": "pbi-301",
+    "subtopic": "Dev Test Production",
+    "difficulty": "medium",
+    "question": "Why should Power BI projects use separate Development, Test, and Production environments?",
+    "answer": "Separating environments allows developers to make and test changes without directly affecting business users. After validation, approved content can be promoted to production, reducing deployment risk and improving governance."
+  },
+  {
+    "id": "pbi-302",
+    "subtopic": "Deployment Scenario",
+    "difficulty": "hard",
+    "question": "A developer has changed a production Power BI report and introduced an incorrect calculation. How would you reduce the risk of this happening in the future?",
+    "answer": "Use separate development and production environments, source control or versioning where supported, peer review, testing, deployment pipelines, documented release procedures, and validation of important measures before production deployment."
+  },
+  {
+    "id": "pbi-303",
+    "subtopic": "Visualization",
+    "difficulty": "easy",
+    "question": "How do you choose the right visualization in Power BI?",
+    "answer": "Choose the visual based on the business question. Use line charts for trends, bar or column charts for comparisons, maps for geographic analysis, cards for single KPIs, tables or matrices for detailed values, and scatter charts for relationships between numeric variables."
+  },
+  {
+    "id": "pbi-304",
+    "subtopic": "KPI",
+    "difficulty": "easy",
+    "question": "What is a KPI in Power BI?",
+    "answer": "A Key Performance Indicator is a metric used to measure progress against an important business objective. A Power BI KPI visual can show a current value, target, and trend or status depending on the design."
+  },
+  {
+    "id": "pbi-305",
+    "subtopic": "Card Visual",
+    "difficulty": "easy",
+    "question": "When would you use a Card visual?",
+    "answer": "A Card is useful for displaying a single important metric, such as Total Revenue, Total Customers, Profit Margin, or Number of Orders. It is commonly used in the KPI area of an executive dashboard."
+  },
+  {
+    "id": "pbi-306",
+    "subtopic": "Matrix Visual",
+    "difficulty": "easy",
+    "question": "What's the difference between a Table and Matrix visual?",
+    "answer": "A Table displays data in rows and columns, while a Matrix supports hierarchical row and column groupings, drill-down, subtotals, and cross-tab style analysis. A Matrix is useful when users need to explore multiple levels of a hierarchy."
+  },
+  {
+    "id": "pbi-307",
+    "subtopic": "Slicers",
+    "difficulty": "easy",
+    "question": "What is a slicer in Power BI?",
+    "answer": "A slicer is an interactive filtering visual that allows users to select values such as dates, regions, products, or departments. The selection filters other visuals on the report page according to the model relationships and interaction settings."
+  },
+  {
+    "id": "pbi-308",
+    "subtopic": "Sync Slicers",
+    "difficulty": "medium",
+    "question": "What are synchronized slicers in Power BI?",
+    "answer": "Synchronized slicers allow a slicer selection to be shared across multiple report pages. This provides a consistent filtering experience when users navigate through different pages of a report."
+  },
+  {
+    "id": "pbi-309",
+    "subtopic": "Visual Interactions",
+    "difficulty": "medium",
+    "question": "What are Edit Interactions in Power BI?",
+    "answer": "Edit Interactions controls how one visual affects other visuals when a user selects data. A visual can be configured to filter, highlight, or have no effect on another visual."
+  },
+  {
+    "id": "pbi-310",
+    "subtopic": "Drill Down",
+    "difficulty": "easy",
+    "question": "What is drill-down in Power BI?",
+    "answer": "Drill-down allows users to move from a higher level of a hierarchy to a lower level within the same visual. For example, users can move from Year to Quarter, Month, and Day."
+  },
+  {
+    "id": "pbi-311",
+    "subtopic": "Drill Through",
+    "difficulty": "medium",
+    "question": "What is drill-through in Power BI?",
+    "answer": "Drill-through allows users to navigate from a summary visual to a dedicated detail page filtered for the selected value. For example, selecting a customer from a sales report can open a customer-detail page showing that customer's transactions."
+  },
+  {
+    "id": "pbi-312",
+    "subtopic": "Drill Down vs Drill Through",
+    "difficulty": "medium",
+    "question": "What's the difference between drill-down and drill-through?",
+    "answer": "Drill-down moves between hierarchy levels within a visual, such as Year to Month. Drill-through navigates to another report page containing detailed information filtered according to the selected item."
+  },
+  {
+    "id": "pbi-313",
+    "subtopic": "Bookmarks",
+    "difficulty": "medium",
+    "question": "What are bookmarks in Power BI?",
+    "answer": "Bookmarks capture the current state of a report page, including selected filters, slicers, visibility, and visual states depending on the bookmark configuration. They can be used to create navigation, storytelling, toggle views, and interactive report experiences."
+  },
+  {
+    "id": "pbi-314",
+    "subtopic": "Buttons",
+    "difficulty": "easy",
+    "question": "How can buttons improve a Power BI report?",
+    "answer": "Buttons can provide navigation and interactive controls. They can be connected to bookmarks, page navigation, drill-through, or other actions to create a more intuitive user experience."
+  },
+  {
+    "id": "pbi-315",
+    "subtopic": "Tooltips",
+    "difficulty": "medium",
+    "question": "What are report page tooltips in Power BI?",
+    "answer": "Report page tooltips are custom tooltip pages that display additional information when users hover over a visual. They can provide contextual details without requiring another report page or cluttering the main dashboard."
+  },
+  {
+    "id": "pbi-316",
+    "subtopic": "Conditional Formatting",
+    "difficulty": "easy",
+    "question": "What is conditional formatting in Power BI?",
+    "answer": "Conditional formatting changes the appearance of values based on rules or measures. For example, negative profit can be highlighted differently from positive profit, or sales values can use data bars to show relative magnitude."
+  },
+  {
+    "id": "pbi-317",
+    "subtopic": "Performance Analyzer",
+    "difficulty": "medium",
+    "question": "What is Performance Analyzer in Power BI Desktop?",
+    "answer": "Performance Analyzer helps identify which visuals and queries are taking the most time to render. It can help developers investigate slow visuals and determine whether the issue is related to DAX, visual rendering, or other query operations."
+  },
+  {
+    "id": "pbi-318",
+    "subtopic": "Performance Optimization",
+    "difficulty": "hard",
+    "question": "A Power BI report is loading slowly. What would you check first?",
+    "answer": "Start with Performance Analyzer to identify slow visuals. Then investigate DAX complexity, model size, relationships, high-cardinality columns, unnecessary visuals, DirectQuery performance, Power Query design, and source-system performance."
+  },
+  {
+    "id": "pbi-319",
+    "subtopic": "DAX Performance",
+    "difficulty": "hard",
+    "question": "How can you improve the performance of a slow DAX measure?",
+    "answer": "Review the measure logic, avoid unnecessary iterations, simplify FILTER expressions where possible, use variables to avoid repeated calculations, reduce the amount of data being scanned, and ensure the underlying model has a clean star-schema design."
+  },
+  {
+    "id": "pbi-320",
+    "subtopic": "Model Performance",
+    "difficulty": "hard",
+    "question": "How can data-model design affect Power BI report performance?",
+    "answer": "A well-designed star schema with appropriate relationships and low unnecessary cardinality generally allows the engine to process queries efficiently. Poor relationships, excessive columns, high-cardinality fields, and unnecessary complexity can increase memory usage and query time."
+  },
+  {
+    "id": "pbi-321",
+    "subtopic": "DirectQuery Performance",
+    "difficulty": "hard",
+    "question": "A DirectQuery report is very slow. What would you investigate?",
+    "answer": "Check the source database performance, SQL generated by Power BI, indexes, joins, query complexity, network latency, model design, number of visuals, and whether unnecessary interactions are generating excessive source queries. Consider Import or composite approaches if the business requirements allow them."
+  },
+  {
+    "id": "pbi-322",
+    "subtopic": "Import vs DirectQuery Scenario",
+    "difficulty": "hard",
+    "question": "The business wants near-real-time data but also expects very fast dashboard performance. How would you approach the design?",
+    "answer": "First understand the required freshness and latency. Depending on the architecture, consider DirectQuery, composite models, hybrid approaches, or an upstream data platform that provides near-real-time prepared data. The goal is to balance freshness, performance, source capacity, and model complexity."
+  },
+  {
+    "id": "pbi-323",
+    "subtopic": "Data Refresh Scenario",
+    "difficulty": "hard",
+    "question": "A dashboard shows yesterday's data even though the source database contains today's data. What would you check?",
+    "answer": "Check whether the semantic model is Import mode, whether scheduled refresh completed successfully, refresh history, gateway status if applicable, source credentials, query filters, incremental-refresh configuration, and the timestamp of the latest data actually loaded into the model."
+  },
+  {
+    "id": "pbi-324",
+    "subtopic": "Incorrect Dashboard Results",
+    "difficulty": "hard",
+    "question": "A business user says the Power BI revenue number is different from the SQL report. How would you investigate?",
+    "answer": "Compare the source data, filters, date ranges, joins, relationship cardinality, table grain, currency or discount logic, NULL handling, duplicate records, and DAX calculations. Reconcile the numbers step by step from the source transaction level through the Power BI model and final measure."
+  },
+  {
+    "id": "pbi-325",
+    "subtopic": "Power BI Interview Scenario",
+    "difficulty": "hard",
+    "question": "You are asked to build an executive sales dashboard from scratch. Explain your approach from data source to final deployment.",
+    "answer": "First understand the business requirements, KPIs, users, and required refresh frequency. Then inspect and clean the source data using Power Query or upstream ETL, define the correct fact-table grain, and build a star schema with appropriate dimensions and relationships. Create reusable DAX measures for revenue, profit, growth, YTD, and other KPIs. Build clear visuals with slicers, drill-through, and tooltips where useful. Validate the numbers against the source, optimize the model and report performance, configure refresh and security, publish to a controlled workspace, test with representative users, and then deploy through the organization's release process."
+  }
+],
+  "practice": [
+  { "question": "Import a sales dataset into Power BI and create a dashboard showing Total Sales, Total Orders, Total Quantity, and Average Order Value." },
+  { "question": "Create a line chart showing monthly sales for the last 12 months and add a slicer for Region." },
+  { "question": "Create a bar chart showing the top 10 products by sales. The ranking should change when a user filters by Region." },
+  { "question": "Create a Power BI report that shows sales by Product Category, Region, and Month. Which visuals would you choose and why?" },
+  { "question": "Create four KPI cards showing Total Revenue, Total Profit, Profit Margin %, and Number of Customers." },
+
+  { "question": "In Power Query, convert a SalesAmount column from Text to Decimal Number and handle invalid values such as 'N/A' and '-'." },
+  { "question": "In Power Query, remove all rows where CustomerName is blank or null." },
+  { "question": "A CustomerName column contains values such as '  Riya Patel  ', 'RIYA PATEL', and 'riya patel'. Clean and standardize the values using Power Query." },
+  { "question": "A FullName column contains values such as 'Riya Patel'. Split it into FirstName and LastName using Power Query." },
+  { "question": "Create a Conditional Column in Power Query that categorizes SalesAmount as High, Medium, or Low based on defined thresholds." },
+  { "question": "You receive one Excel file every month with the same structure. Explain how you would use the Folder connector to combine all monthly files automatically." },
+  { "question": "You have Sales_2025 and Sales_2026 tables with identical columns. Combine them into a single Sales table using Power Query." },
+  { "question": "A dataset contains separate columns for January, February, March, and April sales. Transform it into a normalized Month-Sales structure using Unpivot." },
+  { "question": "Two tables contain CustomerID, CustomerName and CustomerID, CustomerRegion. Merge them using CustomerID and explain which join type you would use." },
+  { "question": "A source file contains duplicate records. Explain how you would identify and remove duplicates in Power Query while making sure legitimate repeated transactions are not removed." },
+  { "question": "Create a Power Query parameter for a file path so the same report can be moved from development to production without changing the query manually." },
+  { "question": "A folder contains 100 CSV files but 20 files have a different structure. Design a Power Query solution that combines only the compatible files." },
+  { "question": "A SQL Server table contains 500 million rows but your dashboard only needs the last two years. Explain how you would filter the data while preserving query folding where possible." },
+  { "question": "Create a custom Power Query function that accepts a text value and returns a cleaned uppercase version with unnecessary spaces removed." },
+
+  { "question": "Given Sales, Customer, Product, Region, and Date tables, design a star schema and identify which table should be the fact table and which should be dimensions." },
+  { "question": "Explain the correct relationship cardinality and filter direction between Customer and Sales in a typical star schema." },
+  { "question": "A Customer table contains duplicate CustomerIDs. Explain why this is a problem when creating a one-to-many relationship with Sales and how you would fix it." },
+  { "question": "A Sales table contains OrderDate, ShipDate, and DeliveryDate. Explain how you would model the Date relationships." },
+  { "question": "Create a proper Date table containing Date, Year, Quarter, Month Number, Month Name, and Day columns." },
+  { "question": "A company has Sales and Returns fact tables. Design a model that allows users to analyze both by Date, Product, Customer, and Region." },
+  { "question": "Customers can belong to multiple segments and each segment can contain multiple customers. Design a Power BI model using a bridge table." },
+  { "question": "A Power BI model contains several bidirectional relationships and users are getting unexpected totals. Explain how you would troubleshoot and redesign the model." },
+  { "question": "A Sales fact table contains 100 million rows and 30 columns, but only 12 columns are used in reports. Explain how you would optimize the model." },
+  { "question": "A transaction table contains TransactionID and a high-cardinality DateTime column. Explain how these columns can affect model size and what you would do to optimize them." },
+
+  { "question": "Write a DAX measure that calculates Total Sales using Sales[SalesAmount]." },
+  { "question": "Write a DAX measure that calculates the total number of orders in the Sales table." },
+  { "question": "Write a DAX measure that calculates the number of unique customers who made at least one purchase." },
+  { "question": "Write a DAX measure that calculates Average Order Value using Total Sales and Total Orders." },
+  { "question": "Write DAX measures for Total Profit and Profit Margin %, assuming the Sales table contains SalesAmount and CostAmount." },
+  { "question": "Write a DAX measure using CALCULATE() that returns sales only for the Electronics category." },
+  { "question": "Write a DAX measure that calculates each product's contribution % to total sales." },
+  { "question": "Write a DAX measure using SUMX() to calculate revenue when the Sales table contains Quantity and UnitPrice but no Revenue column." },
+  { "question": "Write a DAX measure using RANKX() to rank products based on Total Sales." },
+  { "question": "Write a DAX measure that calculates Year-to-Date Sales using a proper Date table." },
+  { "question": "Write DAX measures for Previous Year Sales and Year-over-Year Growth %." },
+  { "question": "Write a DAX measure that calculates a rolling 3-month average of sales." },
+  { "question": "Write a DAX measure that calculates a running total of sales from the beginning of the year through the current date." },
+  { "question": "Create a disconnected table containing Sales, Profit, and Quantity and write a DAX measure that dynamically returns the metric selected by the user." },
+  { "question": "A Sales table has both OrderDate and ShipDate. Write a DAX measure that calculates sales based on ShipDate using USERELATIONSHIP()." },
+  { "question": "A matrix displays Product Category, Sales, and Profit Margin. The grand-total margin is different from the average of the category margins. Explain why and write a measure that calculates the correct overall margin." },
+  { "question": "A dashboard needs to compare current-month sales with previous-month sales. Write the required DAX measures and calculate the Month-over-Month growth percentage." },
+  { "question": "Write a DAX measure that calculates each product's contribution % to total sales within its category, not against the grand total." },
+  { "question": "Explain how you would design a data model for a dashboard tracking Sales, Returns, and Inventory — how many fact tables, how many dimensions, and why?" },
+  { "question": "You are given raw Sales, Customer, Product, and Date data. Explain your complete approach from Power Query transformation to data modeling, DAX measures, dashboard creation, validation, and deployment." }
+]
+}
